@@ -1,4 +1,4 @@
-package com.hansol.model;
+package com.wedeal.model;
 
 import java.util.Date;
 
