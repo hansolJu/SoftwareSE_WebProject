@@ -19,6 +19,7 @@ import com.wedeal.model.BoardDataBean;
  * 이 파일은 게시판 시스템의 DB를 처리하는 DAO파일입니다.
  * 
  * 수정해야할 부분-> 이미지 경로를 저장하는 부분
+ * 앙 기모띠!!!!ㅋㅋㅋㅋㅋ
  */
 
 public class BoardDAO {
