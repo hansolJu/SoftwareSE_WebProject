@@ -11,7 +11,7 @@
 <h3>회원가입</h3>
 <hr>
 <form action=UserController method="post" name=form1>
-	<table border=1 cellspacing="1" cellpadding="5" align="center">
+	<table border=1 cellspacing="1" cellpadding="5">
 	<tr>
 	<td>이름</td>
 	<td><input type="text" name="user_name" value="홍길동"></td>
