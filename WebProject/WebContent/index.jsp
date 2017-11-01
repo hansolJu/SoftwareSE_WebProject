@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="./userRegister">
+		<form method="post" action="./user/UserRegisterServlet">
 			<!-- design part -->
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
@@ -53,7 +53,7 @@
 					
 					<tr>
 						<td style="width: 110px;"><h5>비밀번호</h5></td>
-						<td colspan="2"><input class="form-control" type="password" id="user_passwd" name="user_passwd"></td>
+						<td colspan="2"><input class="form-control" type="password" id="user_pw" name="user_pw"></td>
 					</tr>
 					
 					<tr>
