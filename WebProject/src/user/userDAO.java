@@ -5,20 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.wedeal.dao.DataDBBean;
+import com.wedeal.util.DbUtil;
+
 public class userDAO {
 
 	private Connection conn;
+	private static DataDBBean instance = new DataDBBean();
 	
 	public userDAO() {
-		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se";
-			String dbID = "jy";
-			String dpPassword = "1365";
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(dbURL,dbID,dpPassword);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		conn = DbUtil.getConnection();
 	}
 	
 	//check id
@@ -52,19 +48,19 @@ public class userDAO {
 	}
 	
 	//add user
-	public int register(userDTO user) {
+	public int register(String user_name,String user_age,String user_phone,String user_id,String user_pw,String user_hope) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, user.getUser_name());
-			pstmt.setString(2, user.getUser_age());
-			pstmt.setString(3, user.getUser_phone());
-			pstmt.setString(4, user.getUser_id());
-			pstmt.setString(5, user.getUser_pw());
-			pstmt.setString(6, user.getUser_hope());
+			pstmt.setString(1, user_name);
+			pstmt.setString(2, user_age);
+			pstmt.setString(3, user_phone);
+			pstmt.setString(4, user_id);
+			pstmt.setString(5, user_pw);
+			pstmt.setString(6, user_hope);
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
