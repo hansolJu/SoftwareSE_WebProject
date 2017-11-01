@@ -15,11 +15,15 @@ import com.wedeal.util.DbUtil;
 public class UserDao {
 
     private Connection connection;
-
+    private static UserDao instance = new UserDao();
+    
     public UserDao() {
         connection = DbUtil.getConnection();
     }
-
+    
+    public static UserDao getInstance() {
+		return instance;
+	}
     public void addUser(User user) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_name,user_age,user_phone,user_pw,user_hope_1,user_hope_2,user_hope_3) values (?, ?, ?, ?, ?, ?, ?, ? )");

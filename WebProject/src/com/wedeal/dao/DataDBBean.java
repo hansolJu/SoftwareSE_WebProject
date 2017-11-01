@@ -18,7 +18,6 @@ public class DataDBBean {
 	//객체를 리턴하는 메소드
 	public static DataDBBean getInstance() {
 		return instance;
-		
 	}
 	//회원가입 처리에서 사용하는 새 레코드 추가 메서드
 	public void insertMember(LogonDataBean member) {
