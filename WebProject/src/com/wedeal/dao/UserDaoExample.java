@@ -22,19 +22,22 @@ public class UserDaoExample {
 
     public void addUser(User user) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into users(firstname,dob,email,filename,filepath) values (?, ?, ?, ?, ? )");
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setDate(2, new java.sql.Date(user.getDob().getTime()));
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getFileName());
-            preparedStatement.setString(5, user.getSavePath());
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_name,user_age,user_phone,user_pw,user_hope_1,user_hope_2,user_hope_3) values (?, ?, ?, ?, ?, ?, ?, ? )");
+            preparedStatement.setString(1, user.getUser_name());
+            preparedStatement.setInt(2, user.getUser_age());
+            preparedStatement.setString(3, user.getUser_phone());
+            preparedStatement.setString(4, user.getUser_id());
+            preparedStatement.setString(5, user.getUser_pw());
+            preparedStatement.setString(6, user.getUser_hope_1());
+            preparedStatement.setString(7, user.getUser_hope_2());
+            preparedStatement.setString(8, user.getUser_hope_3());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+/*
     public void deleteUser(int userId) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("delete from users where userid=?");
@@ -105,5 +108,5 @@ public class UserDaoExample {
         }
 
         return user;
-    }
+    }*/
 }

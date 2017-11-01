@@ -26,9 +26,9 @@ public class User {
     private String user_phone;
     private String user_id;
     private String user_pw;
-    private String user_hope1;
-    private String user_hope2;
-    private String user_hope3;
+    private String user_hope_1;
+    private String user_hope_2;
+    private String user_hope_3;
     
     public int getUser_num() {
 		return user_num;
@@ -66,22 +66,22 @@ public class User {
 	public void setUser_pw(String user_pw) {
 		this.user_pw = user_pw;
 	}
-	public String getUser_hope1() {
-		return user_hope1;
+	public String getUser_hope_1() {
+		return user_hope_1;
 	}
-	public void setUser_hope1(String user_hope1) {
-		this.user_hope1 = user_hope1;
+	public void setUser_hope_1(String user_hope_1) {
+		this.user_hope_1 = user_hope_1;
 	}
-	public String getUser_hope2() {
-		return user_hope2;
+	public String getUser_hope_2() {
+		return user_hope_2;
 	}
-	public void setUser_hope2(String user_hope2) {
-		this.user_hope2 = user_hope2;
+	public void setUser_hope2(String user_hope_2) {
+		this.user_hope_2 = user_hope_2;
 	}
-	public String getUser_hope3() {
-		return user_hope3;
+	public String getUser_hope_3() {
+		return user_hope_3;
 	}
-	public void setUser_hope3(String user_hope3) {
-		this.user_hope3 = user_hope3;
+	public void setUser_hope_3(String user_hope_3) {
+		this.user_hope_3 = user_hope_3;
 	}
 }
