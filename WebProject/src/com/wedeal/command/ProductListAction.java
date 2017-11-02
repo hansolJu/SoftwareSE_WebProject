@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public class ProductListAction implements CommandAction {
-
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws Throwable {
-		List</*물품DataBean*/> bookList = null;
+		List</*물품DataBean*/> productList = null;
 		String book_kind = request.getParameter("book_kind");
 		int count = 0;
 
@@ -33,6 +32,6 @@ public class ProductListAction implements CommandAction {
 		request.setAttribute("count", new Integer(count));
 		request.setAttribute("book_kind", book_kind);
 		request.setAttribute("type", new Integer(0));
-	//	return "/mngr/productProcess/bookList.jsp";???
+	//	return page
 	}
 }
