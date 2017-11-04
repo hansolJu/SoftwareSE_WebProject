@@ -22,7 +22,7 @@ public class SearchAction implements CommandAction {
 			return "error";
 		}
 		try {
-			list = searchService.searchByName(searchName);
+			list = searchService.selectProductName(searchName);
 			request.setAttribute("searchNameList", list);
 			request.setAttribute("search_value", searchName);
 		} catch(SQLException e) {

@@ -17,7 +17,7 @@ public class UserDao {
     private Connection connection;
     private static UserDao instance = new UserDao();
     
-    public UserDao() {
+    public UserDao() {  //?
         connection = DbUtil.getConnection();
     }
     
