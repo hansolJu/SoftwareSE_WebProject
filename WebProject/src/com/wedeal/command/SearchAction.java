@@ -13,7 +13,6 @@ import com.wedeal.model.ProductDataBean;
  * 2017.11.05
  * @author eunjin
  * 검색기능을 하는 Action클래스
- * TO-DO : 상세검색
  */
 public class SearchAction implements CommandAction {
 	@Override
@@ -29,7 +28,7 @@ public class SearchAction implements CommandAction {
 			return "error";
 		}
 		try {
-			list = searchService.selectProductName(searchName);  //물품의 이름으로 검색하는 메소드 실행
+			list = searchService.selectProductByName(searchName);  //물품의 이름으로 검색하는 메소드 실행
 			request.setAttribute("searchNameList", list);  //검색 결과 리스트 attribute에 저장
 			request.setAttribute("search_value", searchName);  //키워드 저장
 		} catch(SQLException e) {
