@@ -12,12 +12,12 @@ import com.wedeal.util.DbUtil;
 public class ProductDAO {
 	
 	private Connection connection;
-	private static ProductDataBean instance = new ProductDataBean(); //싱글턴
+	private static ProductDAO instance = new ProductDAO(); //싱글톤
 
 	private ProductDAO() {
 		connection = DbUtil.getConnection();
 	}
-	private static ProductDataBean getInstance() {
+	public static ProductDAO getInstance() {
 		return instance;
 	}
 	public ArrayList<ProductDataBean> selectProductName(String searchName) throws SQLException{
