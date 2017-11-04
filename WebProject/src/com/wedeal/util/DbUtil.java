@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
 
 public class DbUtil {
 
@@ -37,5 +40,18 @@ public class DbUtil {
             }
             return connection;
         }
+    }
+    /**
+     * conn과 pstmt와 rset을 닫아주는 메소드
+     * @param connection
+     * @param pstmt
+     * @param rset
+     */
+    public static void close (Connection connection, PreparedStatement pstmt, ResultSet rset) {
+    	try {
+    		if(connection != null) connection.close();
+    		if(pstmt != null) pstmt.close();
+    		if(rset != null) rset.close();
+    	} catch(SQLException e) {}
     }
 }
