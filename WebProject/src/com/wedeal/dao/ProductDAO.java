@@ -72,5 +72,16 @@ public class ProductDAO {
 		DbUtil.close(connection, preparedStatement, rset);  //연결 해지
 		return searchNameProductList;
 	}
-
+	
+	/**
+	 * 
+	 * @param searchName, detailedSearch
+	 * @return 결과 list 반환
+	 * @throws SQLException
+	 * 특정 조건과 함께 상세 검색
+	 * 
+	 */
+	public ArrayList<ProductDataBean> selectProductByDetail(String searchName, ArrayList<String> detailedSearch) throws SQLException{
+		//To-DO
+	}
 }
