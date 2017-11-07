@@ -75,7 +75,7 @@ public class User {
 	public String getUser_hope_2() {
 		return user_hope_2;
 	}
-	public void setUser_hope2(String user_hope_2) {
+	public void setUser_hope_2(String user_hope_2) {
 		this.user_hope_2 = user_hope_2;
 	}
 	public String getUser_hope_3() {

@@ -17,16 +17,17 @@ public class UserDao {
     private Connection connection;
     private static UserDao instance = new UserDao();
     
-    public UserDao() {  //?
-        connection = DbUtil.getConnection();
-    }
+    private UserDao() { }
     
     public static UserDao getInstance() {
 		return instance;
 	}
     public void addUser(User user) {
+    	PreparedStatement preparedStatement = null;
+    	ResultSet  rs = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_name,user_age,user_phone,user_pw,user_hope_1,user_hope_2,user_hope_3) values (?, ?, ?, ?, ?, ?, ?, ? )");
+            connection = DbUtil.getConnection();
+            preparedStatement = connection.prepareStatement("insert into users(user_name,user_age,user_phone,user_pw,user_hope_1,user_hope_2,user_hope_3) values (?, ?, ?, ?, ?, ?, ?, ? )");
             preparedStatement.setString(1, user.getUser_name());
             preparedStatement.setInt(2, user.getUser_age());
             preparedStatement.setString(3, user.getUser_phone());
@@ -40,7 +41,7 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-        	//close 
+        	DbUtil.close(connection, preparedStatement, rs);
         }
     }
 /*
@@ -115,4 +116,38 @@ public class UserDao {
 
         return user;
     }*/
+    /**
+     * 
+     * @param userName
+     * @return User
+     * 관리자가 회원을 조회하는 메소드
+     */
+    public User getUserByName(String userName) {
+        User user = new User();
+        PreparedStatement preparedStatement = null;
+    	ResultSet  rs = null;
+        try {
+            preparedStatement = connection.prepareStatement("select * from User where user_name=?");
+            preparedStatement.setString(1, userName);
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user.setUser_num(rs.getInt("user_num"));
+                user.setUser_name(rs.getString("user_name"));
+                user.setUser_age(rs.getInt("user_age"));
+                user.setUser_phone(rs.getString("user_phone"));
+                user.setUser_id(rs.getString("user_id"));
+                user.setUser_pw(rs.getString("user_pw"));
+                user.setUser_hope_1(rs.getString("user_hope_1"));
+                user.setUser_hope_2(rs.getString("user_hope_2"));
+                user.setUser_hope_3(rs.getString("user_hope_3"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+        	DbUtil.close(connection, preparedStatement, rs);
+        }
+        return user;
+    }
 }
