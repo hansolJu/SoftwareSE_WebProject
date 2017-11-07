@@ -24,15 +24,16 @@ public class ProductDAO {
 	 * @param category
 	 * @return
 	 * @throws SQLException
-	 * 해당 카테고리의 물품들을 반환하는 메소드
+	 * 상품명과 카테고리로 검색
 	 */
-	public ArrayList<ProductDataBean> selectProduct(String category) throws SQLException {
+	public ArrayList<ProductDataBean> selectProductByCategory(String searchName, String category) throws SQLException {
 		connection = DbUtil.getConnection();  //connection 연결
 		ResultSet rset = null;
 		
 		ArrayList<ProductDataBean> searchCategoryProductList = new ArrayList<ProductDataBean>();  //반환할 결과 리스트
-		PreparedStatement preparedStatement = connection.prepareStatement("select * from product where name=?");  //해당 이름을 포함하는 물품 검색
-		preparedStatement.setString(1, category);
+		PreparedStatement preparedStatement = connection.prepareStatement("select * from product where name like '%'||?||'%' and category = ?");  //해당 카테고리의 해당 이름을 포함하는 물품 검색
+		preparedStatement.setString(1, searchName);
+		preparedStatement.setString(2,  category);
 		rset = preparedStatement.executeQuery();
 		while(rset.next()) {
 			//각 dto 변수 저장
@@ -71,17 +72,5 @@ public class ProductDAO {
 		}
 		DbUtil.close(connection, preparedStatement, rset);  //연결 해지
 		return searchNameProductList;
-	}
-	
-	/**
-	 * 
-	 * @param searchName, detailedSearch
-	 * @return 결과 list 반환
-	 * @throws SQLException
-	 * 특정 조건과 함께 상세 검색
-	 * 
-	 */
-	public ArrayList<ProductDataBean> selectProductByDetail(String searchName, ArrayList<String> detailedSearch) throws SQLException{
-		//To-DO
 	}
 }
