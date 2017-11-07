@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/userRegister")
+@WebServlet("/UserRegisterServlet")
 public class UserRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,29 +31,28 @@ public class UserRegisterServlet extends HttpServlet {
 		String user_hope=request.getParameter("user_hope");
 		
 		if(user_name == null || user_name.equals("") || user_age == null || user_age.equals("") || user_phone == null || user_phone.equals("") || user_id == null || user_id.equals("") || user_pw == null || user_pw.equals("") || user_hope == null || user_hope.equals("") || check_passwd == null || check_passwd.equals("")) {
-			request.getSession().setAttribute("messageType", "¿À·ù ¸Ş½ÃÁö");
-			request.getSession().setAttribute("messageContent", "¸ğµç ³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
-			response.sendRedirect("join.jsp");
+			request.getSession().setAttribute("messageType", "ì˜¤ë¥˜ ë©”ì‹œì§€");
+			request.getSession().setAttribute("messageContent", "ëª¨ë“  ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.");
+			response.sendRedirect("index.jsp");
 			return;
 		}
 		
 		if(!user_pw.equals(check_passwd)) {
-			request.getSession().setAttribute("messageType", "¿À·ù ¸Ş½ÃÁö");
-			request.getSession().setAttribute("messageContent", "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
-			response.sendRedirect("join.jsp");
-			
+			request.getSession().setAttribute("messageType", "ì˜¤ë¥˜ ë©”ì‹œì§€");
+			request.getSession().setAttribute("messageContent", "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+			response.sendRedirect("index.jsp");
 			return;
 		}
-		
 		int result = new userDAO().register(user_name,user_age,user_phone,user_id,user_pw,user_hope);
-		
-		if(result ==1) 
+		if(result ==1) {
+			request.getSession().setAttribute("messageType", "ì„±ê³µ ë©”ì„¸ì§€");
+			request.getSession().setAttribute("messageContent", "íšŒì›ê°€ì…ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.");
 			response.sendRedirect("index.jsp");
-		
+		}
 		else {
-			request.getSession().setAttribute("messageType", "¿À·ù ¸Ş½ÃÁö");
-			request.getSession().setAttribute("messageContent", "ÀÌ¹Ì Á¸ÀçÇÏ´Â È¸¿øÀÔ´Ï´Ù.");
-			response.sendRedirect("join.jsp");
+			request.getSession().setAttribute("messageType", "ì˜¤ë¥˜ ë©”ì‹œì§€");
+			request.getSession().setAttribute("messageContent", "ì´ë¯¸ ì¡´ì¬í•˜ëŠ” íšŒì›ì…ë‹ˆë‹¤.");
+			response.sendRedirect("index.jsp");
 		}
 	}
 
