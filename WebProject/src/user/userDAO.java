@@ -5,33 +5,57 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.wedeal.dao.DataDBBean;
-import com.wedeal.util.DbUtil;
 
 public class userDAO {
 
 	private Connection conn;
-	private static DataDBBean instance = new DataDBBean();
+	private PreparedStatement pstmt;
+	private ResultSet rs;
 	
 	public userDAO() {
-		conn = DbUtil.getConnection();
+		try {
+			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
+			String dbID = "jy";
+			String dbPW = "1365";
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	//check id
+	//login
+	public int login(String user_id,String user_pw) {
+		String SQL = "SELECT user_pw FROM USER WHERE user_id = ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString(1).equals(user_pw)) 
+					return 1; //로그인 성공
+			}
+			return 0; //아이디&비밀번호 틀림
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -2; //오류
+	}
+	
+	//check id(join)
 	public int registerCheck(String user_id) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 		String SQL="SELECT * FROM USER WHERE user_id = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
 			//no
-			if(rs.next()) {
+			if(rs.next() || user_id.equals("")) {
 				return 0;
 			}
 			//ok
-			else {
+			else{
 				return 1;
 			}
 		}catch(Exception e) {
@@ -49,8 +73,6 @@ public class userDAO {
 	
 	//add user
 	public int register(String user_name,String user_age,String user_phone,String user_id,String user_pw,String user_hope) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -74,4 +96,6 @@ public class userDAO {
 		}
 		return -1;//error
 	}
+	
+
 }
