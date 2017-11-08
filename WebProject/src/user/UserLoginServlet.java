@@ -17,6 +17,7 @@ public class UserLoginServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,11 +35,13 @@ public class UserLoginServlet extends HttpServlet {
 			return;
 		}
 		
-		int result=new userDAO().login(user_id, user_pw);
+		int result = new userDAO().login(user_id, user_pw);
+		userDTO user = new userDAO().getUser(user_id);
 		
 		if(result == 1) {
 			//로그인 성공시 id 세션 부여
-			request.getSession().setAttribute("user_id",user_id);
+			request.getSession().setAttribute("user_id", user_id);
+			request.getSession().setAttribute("user_info", user);
 			response.sendRedirect("index.jsp"); //complete page로 redirect해야함
 			
 			return;

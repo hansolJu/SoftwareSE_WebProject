@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
 
 public class userDAO {
 
@@ -14,9 +14,9 @@ public class userDAO {
 	
 	public userDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
-			String dbID = "jy";
-			String dbPW = "1365";
+			String dbURL = "jdbc:mysql://localhost:3306/user?autoReconnect=true&useSSL=false";
+			String dbID = "blesk";
+			String dbPW = "6572609";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		}catch(Exception e) {
@@ -24,7 +24,7 @@ public class userDAO {
 		}
 	}
 	
-	//login
+	//Login
 	public int login(String user_id,String user_pw) {
 		String SQL = "SELECT user_pw FROM USER WHERE user_id = ?";
 		try {
@@ -97,5 +97,33 @@ public class userDAO {
 		return -1;//error
 	}
 	
-
+	//get user info
+	public userDTO getUser(String user_id) {
+		String sql = "select * from user where user_id=?";
+		userDTO user = new userDTO();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			user.setUser_name(rs.getString("user_name"));
+			user.setUser_age(rs.getString("user_age"));
+			user.setUser_phone(rs.getString("user_phone"));
+			user.setUser_id(rs.getString("user_id"));
+			user.setUser_pw(rs.getString("user_pw"));
+			user.setUser_hope(rs.getString("user_hope"));
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs !=null) rs.close();
+				if(pstmt !=null) pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
 }
