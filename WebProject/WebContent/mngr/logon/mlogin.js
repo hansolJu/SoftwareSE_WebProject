@@ -6,10 +6,10 @@ $(document).ready(function(){
 		  
 		$.ajax({
 		   type: "POST",
-		   url: "/shoppingmall/mg/managerLoginPro.do",
+		   url: "/wedeal/mg/managerLoginPro.do",
 		   data: query,
 		   success: function(data){
-		   	window.location.href("/shoppingmall/mg/managerMain.do");	
+		   	window.location.href("/wedeal/mg/managerMain.do");	
 		   }
 		});
 
@@ -19,9 +19,9 @@ $(document).ready(function(){
 	$("#logout").click(function(){
 		$.ajax({
 		   type: "POST",
-		   url: "/shoppingmall/mg/managerLogout.do",
+		   url: "/wedeal/mg/managerLogout.do",
 		   success: function(data){
-			   window.location.href("/shoppingmall/mg/managerMain.do");
+			   window.location.href("/wedeal/mg/managerMain.do");
 		   }
 		});
 	});
