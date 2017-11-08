@@ -70,7 +70,7 @@ public class MngrDBBean {
         }
 		return x;
 	}
-    
+    /*
     //책 등록 메소드
     public void insertBook(MngrDataBean book) 
     throws Exception {
@@ -457,4 +457,5 @@ public class MngrDBBean {
             	try { conn.close(); } catch(SQLException ex) {}
         }
     }
+    */
 }
