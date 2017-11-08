@@ -13,7 +13,11 @@ import javax.sql.DataSource;
 
 import work.crypt.BCrypt;
 import work.crypt.SHA256;
-
+/*
+ * 디비 처리빈이다.
+ * 책 페이지 770 쪽에 나오는 내용.
+ * 각 함수에 주석이 달려있음.
+ */
 public class MngrDBBean {
 	//MngrDBBean 전역 객체 생성 <- 한개의 객체만 생성해서 공유
     private static MngrDBBean instance = new MngrDBBean();
