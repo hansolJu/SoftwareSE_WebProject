@@ -20,9 +20,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width", initial-scale="1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<title>메인 화면</title>
+	<link rel="stylesheet" type="text/css" href="MetaData/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="MetaData/css/style.css" />
+    <script src="MetaData/js/modernizr.custom.97074.js"></script>
+    <noscript><link rel="stylesheet" type="text/css" href="MetaData/css/noJS.css"/></noscript>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -34,6 +38,13 @@
 			})
 		}
 	</script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="MetaData/js/jquery.hoverdir.js"></script>
+    <script type="text/javascript">
+            $(function () {
+                $(' #da-thumbs > li ').hoverdir();
+            });
+    </script>
 <style type="text/css">
 	a, a:hover{
 		color: #000000;
@@ -100,6 +111,7 @@
 			%>
 		</div>
 	</nav>
+	
 	<div class="container">
 		<div class="row">
 		<!-- 테이블 색 -->
@@ -116,9 +128,21 @@
 						ArrayList<boardDTO> list = boarddao.getList(pageNumber);
 						for(int i = 0; i < list.size(); i++){
 					%>
-						<td align="center"><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
+					
+						<td align="center">
+							<a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>">
+								<%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%>
+							</a><%="<br>"%>
 						<label><%="작성자:"%><%=list.get(i).getUser_id() %></label><%="<br>"%>
-						<a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>"><img src="<%= list.get(i).getBoard_path() %>\<%= list.get(i).getBoard_image() %>" height= 200px width=200px></a><%="<br>"%>
+						<ul id="da-thumbs" class="da-thumbs">
+							<li>
+								<a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>">
+									<img src="<%= list.get(i).getBoard_path() %>\<%= list.get(i).getBoard_image() %>" height= 200px width=200px>
+										<div><span><%= list.get(i).getUser_id() %></span><span><%= list.get(i).getUser_id()%></span></div>
+								</a>
+							</li>
+						</ul><%="<br>"%>
+						
 						<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%></td>
 					<% 
 						if((i+1)%4==0 && i>0) {
