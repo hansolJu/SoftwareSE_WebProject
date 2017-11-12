@@ -126,4 +126,73 @@ public class userDAO {
 		}
 		return user;
 	}
+	
+	//user_phone modify
+	public boolean modifyPhone(String user_id, String user_phone) {
+		String sql = "update user set user_phone=? where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_phone);
+			pstmt.setString(2, user_id);
+			pstmt.executeUpdate();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//user_pw modify
+	public boolean modifyPasswd(String user_id, String user_pw) {
+		String sql = "update user set user_pw=? where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_pw);
+			pstmt.setString(2, user_id);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//user delete
+	public boolean deleteUser(String user_id) {
+		String sql = "delete from user where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
 }

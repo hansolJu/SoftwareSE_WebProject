@@ -1,17 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
-<%@ page import="user.userDAO"%>
-<!-- 데이터 접근 함수 -->
-<%@ page import="user.userDTO"%>
-<!-- 빈즈 객체 -->
-
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import="user.*" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<title>회원 정보 조회</title>
+	<title>회원 연락처 수정</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -22,6 +18,15 @@
 				url: './UserLogoutServlet',
 			})
 		}
+		function checkpass(){
+			var pw = document.getElementById("user_passwd").value;
+			var pwch = document.getElementById("user_passwdch").value;
+			
+			if(user_paaswd != user_passwdch){
+				alert('비밀번호가 틀렸습니다. 다시 입력해주세요');
+				retrun false;
+			}
+		}
 	</script>
 <jsp:useBean id="user" class="user.userDAO" scope="session" />
 </head>
@@ -29,7 +34,7 @@
 <body>
 	<%
 		String session_id = null;
-		
+		//세션 설정
 		if(session.getAttribute("user_id")!=null){
 			session_id = (String)session.getAttribute("user_id");
 		}
@@ -59,8 +64,8 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="user/login.jsp">로그인</a></li>
-					 	<li><a href="user/join.jsp">회원가입</a></li>
+					 	<li><a href="login.jsp">로그인</a></li>
+					 	<li><a href="join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
@@ -73,7 +78,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">설정<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="user/userinfo.jsp" >내 정보</a></li>
+					 	<li><a href="userinfo.jsp" >내 정보</a></li>
 					 </ul>
 				</li>
 			</ul>
@@ -82,6 +87,7 @@
 			%>
 		</div>
 	</nav>
+	
 	<!-- 회원 메뉴 -->
 	<div id="menu" style="display:inline-block; border-right:1px solid; float:left; height:400px; width:15%; padding:10px;">
 		<ul style="list-style:none;">
@@ -91,65 +97,21 @@
 		</ul>
 	</div>
 	
-	<!-- 회원 정보 조회 및 수정-->
-	<div class="userinfo" style="float:left;">
-		<div id="profile" style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>WeDEAL 프로필</h3>
-			<hr>
+	<div>
+		<div style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
+			<h3>비밀번호 수정</h3>
+			<br>
 			<div>
-				<table>
-					<tr>
-						<td>이름 : </td>
-						<td><%=userinfo.getUser_name() %></td>
-					</tr>
-					<tr>
-						<td>연령대 : </td>
-						<td><%=userinfo.getUser_age() %></td>
-					</tr>
-				</table>
+				<form name="modify" method="post" action="./UserPassWd" onsubmit="return checkpass()">
+				비밀번호 : <input type="password" name="user_passwd" size="15" />
 				<br>
-			</div>
-		</div>
-		
-		<div id="contact" style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>연락처</h3>
-			<hr>
-			<div>
-				<table>
-					<tr>
-						<td>휴대전화 : </td>
-						<td><%=userinfo.getUser_phone() %></td>
-					</tr>
-				</table>
-				<br>
-				<a href="modifyPhone.jsp">수정</a>
-			</div>
-		</div>
-		<br>
-		
-		<div id="secret" style="display:inline-block; border:1px ; float:bottom; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>비밀번호</h3>
-			<hr>
-			<div>
-				<table>
-					<tr>
-						<td><a href="modifyPasswd.jsp">수정</a></td>
-					</tr>	
-				</table>
-			</div>
-		</div>
-		
-		<div id="withdraw" style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>회원 탈퇴</h3>
-			<hr>
-			<div>
-				<table>
-					<tr>
-						<td><a href="deleteUser.jsp">탈퇴</a>
-					<tr>
-				</table>
+				비밀번호 확인 : <input type="password" name="user_passwdch" size="15" />
+				<hr>
+				<input type="submit" name="Submit" value="수정" >
+				</form>
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>
