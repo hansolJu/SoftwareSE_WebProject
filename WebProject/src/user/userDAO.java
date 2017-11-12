@@ -69,6 +69,12 @@ public class userDAO {
 		}
 		return -1;//error
 	}
+	/**
+	 * 
+	 * @param user_id
+	 * @return userDTO
+	 * 관리자가 사용자의 id를 검색하거나 metadata 사용시 이용
+	 */
 	public userDTO getUserByID(String user_id) {
         userDTO user = new userDTO();
         PreparedStatement preparedStatement = null;
@@ -100,7 +106,7 @@ public class userDAO {
      * 
      * @param userName
      * @return User
-     * 관리자가 회원을 조회하는 메소드
+     * 관리자가 회원을 이름으로 조회하는 메소드
      */
     public userDTO getUserByName(String userName) {
         userDTO user = new userDTO();
