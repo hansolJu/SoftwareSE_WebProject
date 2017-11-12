@@ -6,12 +6,12 @@
 <script src="/shoppingmall/js/jquery-1.11.0.min.js"></script>
 <script src="/shoppingmall/mngr/managermain.js"></script>
 <!-- 관리자 인증이 되지 않은 경우 표시되는 내용 -->    
-<c:if test="${empty sessionScope.id}">
+<c:if test="${!empty sessionScope.id}">
   <div id="mList"><p>로그인 하세요.
   </div>
 </c:if>
 <!-- 관리자 인증이 성공한 경우 표시되는 내용 -->
-<c:if test="${!empty sessionScope.id}">
+<c:if test="${empty sessionScope.id}">
 	<div id="mList">
 		<ul>
 			<li>회원 관리
