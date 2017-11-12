@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.wedeal.dao.ProductDAO;
-import com.wedeal.model.ProductDataBean;
+import board.boardDAO;
+import board.boardDTO;
 
 /**
  * 12017.11.07
@@ -20,8 +20,8 @@ public class CategorySearchAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		String searchName = null;  //검색하려는 키워드
 		String searchCategory = null;
-		ProductDAO searchService = ProductDAO.getInstance();
-		ArrayList<ProductDataBean> list = null;  //검색 결과를 가져올 list
+		boardDAO searchService = boardDAO.getInstance();
+		ArrayList<boardDTO> list = null;  //검색 결과를 가져올 list
 		try {  //해당 parameter가 없을 경우
 			searchName = request.getParameter("searchName");
 			searchCategory = request.getParameter("searchCategory");  //어떤 카테고리를 검사할지

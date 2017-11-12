@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="css/demo.css" />
       <link rel="stylesheet" type="text/css" href="css/style.css" />
       <script src="js/modernizr.custom.97074.js"></script>
-      <noscript><link rel="stylesheet" type="text/css" href="css/noJS.css"/></noscript>
+      <noscript><link rel="stylesheet" type="text/css" href="css/noJS.css"/></noscript>Z
     </head>
 </head>
  <body>
@@ -20,7 +20,7 @@
                     <li>
                         <a href="http://www.google.com">
                             <img src="images/beauty.jpg" />
-                            <div><span>test</span></div>
+                            <div><span>test</span><span>안농</span></div>
                         </a>
                     </li>
                 </ul>

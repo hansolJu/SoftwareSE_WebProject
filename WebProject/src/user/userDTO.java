@@ -1,5 +1,7 @@
 package user;
 
+import java.sql.Date;
+
 public class userDTO {
 
 	private String user_name;
@@ -8,6 +10,7 @@ public class userDTO {
 	private String user_id;
 	private String user_pw;
 	private String user_hope;
+	private Date user_date;
 	
 	public String getUser_name() {
 		return user_name;
@@ -44,5 +47,11 @@ public class userDTO {
 	}
 	public void setUser_hope(String user_hope) {
 		this.user_hope = user_hope;
+	}
+	public Date getUser_date() {
+		return user_date;
+	}
+	public void setUser_date(Date user_date) {
+		this.user_date= user_date;
 	}
 }

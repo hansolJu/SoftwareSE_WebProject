@@ -1,22 +1,15 @@
 package user;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import com.wedeal.dao.DataDBBean;
 import com.wedeal.util.DbUtil;
 
 public class userDAO {
 
 	private Connection conn;
-	private static DataDBBean instance = new DataDBBean();
-	
-	public userDAO() {
-		conn = DbUtil.getConnection();
-	}
-	
 	//check id
 	public int registerCheck(String user_id) {
 		PreparedStatement pstmt=null;
@@ -24,6 +17,7 @@ public class userDAO {
 		String SQL="SELECT * FROM USER WHERE user_id = ?";
 		
 		try {
+			conn = DbUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user_id);
 			//no
@@ -54,6 +48,7 @@ public class userDAO {
 		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
+			conn = DbUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user_name);
 			pstmt.setString(2, user_age);
@@ -74,4 +69,64 @@ public class userDAO {
 		}
 		return -1;//error
 	}
+	public userDTO getUserByID(String user_id) {
+        userDTO user = new userDTO();
+        PreparedStatement preparedStatement = null;
+    	ResultSet  rs = null;
+        try {
+        	conn = DbUtil.getConnection();
+            preparedStatement = conn.prepareStatement("select * from User where user_id=?");
+            preparedStatement.setString(1, user_id);
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user.setUser_name(rs.getString("user_age"));
+                user.setUser_age(rs.getString("user_age"));
+                user.setUser_phone(rs.getString("user_phone"));
+                user.setUser_id(rs.getString("user_id"));
+                user.setUser_pw(rs.getString("user_pw"));
+                user.setUser_hope(rs.getString("user_hope_1"));
+                user.setUser_date(rs.getDate("user_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+        	DbUtil.close(conn, preparedStatement, rs);
+        }
+        return user;
+    }
+    /**
+     * 
+     * @param userName
+     * @return User
+     * 관리자가 회원을 조회하는 메소드
+     */
+    public userDTO getUserByName(String userName) {
+        userDTO user = new userDTO();
+        PreparedStatement preparedStatement = null;
+    	ResultSet  rs = null;
+        try {
+        	conn = DbUtil.getConnection();
+            preparedStatement = conn.prepareStatement("select * from User where user_name=?");
+            preparedStatement.setString(1, userName);
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user.setUser_name(rs.getString("user_name"));
+                user.setUser_age(rs.getString("user_age"));
+                user.setUser_phone(rs.getString("user_phone"));
+                user.setUser_id(rs.getString("user_id"));
+                user.setUser_pw(rs.getString("user_pw"));
+                user.setUser_hope(rs.getString("user_hope"));
+                user.setUser_date(rs.getDate("user_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+        	DbUtil.close(conn, preparedStatement, rs);
+        }
+        return user;
+    }
 }
