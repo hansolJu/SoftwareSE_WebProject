@@ -53,7 +53,8 @@ public class Controller extends HttpServlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
-    //명령어와 처리클래스가 매핑되어 있는 properties 파일을 읽어서 HashMap객체인 commandMap에 저장
+    //명령어와 처리클래스가 매핑되어 있는 properties 파일을 읽어서 
+    //HashMap객체인 commandMap에 저장
 	public void init(ServletConfig config) throws ServletException {
 		
 		//initParams에서 propertyConfig의 값을 읽어옴
