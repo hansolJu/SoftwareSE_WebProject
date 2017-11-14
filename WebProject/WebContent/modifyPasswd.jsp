@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<title>회원 연락처 수정</title>
+	<title>회원 비밀번호 수정</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -18,13 +18,13 @@
 				url: './UserLogoutServlet',
 			})
 		}
-		function checkpass(){
-			var pw = document.getElementById("user_passwd").value;
-			var pwch = document.getElementById("user_passwdch").value;
-			
-			if(user_paaswd != user_passwdch){
-				alert('비밀번호가 틀렸습니다. 다시 입력해주세요');
-				retrun false;
+		function passwordCheckFunction(){
+			var user_pw = $('#user_pw').val();
+			var check_passwd = $('#check_passwd').val();
+			if(user_pw != check_passwd){
+				$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
+			}else{
+				$('#passwordCheckMessage').html('');
 			}
 		}
 	</script>
@@ -96,16 +96,15 @@
 			<li><a href="#">내 찜</a></li>
 		</ul>
 	</div>
-	
 	<div>
 		<div style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
 			<h3>비밀번호 수정</h3>
 			<br>
 			<div>
-				<form name="modify" method="post" action="./UserPassWd" onsubmit="return checkpass()">
-				비밀번호 : <input type="password" name="user_passwd" size="15" />
+				<form name="modify" method="post" onsubmit="return checkpass();" action="./UserPassWd">
+				비밀번호 : <input type="password" name="user_pw" size="15" />
 				<br>
-				비밀번호 확인 : <input type="password" name="user_passwdch" size="15" />
+				비밀번호 확인 : <input type="password" name="check_passwd" size="15" />
 				<hr>
 				<input type="submit" name="Submit" value="수정" >
 				</form>

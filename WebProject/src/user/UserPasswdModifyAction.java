@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class UserPassModifyAction
  */
 @WebServlet("/UserPassWd")
-public class UserPassModifyAction extends HttpServlet {
+public class UserPasswdModifyAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -32,12 +32,12 @@ public class UserPassModifyAction extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
-		String user_pw = request.getParameter("user_passwd");
+		String user_pw = request.getParameter("user_pw");
 		
 		userDAO user = new userDAO();
 		boolean result = user.modifyPasswd(user_id, user_pw);
 		if(result == true) {
-			response.sendRedirect("modifyPasswd.jsp");
+			response.sendRedirect("userinfo.jsp");
 			return;
 		}
 		

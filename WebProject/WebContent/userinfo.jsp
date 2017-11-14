@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="user.userDAO"%>
-<!-- µ¥ÀÌÅÍ Á¢±Ù ÇÔ¼ö -->
+<!-- ë°ì´í„° ì ‘ê·¼ í•¨ìˆ˜ -->
 <%@ page import="user.userDTO"%>
-<!-- ºóÁî °´Ã¼ -->
+<!-- ë¹ˆì¦ˆ ê°ì²´ -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<title>È¸¿ø Á¤º¸ Á¶È¸</title>
+	<title>íšŒì› ì •ë³´ ì¡°íšŒ</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -48,32 +48,32 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">¸ÞÀÎ</a></li>
-				<li><a href="board.jsp">°Ô½ÃÆÇ</a></li>
+				<li class="active"><a href="index.jsp">ë©”ì¸</a></li>
+				<li><a href="board.jsp">ê²Œì‹œíŒ</a></li>
 			</ul>
 			<%
 				if(session_id == null){
-				//-------------------------------------------------------·Î±×ÀÎÀÌ µÇ¾îÀÖÁö ¾ÊÀº °æ¿ì
+				//-------------------------------------------------------ë¡œê·¸ì¸ì´ ë˜ì–´ìžˆì§€ ì•Šì€ ê²½ìš°
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Á¢¼ÓÇÏ±â<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ì ‘ì†í•˜ê¸°<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="user/login.jsp">·Î±×ÀÎ</a></li>
-					 	<li><a href="user/join.jsp">È¸¿ø°¡ÀÔ</a></li>
+					 	<li><a href="user/login.jsp">ë¡œê·¸ì¸</a></li>
+					 	<li><a href="user/join.jsp">íšŒì›ê°€ìž…</a></li>
 					 </ul>
 				</li>
 			</ul>
 			<% 
 				} else{
-				//-------------------------------------------------------·Î±×ÀÎÀÌ µÇ¾îÀÖ´Â °æ¿ì
+				//-------------------------------------------------------ë¡œê·¸ì¸ì´ ë˜ì–´ìžˆëŠ” ê²½ìš°
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">¼³Á¤<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ì„¤ì •<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="" onclick="logout();">·Î±×¾Æ¿ô</a></li>
-					 	<li><a href="user/userinfo.jsp" >³» Á¤º¸</a></li>
+					 	<li><a href="" onclick="logout();">ë¡œê·¸ì•„ì›ƒ</a></li>
+					 	<li><a href="user/userinfo.jsp" >ë‚´ ì •ë³´</a></li>
 					 </ul>
 				</li>
 			</ul>
@@ -82,28 +82,28 @@
 			%>
 		</div>
 	</nav>
-	<!-- È¸¿ø ¸Þ´º -->
+	<!-- íšŒì› ë©”ë‰´ -->
 	<div id="menu" style="display:inline-block; border-right:1px solid; float:left; height:400px; width:15%; padding:10px;">
 		<ul style="list-style:none;">
-			<li><a href="#">³» °Ô½Ã±Û</a></li>
-			<li><a href="#">³» ´ñ±Û</a></li>
-			<li><a href="#">³» Âò</a></li>
+			<li><a href="#">ë‚´ ê²Œì‹œê¸€</a></li>
+			<li><a href="#">ë‚´ ëŒ“ê¸€</a></li>
+			<li><a href="#">ë‚´ ì°œ</a></li>
 		</ul>
 	</div>
 	
-	<!-- È¸¿ø Á¤º¸ Á¶È¸ ¹× ¼öÁ¤-->
+	<!-- íšŒì› ì •ë³´ ì¡°íšŒ ë° ìˆ˜ì •-->
 	<div class="userinfo" style="float:left;">
 		<div id="profile" style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>WeDEAL ÇÁ·ÎÇÊ</h3>
+			<h3>WeDEAL í”„ë¡œí•„</h3>
 			<hr>
 			<div>
 				<table>
 					<tr>
-						<td>ÀÌ¸§ : </td>
+						<td>ì´ë¦„ : </td>
 						<td><%=userinfo.getUser_name() %></td>
 					</tr>
 					<tr>
-						<td>¿¬·É´ë : </td>
+						<td>ì—°ë ¹ëŒ€ : </td>
 						<td><%=userinfo.getUser_age() %></td>
 					</tr>
 				</table>
@@ -112,40 +112,39 @@
 		</div>
 		
 		<div id="contact" style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>¿¬¶ôÃ³</h3>
+			<h3>ì—°ë½ì²˜</h3>
 			<hr>
 			<div>
 				<table>
 					<tr>
-						<td>ÈÞ´ëÀüÈ­ : </td>
+						<td>íœ´ëŒ€ì „í™” : </td>
 						<td><%=userinfo.getUser_phone() %></td>
 					</tr>
 				</table>
 				<br>
-				<a href="modifyPhone.jsp">¼öÁ¤</a>
+				<a href="modifyPhone.jsp">ìˆ˜ì •</a>
 			</div>
 		</div>
 		<br>
-		
 		<div id="secret" style="display:inline-block; border:1px ; float:bottom; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>ºñ¹Ð¹øÈ£</h3>
+			<h3>ë¹„ë°€ë²ˆí˜¸</h3>
 			<hr>
 			<div>
 				<table>
 					<tr>
-						<td><a href="modifyPasswd.jsp">¼öÁ¤</a></td>
+						<td><a href="modifyPasswd.jsp">ìˆ˜ì •</a></td>
 					</tr>	
 				</table>
 			</div>
 		</div>
 		
 		<div id="withdraw" style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
-			<h3>È¸¿ø Å»Åð</h3>
+			<h3>íšŒì› íƒˆí‡´</h3>
 			<hr>
 			<div>
 				<table>
 					<tr>
-						<td><a href="deleteUser.jsp">Å»Åð</a>
+						<td><a href="deleteUser.jsp">íƒˆí‡´</a>
 					<tr>
 				</table>
 			</div>

@@ -8,16 +8,15 @@
 	로그인이 되어있는 경우 마이 페이지를 통해 로그아웃 가능. UserLogoutServlet을 통해 session이 invalidate()됨.
 	최종 수정: 2017/11/05
  -->
- 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="../css/bootstrap.css">
 	<title>메인 화면</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="../js/bootstrap.js"></script>
 	<script type="text/javascript">
 		function logout(){
 			var user_id = $('#user_id').val();
@@ -28,6 +27,7 @@
 		}
 	</script>
 </head>
+
 <body>
 	<%
 		String session_id = null;
