@@ -26,14 +26,24 @@ public class UserDBBean {
 		return instance;
 	}
 	
-	private UserDBBean() {}
-	
-	private Connection getConnection() throws Exception{
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context) initCtx.lookup("jaca:comp:/env");
-		DataSource ds = (DataSource) envCtx.lookup("jdbc/jy");
-		return ds.getConnection();
+	private UserDBBean() {
+		try {
+			String dbURL = "jdbc:mysql://localhost:3306/user?autoReconnect=true&useSSL=false";
+			String dbID = "blesk";
+			String dbPW = "6572609";
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	/*private Connection getConnection() throws Exception{
+		Context initCtx = new InitialContext();
+		Context envCtx = (Context) initCtx.lookup("java:comp:/env");
+		DataSource ds = (DataSource) envCtx.lookup("jdbc/se");
+		return ds.getConnection();
+	}*/
 	
 	//현재 시간을 서버에 넣어준다.
 	public String getDate() {

@@ -1,4 +1,4 @@
-package command;
+package com.wedeal.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +11,7 @@ public class ConfirmIdAction implements CommandAction{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		request.setCharacterEncoding("utf-8");
 		String user_id = request.getParameter("user_id");
-		
+		System.out.println(user_id);
 		System.out.println("여기까지~");
 		
 		UserDBBean manager = UserDBBean.getinstance();

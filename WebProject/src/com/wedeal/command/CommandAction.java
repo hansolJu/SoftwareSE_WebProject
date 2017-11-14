@@ -1,4 +1,4 @@
-package command;
+package com.wedeal.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import command.CommandAction;
+import com.wedeal.command.CommandAction;
 
 @WebServlet(
 		urlPatterns = { 
@@ -37,7 +37,6 @@ public class Controller extends HttpServlet {
      */
     public Controller() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -46,24 +45,29 @@ public class Controller extends HttpServlet {
     //명령어와 처리클래스가 매핑되어 있는 properties 파일을 읽어서 
     //HashMap객체인 commandMap에 저장
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
-		
+		System.out.println("1");
 		//initParams에서 propertyConfig의 값을 읽어옴
 		String props = config.getInitParameter("propertyConfig");
+		System.out.println("2");
 		String realFolder = "/property"; //properties파일이 저장된 폴더
 		//웹어플리케이션 루트 경로
 		ServletContext context = config.getServletContext();
+		System.out.println("3");
 		//realFolder를 웹어플리케이션 시스템상의 절대경로로 변경
 		String realPath = context.getRealPath(realFolder) +"\\"+props;
 							    
 		//명령어와 처리클래스의 매핑정보를 저장할 Properties객체 생성
 		Properties pr = new Properties();
+		System.out.println("4");
 		FileInputStream f = null;
 		try{
 			//command.properties파일의 내용을 읽어옴
 			f = new FileInputStream(realPath); 
 			//command.properties의 내용을 Properties객체 pr에 저장
+			System.out.println("5");
 			pr.load(f);
+			
+			System.out.println("6");
 		}catch (IOException e) {
 			e.printStackTrace();
 		}finally {
@@ -74,11 +78,16 @@ public class Controller extends HttpServlet {
 		//Iterator객체에 저장된 명령어와 처리클래스를 commandMap에 저장
 		while( keyIter.hasNext() ) {
 			String command = (String)keyIter.next();
+			System.out.println(command);
 			String className = pr.getProperty(command);
+			System.out.println(className);
 			try{
-				Class<?> commandClass = Class.forName(className);
-				Object commandInstance = commandClass.newInstance();
-				commandMap.put(command, commandInstance);
+				Class<?> commandClass = Class.forName(className);//해당 문자열을 클래스로 만든다.
+				System.out.println("7");
+			    Object commandInstance = commandClass.newInstance();//해당클래스의 객체를 생성
+			    System.out.println("8");
+			    commandMap.put(command, commandInstance);// Map객체인 commandMap에 객체 저장
+				System.out.println("9");
 			}catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}catch (InstantiationException e) {
@@ -118,8 +127,10 @@ public class Controller extends HttpServlet {
 		CommandAction com=null;
 		try {
 			String command = request.getRequestURI();
+			System.out.println(command);
 	        if(command.indexOf(request.getContextPath()) == 0) 
 	           command = command.substring(request.getContextPath().length());
+	        System.out.println(command);
 	        com = (CommandAction)commandMap.get(command);  
 	        view = com.requestPro(request, response);
 		}catch(Throwable e) {
