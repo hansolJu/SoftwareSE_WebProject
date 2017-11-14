@@ -22,7 +22,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './UserLogoutServlet',
+				url: './../UserLogoutServlet',
 			})
 		}
 	</script>

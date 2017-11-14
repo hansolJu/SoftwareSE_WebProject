@@ -6,16 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="../css/bootstrap.css">
 	<title>회원 비밀번호 수정</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="../js/bootstrap.js"></script>
 	<script type="text/javascript">
 		function logout(){
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './UserLogoutServlet',
+				url: './../UserLogoutServlet',
 			})
 		}
 		function passwordCheckFunction(){
@@ -101,7 +101,7 @@
 			<h3>비밀번호 수정</h3>
 			<br>
 			<div>
-				<form name="modify" method="post" onsubmit="return checkpass();" action="./UserPassWd">
+				<form name="modify" method="post" onsubmit="return checkpass();" action="./../UserPassWd">
 				비밀번호 : <input type="password" name="user_pw" size="15" />
 				<br>
 				비밀번호 확인 : <input type="password" name="check_passwd" size="15" />

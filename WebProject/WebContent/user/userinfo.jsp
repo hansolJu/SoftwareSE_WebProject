@@ -10,16 +10,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="../css/bootstrap.css">
 	<title>회원 정보 조회</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="../js/bootstrap.js"></script>
 	<script type="text/javascript">
 		function logout(){
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './UserLogoutServlet',
+				url: './../UserLogoutServlet',
 			})
 		}
 	</script>
@@ -59,8 +59,8 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="user/login.jsp">로그인</a></li>
-					 	<li><a href="user/join.jsp">회원가입</a></li>
+					 	<li><a href="login.jsp">로그인</a></li>
+					 	<li><a href="join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
@@ -73,7 +73,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">설정<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="user/userinfo.jsp" >내 정보</a></li>
+					 	<li><a href="userinfo.jsp" >내 정보</a></li>
 					 </ul>
 				</li>
 			</ul>

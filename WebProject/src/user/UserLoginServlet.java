@@ -31,7 +31,7 @@ public class UserLoginServlet extends HttpServlet {
 		if( user_id == null || user_id.equals("") || user_pw == null || user_pw.equals("")) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "모든 내용을 입력하세요.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 			return;
 		}
 		
@@ -42,7 +42,7 @@ public class UserLoginServlet extends HttpServlet {
 			//로그인 성공시 id 세션 부여
 			request.getSession().setAttribute("user_id", user_id);
 			request.getSession().setAttribute("user_info", user);
-			response.sendRedirect("index.jsp"); //complete page로 redirect해야함
+			response.sendRedirect("user/index.jsp"); //complete page로 redirect해야함
 			
 			return;
 		}
@@ -50,13 +50,13 @@ public class UserLoginServlet extends HttpServlet {
 		else if(result == 0) {
 			request.getSession().setAttribute("messageType", "오류 메세지");
 			request.getSession().setAttribute("messageContent", "아이디 혹은 비밀번호가 맞지 않습니다.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 		}
 		
 		else {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "내부적인 오류입니다. 다시 시도해 주세요.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 		}
 	}
 
