@@ -5,7 +5,7 @@ $(document).ready(function(){
 		
 	    $.ajax({
 	    	type:"post",
-	    	url:"/WeDeal/confirmId.do",
+	    	url:"/shoppingmall/confirmId.do",
 	    	data:query,
 	    	success:function(data){
 	    		var str1 = '<p id="ck">';
@@ -34,16 +34,16 @@ $(document).ready(function(){
 		  
 		  $.ajax({
 		      type:"post",
-		      url:"/WeDeal/registerPro.do",
+		      url:"/shoppingmall/registerPro.do",
 		      data:query,
 		      success:function(data){
-		    	  window.location.href("/WeDeal/index.do");
+		    	  window.location.href("/shoppingmall/index.do");
 		 	  }
 		  });
 	});
 	
 	$("#cancle").click(function(){//[취소]버튼 클릭
-		window.location.href("/WeDeal/index.do");
+		window.location.href("/shoppingmall/index.do");
 	});
 
  });

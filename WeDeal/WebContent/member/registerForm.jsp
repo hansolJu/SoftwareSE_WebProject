@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<link rel="stylesheet" href="/WeDeal/css/style.css"/>
-<script src="/WeDeal/js/jquery-1.11.0.min.js"></script>
-<script src="/WeDeal/member/register.js"></script>
+<link rel="stylesheet" href="/shoppingmall/css/style.css"/>
+<script src="/mappingExample/js/jquery-1.11.0.min.js"></script>
+<script src="/mappingExample/member/register.js"></script>
 
 <div id="regForm" class="box">
    <ul>
