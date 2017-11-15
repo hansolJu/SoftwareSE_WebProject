@@ -1,7 +1,7 @@
 <!-- 
 회원가입폼
 작성자 : 주한솔
-최종수정자 : 주한솔+이재윤
+최종수정자 : 이재윤
 최종수정일 : 17.11.15
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,28 +12,48 @@
 <!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script> -->
 <script src="/wedeal/member/register.js"></script>
 
+<script type="text/javascript">
+		function passwordCheckFunction(){
+			var user_pw = $('#user_pw').val();
+			var check_passwd = $('#check_passwd').val();
+			if(user_pw != check_passwd){
+				$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
+			}else{
+				$('#passwordCheckMessage').html('');
+			}
+		}
+	</script>
+	
 <div id="regForm" class="box">
    <ul>
-      <li><label for="id">아이디</label>
-          <input id="id" name="id" type="email" size="20" 
-           maxlength="50" placeholder="example@kings.com" autofocus>
-          <button id="checkId">ID중복확인</button>
-      <li><label for="passwd">비밀번호</label>
-          <input id="passwd" name="passwd" type="password" 
-           size="20" placeholder="6~16자 숫자/문자" maxlength="16">
-      <li><label for="repass">비밀번호 재입력</label>
-          <input id="repass" name="repass" type="password" 
-           size="20" placeholder="비밀번호재입력" maxlength="16">
-      <li><label for="name">이름</label>
-          <input id="name" name="name" type="text" 
-           size="20" placeholder="홍길동" maxlength="10">
-      <li><label for="address">주소</label>
-          <input id="address" name="address" type="text" 
-           size="30" placeholder="주소 입력" maxlength="50">
-      <li><label for="tel">전화번호</label>
-          <input id="tel" name="tel" type="tel" 
-           size="20" placeholder="전화번호 입력" maxlength="20">
-      <li class="label2"><button id="process">가입하기</button>
-          <button id="cancle">취소</button>
+   	  <li><h3 style="text-align: center;">회원가입</h3>
+   	  <li><label for="user_name">이름</label>
+				    <input type="text" id="user_name" name="user_name" placeholder="이름">
+	  <li><label for="user_age">나이</label>
+					<select id="user_age" name="user_age">
+					<option value="">연령대를 선택해주세요.</option>
+					<option value="10">10대</option>
+					<option value="20">20대</option>
+					<option value="30">30대</option>
+					<option value="40">40대</option>
+					<option value="50">50대</option>
+					<option value="60">60대 이상</option>
+					</select>
+	  <li><label for="user_phone">핸드폰 번호</label>
+					<input type="text" id="user_phone" placeholder="핸드폰 번호를 입력해 주세요." name="user_phone" maxlength="20">
+	  <li><label for="user_id">아이디</label>
+					<input type="text" id="user_id" placeholder="아이디" name="user_id" maxlength="10" autofocus>
+					<button id="checkId" type="button">중복체크</button>
+	  <li><label for="user_pw">비밀번호</label>
+					<input type="password" id="user_pw" onkeyup="passwordCheckFunction();" placeholder="비밀번호" name="user_pw" maxlength="20">
+	  <li><label for="repass">비밀번호 확인</label>
+					<input type="password" id="check_passwd" onkeyup="passwordCheckFunction();" placeholder="비밀번호 확인" name="check_passwd" maxlength="20">
+	  <li><label for="user_hope">관심상품</label>
+					<input type="radio" name="user_hope" autocomplete="off" value="의류" selected>의류
+					<input type="radio" name="user_hope" autocomplete="off" value="가전">가전
+					<input type="radio" name="user_hope" autocomplete="off" value="도서">도서
+	  <li><h5 style="color: red;" id="passwordCheckMessage"></h5>
+				<li class="label2"><button id="process">가입</button>
+					<button id="cancle">취소</button>											
    </ul>
 </div>
