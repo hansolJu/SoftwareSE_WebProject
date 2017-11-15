@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.wedeal.command.CommandAction;
 
+<<<<<<< HEAD
 @WebServlet(
 		urlPatterns = { 
 				"/Controller", 
@@ -31,6 +32,30 @@ import com.wedeal.command.CommandAction;
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//���ɾ�� ���ɾ� ó�� Ŭ������ ������ ����
+=======
+/**
+ * Servlet implementation class Controller
+ * 
+ * 컨트롤러인 Controller 파일은 사용자의 요청을 받아 요청에 해당하는 로직의 진입점 슈퍼 인터페이스인 CommandAction 클래스의 메소드를 호출한다. 
+ * 그러면 슈퍼 인터페이스를 통해서 해당 작업을 처리할 명령어 처리 클래스의 requestPro(request, response) 메소드가 호출되어 작업을 처리한다.
+ * 처리결과와 결과를 표시할 뷰에 대한 정보는 다시 컨트롤러로 보내진다. 컨트롤러가 이 정보를 Template.jsp로 보내면 화면에 결과가 표시된다.
+ * 
+ * The Controller file, which is the controller, receives the user's request and calls the method of the CommandAction class which is the entry point super interface of the logic corresponding to the request.
+ * Then, the requestPro (request, response) method of the command processing class to process the job through the super interface is called to process the job.
+ * Information about the processing result and the view to display the result is sent back to the controller. When the controller sends this information to Template.jsp, the results are displayed on the screen.
+ */
+@WebServlet(
+	urlPatterns = { 
+		"/Controller", 
+		"*.do"
+	}, 
+	initParams = { 
+	    @WebInitParam(name = "propertyConfig", value = "commandMapping.properties")
+	})
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	//명령어와 명령어 처리 클래스를 쌍으로 저장
+>>>>>>> master
 	private Map<String, Object> commandMap = new HashMap<String, Object>();      
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,6 +67,7 @@ public class Controller extends HttpServlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
+<<<<<<< HEAD
     //���ɾ�� ó��Ŭ������ ���εǾ� �ִ� properties ������ �о 
     //HashMap��ü�� commandMap�� ����
 	public void init(ServletConfig config) throws ServletException {
@@ -68,11 +94,34 @@ public class Controller extends HttpServlet {
 			pr.load(f);
 			
 			System.out.println("6");
+=======
+    //명령어와 처리클래스가 매핑되어 있는 properties 파일을 읽어서 
+    //HashMap객체인 commandMap에 저장
+	public void init(ServletConfig config) throws ServletException {
+		
+		//initParams에서 propertyConfig의 값을 읽어옴
+		String props = config.getInitParameter("propertyConfig");
+		String realFolder = "/property"; //properties파일이 저장된 폴더
+		//웹어플리케이션 루트 경로
+		ServletContext context = config.getServletContext();
+		//realFolder를 웹어플리케이션 시스템상의 절대경로로 변경
+		String realPath = context.getRealPath(realFolder) +"\\"+props;
+							    
+		//명령어와 처리클래스의 매핑정보를 저장할 Properties객체 생성
+		Properties pr = new Properties();
+		FileInputStream f = null;
+		try{
+			//command.properties파일의 내용을 읽어옴
+			f = new FileInputStream(realPath); 
+			//command.properties의 내용을 Properties객체 pr에 저장
+			pr.load(f);
+>>>>>>> master
 		}catch (IOException e) {
 			e.printStackTrace();
 		}finally {
 			if (f != null) try { f.close(); } catch(IOException ex) {}
 		}
+<<<<<<< HEAD
 		//Set��ü�� iterator()�޼ҵ带 ����� Iterator��ü�� ��
 		Iterator<?> keyIter = pr.keySet().iterator();
 		//Iterator��ü�� ����� ���ɾ�� ó��Ŭ������ commandMap�� ����
@@ -88,6 +137,18 @@ public class Controller extends HttpServlet {
 			    System.out.println("8");
 			    commandMap.put(command, commandInstance);// Map��ü�� commandMap�� ��ü ����
 				System.out.println("9");
+=======
+		//Set객체의 iterator()메소드를 사용해 Iterator객체를 얻어냄
+		Iterator<?> keyIter = pr.keySet().iterator();
+		//Iterator객체에 저장된 명령어와 처리클래스를 commandMap에 저장
+		while( keyIter.hasNext() ) {
+			String command = (String)keyIter.next();
+			String className = pr.getProperty(command);
+			try{
+				Class<?> commandClass = Class.forName(className);
+				Object commandInstance = commandClass.newInstance();
+				commandMap.put(command, commandInstance);
+>>>>>>> master
 			}catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}catch (InstantiationException e) {
@@ -104,8 +165,12 @@ public class Controller extends HttpServlet {
 	protected void doGet(
 		HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		requestPro(request, response);//��ûó�� �޼ҵ� ȣ��
+=======
+		requestPro(request, response);//요청처리 메소드 호출
+>>>>>>> master
 	}
 
 	/**
@@ -114,12 +179,20 @@ public class Controller extends HttpServlet {
 	protected void doPost(
 		HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		requestPro(request, response);//��ûó�� �޼ҵ� ȣ��
 	}
 	
 	//���������� ��û�� �м��ϰ�, �ش� ������ ó���� �� �� ���� ��
 	//ó�� ����� �信 ����
+=======
+		requestPro(request, response);//요청처리 메소드 호출
+	}
+	
+	//웹브라우저의 요청을 분석하고, 해당 로직의 처리를 할 모델 실행 및
+	//처리 결과를 뷰에 보냄
+>>>>>>> master
 	private void requestPro(
 		HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
@@ -127,10 +200,15 @@ public class Controller extends HttpServlet {
 		CommandAction com=null;
 		try {
 			String command = request.getRequestURI();
+<<<<<<< HEAD
 			System.out.println(command);
 	        if(command.indexOf(request.getContextPath()) == 0) 
 	           command = command.substring(request.getContextPath().length());
 	        System.out.println(command);
+=======
+	        if(command.indexOf(request.getContextPath()) == 0) 
+	           command = command.substring(request.getContextPath().length());
+>>>>>>> master
 	        com = (CommandAction)commandMap.get(command);  
 	        view = com.requestPro(request, response);
 		}catch(Throwable e) {
@@ -141,4 +219,8 @@ public class Controller extends HttpServlet {
 	       request.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(request, response);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
