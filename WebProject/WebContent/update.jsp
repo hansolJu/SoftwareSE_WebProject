@@ -3,7 +3,6 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="board.boardDAO" %>
 <%@ page import="board.boardDTO" %>
-
 <!-- 
 	수정 페이지
 	view.jsp에서 수정 버튼을 누르면 넘어오는 페이지.
@@ -11,7 +10,7 @@
 	최종 수정: 2017/11/05
 -->
 
-<!DOCTYPE>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,8 +43,8 @@
 			script.println("location.href = 'login.jsp'");
 			script.println("</script>");
 		}
-		
 		int board_num = 0;
+		
 		if(request.getParameter("board_num") != null){
 			board_num = Integer.parseInt(request.getParameter("board_num"));
 		}
@@ -59,13 +58,6 @@
 		}
 		
 		boardDTO boarddto = new boardDAO().getBoard(board_num);
-		if(!session_id.equals(boarddto.getUser_id())){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('권한이 없습니다.')");
-			script.println("location.href = 'login.jsp'");
-			script.println("</script>");
-		}
 		
 	%>
 	<nav class="navbar navbar-default">
@@ -97,7 +89,7 @@
 	<div class="container">
 		<div class="row">
 		<!-- 테이블 색 -->
-			<form method="post" action="./boardUpdate?board_num=<%= board_num%>" enctype="multipart/form-data">
+			<form method="post" action="./boardUpdate">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -112,15 +104,7 @@
 						<td><textarea class="form-control" placeholder="글  내용" name="board_content" maxlength="2048" style="height: 350px;"><%= boarddto.getBoard_content()%></textarea></td>
 					</tr>
 					<tr>
-						<td>
-						<label>현재 파일: <%=boarddto.getBoard_image()%></label>
-						</td>
-					</tr>
-					<tr>
-						<td align="center"><img src="<%=boarddto.getBoard_path()%>\<%=boarddto.getBoard_image()%>" height= 300px width=300px></td>
-					</tr>
-					<tr>	
-						<td><input type="file" class="form-control" name="board_image"></td>
+						<td><label>사진 첨부하기</label><input type="file" name="board_image"></td>
 					</tr>
 				</tbody>
 			</table>

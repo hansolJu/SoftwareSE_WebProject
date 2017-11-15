@@ -4,7 +4,6 @@
 <%@ page import="board.boardDAO" %>
 <%@ page import="board.boardDTO" %>
 <%@ page import="java.util.ArrayList" %>
-
 <!-- 
 	게시판 페이지
 	게시판 페이지는 회원 session없이도 접속 가능함.
@@ -15,18 +14,13 @@
 	게시글의 제목을 클릭할 경우 write.jsp로 넘어감.
 	최종 수정: 2017/11/05
 -->
-
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<title>메인 화면</title>
-	<link rel="stylesheet" type="text/css" href="MetaData/css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="MetaData/css/style.css" />
-    <script src="MetaData/js/modernizr.custom.97074.js"></script>
-    <noscript><link rel="stylesheet" type="text/css" href="MetaData/css/noJS.css"/></noscript>
+	<title>게시판 화면</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -38,13 +32,6 @@
 			})
 		}
 	</script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="MetaData/js/jquery.hoverdir.js"></script>
-    <script type="text/javascript">
-            $(function () {
-                $(' #da-thumbs > li ').hoverdir();
-            });
-    </script>
 <style type="text/css">
 	a, a:hover{
 		color: #000000;
@@ -111,54 +98,39 @@
 			%>
 		</div>
 	</nav>
-	
 	<div class="container">
 		<div class="row">
-		<!-- 테이블 색 -->
-			<table class="table table-striped" border: 1px solid #dddddd">
+		<!-------------------------------- 글 목록을 테이블로 생성하는 부분 -------------------------------->
+			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="5" style="background-color: #eeeeee; text-align: center;">00게시판</th>
+						<th style="background-color: #eeeeee; text-align: center;">번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">제목</th>
+						<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
 					<%
 						boardDAO boarddao = new boardDAO();
 						ArrayList<boardDTO> list = boarddao.getList(pageNumber);
 						for(int i = 0; i < list.size(); i++){
+							
+					%>
+					<tr>
+						<td><%=list.get(i).getBoard_num() %></td>
+						<td><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td><%=list.get(i).getUser_id() %></td>
+						<td><%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%></td>
+					</tr>
+					<% 
+						} 
 					%>
 					
-						<td align="center">
-							<a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>">
-								<%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%>
-							</a><%="<br>"%>
-						<label><%="작성자:"%><%=list.get(i).getUser_id() %></label><%="<br>"%>
-						<ul id="da-thumbs" class="da-thumbs">
-							<li>
-								<a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>">
-									<img src="<%= list.get(i).getBoard_path() %>\<%= list.get(i).getBoard_image() %>" height= 200px width=200px>
-										<div><span><%= list.get(i).getUser_id() %></span><span><%= list.get(i).getUser_id()%></span></div>
-								</a>
-							</li>
-						</ul><%="<br>"%>
-						
-						<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%></td>
-					<% 
-						if((i+1)%4==0 && i>0) {
-					%>
-						</tr>
-						<tr>
-					<% 
-						} 
-					%>
-					<% 
-						} 
-					%>
-					</tr>
 				</tbody>
 			</table>
 			<% 
+				//-------------------------------------- 페이지 넘기는 버튼 생성하는 부분 --------------------------------------
 				if(pageNumber != 1) {
 			%>
 				<a href="board.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a>

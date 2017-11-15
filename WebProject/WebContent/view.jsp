@@ -3,7 +3,6 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="board.boardDTO" %>
 <%@ page import="board.boardDAO" %>
-
 <!-- 
 	게시글 보는 페이지
 	board.jsp에서 누른 게시글에 대한 board_num를 받아옴.
@@ -12,13 +11,13 @@
 	최종 수정: 2017/11/05
 -->
 
-<!DOCTYPE>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<title>메인 화면</title>
+	<title>게시글 보는 화면</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -101,7 +100,7 @@
 	</nav>
 	<div class="container">
 		<div class="row">
-		<!-- 테이블 색 -->
+		<!----------------------------- 받아온 글 보여주는 부분 ----------------------------->
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -125,18 +124,15 @@
 						<td>내용</td>
 						<td colspan="2" style="min-height: 200px, text-align: left;"><%= boarddto.getBoard_content().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></td>
 					</tr>
-					<tr>
-						<td>물품 사진</td>
-						<td colspan="2" align="center"><img src="<%= boarddto.getBoard_path() %>\<%= boarddto.getBoard_image() %>" height= 300px width=300px></td>
-					</tr>
 				</tbody>
 			</table>
 			<a href="board.jsp" class="btn btn-primary">목록</a>
-			<%
+			<% 
+				//---------------------------------------session에 저장된 id와 글쓴 id와 같을 경우 ---------------------------------------
 				if( session_id !=null && session_id.equals(boarddto.getUser_id())){
 			%>
 					<a href="update.jsp?board_num=<%= board_num%>" class="btn btn-primary">수정</a>
-					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="./BoardDeleteServlet?board_num=<%= board_num%>" class="btn btn-primary">삭제</a>
+					<a href="deleteAction.jsp?board_num=<%= board_num%>" class="btn btn-primary">삭제</a>
 			<%
 				}
 			%>

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.wedeal.util.DbUtil;
 
 public class userDAO {
@@ -26,6 +25,7 @@ public class userDAO {
 			}
 			//ok
 			else {
+
 				return 1;
 			}
 		}catch(Exception e) {
@@ -43,6 +43,7 @@ public class userDAO {
 	
 	//add user
 	public int register(String user_name,String user_age,String user_phone,String user_id,String user_pw,String user_hope) {
+
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?)";
@@ -69,11 +70,12 @@ public class userDAO {
 		}
 		return -1;//error
 	}
+
 	/**
 	 * 
 	 * @param user_id
 	 * @return userDTO
-	 * 관리자가 사용자의 id를 검색하거나 metadata 사용시 이용
+	 * 愿由ъ媛 ъ⑹ id瑜 寃嫄곕 metadata ъ⑹ 댁
 	 */
 	public userDTO getUserByID(String user_id) {
         userDTO user = new userDTO();
@@ -106,7 +108,7 @@ public class userDAO {
      * 
      * @param userName
      * @return User
-     * 관리자가 회원을 이름으로 조회하는 메소드
+     * 愿由ъ媛  대쇰 議고 硫
      */
     public userDTO getUserByName(String userName) {
         userDTO user = new userDTO();
@@ -135,4 +137,5 @@ public class userDAO {
         }
         return user;
     }
+
 }

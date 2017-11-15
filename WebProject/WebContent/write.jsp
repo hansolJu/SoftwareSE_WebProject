@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-
 <!-- 
 	글쓰기 페이지
 	글쓰기 양식을 모두 채워야만 글 등록 가능.
@@ -10,13 +9,13 @@
 	최종 수정: 2017/11/05
 -->
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<title>메인 화면</title>
+	<title>글쓰기 화면</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -86,8 +85,8 @@
 	</nav>
 	<div class="container">
 		<div class="row">
-		<!-- 테이블 색 -->
-			<form method="post" action="./boardWrite" enctype="multipart/form-data">
+		<!---------------------------------------------------- 글 작성하는 부분 ---------------------------------------------------->
+			<form method="post" action="./boardWrite">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -102,10 +101,7 @@
 						<td><textarea class="form-control" placeholder="글  내용" name="board_content" maxlength="2048" style="height: 350px;"></textarea></td>
 					</tr>
 					<tr>
-						<td><label>사진 첨부하기</label></td>
-					</tr>
-					<tr>
-						<td><input type="file" class="form-control" name="board_image"></td>
+						<td><label>사진 첨부하기</label><input type="file" name="board_image"></td>
 					</tr>
 				</tbody>
 			</table>
