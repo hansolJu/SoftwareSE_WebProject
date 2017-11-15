@@ -1,61 +1,31 @@
 package user;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import com.wedeal.util.DbUtil;
 
 public class userDAO {
 
 	private Connection conn;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
-	
-	public userDAO() {
-		try {
-			String dbURL = "jdbc:mysql://localhost:3306/user?autoReconnect=true&useSSL=false";
-			String dbID = "blesk";
-			String dbPW = "6572609";
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	//Login
-	public int login(String user_id,String user_pw) {
-		String SQL = "SELECT user_pw FROM USER WHERE user_id = ?";
-		try {
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, user_id);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getString(1).equals(user_pw)) 
-					return 1; //�α��� ����
-			}
-			return 0; //���̵�&��й�ȣ Ʋ��
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -2; //����
-	}
-	
-	//check id(join)
+	//check id
 	public int registerCheck(String user_id) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		String SQL="SELECT * FROM USER WHERE user_id = ?";
 		
 		try {
+			conn = DbUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user_id);
-			rs = pstmt.executeQuery();
 			//no
-			if(rs.next() || user_id.equals("")) {
+			if(rs.next()) {
 				return 0;
 			}
 			//ok
-			else{
+			else {
+
 				return 1;
 			}
 		}catch(Exception e) {
@@ -73,9 +43,13 @@ public class userDAO {
 	
 	//add user
 	public int register(String user_name,String user_age,String user_phone,String user_id,String user_pw,String user_hope) {
+
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
+			conn = DbUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user_name);
 			pstmt.setString(2, user_age);
@@ -96,103 +70,72 @@ public class userDAO {
 		}
 		return -1;//error
 	}
-	
-	//get user info
-	public userDTO getUser(String user_id) {
-		String sql = "select * from user where user_id=?";
-		userDTO user = new userDTO();
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_id);
-			rs = pstmt.executeQuery();
-			
-			rs.next();
-			user.setUser_name(rs.getString("user_name"));
-			user.setUser_age(rs.getString("user_age"));
-			user.setUser_phone(rs.getString("user_phone"));
-			user.setUser_id(rs.getString("user_id"));
-			user.setUser_pw(rs.getString("user_pw"));
-			user.setUser_hope(rs.getString("user_hope"));
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(rs !=null) rs.close();
-				if(pstmt !=null) pstmt.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return user;
-	}
-	
-	//user_phone modify
-	public boolean modifyPhone(String user_id, String user_phone) {
-		String sql = "update user set user_phone=? where user_id=?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_phone);
-			pstmt.setString(2, user_id);
-			pstmt.executeUpdate();
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-			return false;
-		}finally {
-			try {
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	//user_pw modify
-	public boolean modifyPasswd(String user_id, String user_pw) {
-		String sql = "update user set user_pw=? where user_id=?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_pw);
-			pstmt.setString(2, user_id);
-			pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-			return false;
-		}finally {
-			try {
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	//user delete
-	public boolean deleteUser(String user_id) {
-		String sql = "delete from user where user_id=?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_id);
-			pstmt.executeQuery();
-		}catch(SQLException e) {
-			e.printStackTrace();
-			return false;
-		}finally {
-			try {
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-		return true;
-	}
+
+	/**
+	 * 
+	 * @param user_id
+	 * @return userDTO
+	 * 愿由ъ媛 ъ⑹ id瑜 寃嫄곕 metadata ъ⑹ 댁
+	 */
+	public userDTO getUserByID(String user_id) {
+        userDTO user = new userDTO();
+        PreparedStatement preparedStatement = null;
+    	ResultSet  rs = null;
+        try {
+        	conn = DbUtil.getConnection();
+            preparedStatement = conn.prepareStatement("select * from User where user_id=?");
+            preparedStatement.setString(1, user_id);
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user.setUser_name(rs.getString("user_age"));
+                user.setUser_age(rs.getString("user_age"));
+                user.setUser_phone(rs.getString("user_phone"));
+                user.setUser_id(rs.getString("user_id"));
+                user.setUser_pw(rs.getString("user_pw"));
+                user.setUser_hope(rs.getString("user_hope_1"));
+                user.setUser_date(rs.getDate("user_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+        	DbUtil.close(conn, preparedStatement, rs);
+        }
+        return user;
+    }
+    /**
+     * 
+     * @param userName
+     * @return User
+     * 愿由ъ媛  대쇰 議고 硫
+     */
+    public userDTO getUserByName(String userName) {
+        userDTO user = new userDTO();
+        PreparedStatement preparedStatement = null;
+    	ResultSet  rs = null;
+        try {
+        	conn = DbUtil.getConnection();
+            preparedStatement = conn.prepareStatement("select * from User where user_name=?");
+            preparedStatement.setString(1, userName);
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user.setUser_name(rs.getString("user_name"));
+                user.setUser_age(rs.getString("user_age"));
+                user.setUser_phone(rs.getString("user_phone"));
+                user.setUser_id(rs.getString("user_id"));
+                user.setUser_pw(rs.getString("user_pw"));
+                user.setUser_hope(rs.getString("user_hope"));
+                user.setUser_date(rs.getDate("user_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+        	DbUtil.close(conn, preparedStatement, rs);
+        }
+        return user;
+    }
+
 }

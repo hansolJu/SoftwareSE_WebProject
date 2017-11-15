@@ -1,65 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="board.boardDAO" %>
-<%@ page import="board.boardDTO" %>
+    
 <!-- 
-	수정 페이지
-	view.jsp에서 수정 버튼을 누르면 넘어오는 페이지.
-	
+	로그인 페이지
+	ID/PW를 입력했을떄 DB에 정보가 존재할 경우 로그인 성공
+	ID/PW중 하나라도 틀리거나, 적지 않은 경우에는 UserLoginServlet에서 session에 경고메세지를 담아 보내고, login.jsp에서 경고 메세지 출력
+	로그인 성공할 경우 main페이지로 이동(로그인 한 상태에서)
+	로그인한 회원의 정보는 session으로 유지
 	최종 수정: 2017/11/05
 -->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<title>메인 화면</title>
+	<title>로그인 화면</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	<script type="text/javascript">
-		function logout(){
-			var user_id = $('#user_id').val();
-			$.ajax({
-				type: 'POST',
-				url: './UserLogoutServlet',
-			})
-		}
-	</script>
-</head>
+	</head>
 <body>
-	<%
-		String session_id=null;
-	
-		if(session.getAttribute("user_id") !=null){
-			session_id=(String)session.getAttribute("user_id");
-		}
-		if(session_id == null){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인이 필요합니다.')");
-			script.println("location.href = 'login.jsp'");
-			script.println("</script>");
-		}
-		int board_num = 0;
-		
-		if(request.getParameter("board_num") != null){
-			board_num = Integer.parseInt(request.getParameter("board_num"));
-		}
-		
-		if(board_num == 0){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('유효하지 않은 글입니다.')");
-			script.println("location.href = 'board.jsp'");
-			script.println("</script>");
-		}
-		
-		boardDTO boarddto = new boardDAO().getBoard(board_num);
-		
-	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -68,50 +29,46 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">중고 장터</a>
+			<a class="navbar-brand" href="main.jsp">중고 장터</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp">메인</a></li>
-				<li class="active"><a href="board.jsp">게시판</a></li>
+				<li><a href="board.jsp">게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
+					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="" onclick="logout();">로그아웃</a></li>
+					 	<li class="active"><a href="login.jsp">로그인</a></li>
+					 	<li><a href="join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
 		</div>
 	</nav>
 	<div class="container">
-		<div class="row">
-		<!-- 테이블 색 -->
-			<form method="post" action="./boardUpdate">
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-				<thead>
-					<tr>
-						<th colspan="2" style="background-color: #eeeeee; text-align: center;">게시판 수정 양식</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><input type="text" class="form-control" placeholder="글 제목" name="board_title" maxlength="50" value="<%= boarddto.getBoard_title()%>"></td>
-					</tr>
-					<tr>
-						<td><textarea class="form-control" placeholder="글  내용" name="board_content" maxlength="2048" style="height: 350px;"><%= boarddto.getBoard_content()%></textarea></td>
-					</tr>
-					<tr>
-						<td><label>사진 첨부하기</label><input type="file" name="board_image"></td>
-					</tr>
-				</tbody>
-			</table>
-			<input type="submit" class="btn btn-primary pull-right" value="글수정">
-			</form>
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<div class="jumbotron" style="padding-top: 20px;">
+				<form method="post" action="./userLogin">
+					<h3 style="text-align: center;">로그인</h3>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="아이디" name="user_id" maxlength="20">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="비밀번호" name="user_pw" maxlength="20">
+					</div>
+					<input type="submit" class="btn btn-primary form-control" value="로그인">
+				</form>
 		</div>
+		<div class="col-lg-4"></div>
 	</div>
+	</div>
+	
+	
+	
 	<%
 		String messageContent = null;
 		if(session.getAttribute("messageContent") !=null) {

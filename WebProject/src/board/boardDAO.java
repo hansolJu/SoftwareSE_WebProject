@@ -23,9 +23,9 @@ public class boardDAO {
 		}
 	}
 	
-	//ÇöÀç ½Ã°£À» ¼­¹ö¿¡ ³Ö¾îÁØ´Ù.
+	//í˜„ì¬ ì‹œê°„ì„ ì„œë²„ì— ë„£ì–´ì¤€ë‹¤.
 	public String getDate() {
-		String SQL="SELECT NOW()";//ÇöÀç ½Ã°£À» µ¹·ÁÁØ´Ù.
+		String SQL="SELECT NOW()";//í˜„ì¬ ì‹œê°„ì„ ëŒë ¤ì¤€ë‹¤.
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			rs=pstmt.executeQuery();
@@ -37,7 +37,7 @@ public class boardDAO {
 		return "";
 	}
 	 
-	//ÀÛ¼ºµÉ ±Û ¹øÈ£ ±¸ÇÏ±â
+	//ì‘ì„±ë  ê¸€ ë²ˆí˜¸ êµ¬í•˜ê¸°
 	public int getNext() {
 		String SQL="SELECT board_num FROM board ORDER BY board_num DESC";
 		try {
@@ -46,7 +46,7 @@ public class boardDAO {
 			if(rs.next()) {
 				return rs.getInt(1)+1;
 			}
-			return 1;//ÇöÀç°¡ Ã¹¹øÂ° °Ô½Ã±ÛÀÎ °æ¿ì
+			return 1;//í˜„ì¬ê°€ ì²«ë²ˆì§¸ ê²Œì‹œê¸€ì¸ ê²½ìš°
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -93,7 +93,7 @@ public class boardDAO {
 		return list;
 	}
 	
-	//ÆäÀÌÂ¡ Ã³¸®¸¦ À§ÇÑ nextpageÇÔ¼ö
+	//í˜ì´ì§• ì²˜ë¦¬ë¥¼ ìœ„í•œ nextpageí•¨ìˆ˜
 	public boolean nextPage(int pageNumber) {
 		String SQL="SELECT * FROM board WHERE board_num < ? AND board_available = 1 ORDER BY board_num DESC LIMIT 10";
 		try {
@@ -131,7 +131,7 @@ public class boardDAO {
 		return null;
 	}
 	
-	//¼öÁ¤½Ã »ç¿ë
+	//ìˆ˜ì •ì‹œ ì‚¬ìš©
 	public int update(int board_num,String board_title,String board_content) {
 		String SQL="UPDATE board SELECT board_title = ?, board_content = ? WHERE board_num = ?";
 		try {

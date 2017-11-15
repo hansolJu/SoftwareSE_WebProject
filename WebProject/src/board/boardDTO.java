@@ -7,7 +7,8 @@ public class boardDTO {
 	private String user_id;
 	private String board_date;
 	private String board_content;
-	private int available;
+	private String board_image;
+	private String board_path;
 	
 	public int getBoard_num() {
 		return board_num;
@@ -39,11 +40,16 @@ public class boardDTO {
 	public void setBoard_content(String board_content) {
 		this.board_content = board_content;
 	}
-	public int getAvailable() {
-		return available;
+	public String getBoard_image() {
+		return board_image;
 	}
-	public void setAvailable(int available) {
-		this.available = available;
+	public void setBoard_image(String board_image) {
+		this.board_image = board_image;
 	}
-	
+	public String getBoard_path() {
+		return board_path;
+	}
+	public void setBoard_path(String board_path) {
+		this.board_path = board_path;
+	}
 }
