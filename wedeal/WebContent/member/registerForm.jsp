@@ -1,3 +1,9 @@
+<!-- 
+회원가입폼
+작성자 : 주한솔
+최종수정자 : 주한솔+이재윤
+최종수정일 : 17.11.15
+ -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>

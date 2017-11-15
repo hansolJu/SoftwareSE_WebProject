@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/shoppingmall/css/style.css"/>
-<script src="/WebProject/js/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="/WebProject/member/register.js"></script>
 
 <div id="regForm" class="box">

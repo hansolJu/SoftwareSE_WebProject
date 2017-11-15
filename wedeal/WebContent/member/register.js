@@ -1,3 +1,10 @@
+/**
+ * 회원가입폼 함수
+ * 작성자: 주한솔
+ * 수정자:
+ * 최종수정일 : 17.11.15
+ * @returns
+ */
 $(document).ready(function(){
 	$("#checkId").click(function(){//[ID중복확인]버튼 클릭
 	  if($("#id").val()){
