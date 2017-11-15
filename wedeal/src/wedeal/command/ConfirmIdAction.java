@@ -14,7 +14,6 @@ public class ConfirmIdAction implements CommandAction {
 		
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
-		System.out.println("된다~");
 		//주어진 id의 중복여부를 체크해 값을 반환.
 		LogonDBBean manager = LogonDBBean.getInstance();
 		int check= manager.confirmId(id);
