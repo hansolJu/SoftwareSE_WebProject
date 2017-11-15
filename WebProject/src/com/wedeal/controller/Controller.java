@@ -1,3 +1,17 @@
+/**
+ * Servlet implementation class Controller
+ * 
+ * 최종수정일 : 17.11.15
+ * 
+ * 컨트롤러인 Controller 파일은 사용자의 요청을 받아 요청에 해당하는 로직의 진입점 슈퍼 인터페이스인 CommandAction 클래스의 메소드를 호출한다. 
+ * 그러면 슈퍼 인터페이스를 통해서 해당 작업을 처리할 명령어 처리 클래스의 requestPro(request, response) 메소드가 호출되어 작업을 처리한다.
+ * 처리결과와 결과를 표시할 뷰에 대한 정보는 다시 컨트롤러로 보내진다. 컨트롤러가 이 정보를 Template.jsp로 보내면 화면에 결과가 표시된다.
+ * 
+ * The Controller file, which is the controller, receives the user's request and calls the method of the CommandAction class which is the entry point super interface of the logic corresponding to the request.
+ * Then, the requestPro (request, response) method of the command processing class to process the job through the super interface is called to process the job.
+ * Information about the processing result and the view to display the result is sent back to the controller. When the controller sends this information to Template.jsp, the results are displayed on the screen.
+ */
+
 package com.wedeal.controller;
 
 import java.io.FileInputStream;
@@ -20,17 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.wedeal.command.CommandAction;
 
-/**
- * Servlet implementation class Controller
- * 
- * ì»¨íŠ¸ë¡¤ëŸ¬ì¸ Controller íŒŒì¼ì€ ì‚¬ìš©ìžì˜ ìš”ì²­ì„ ë°›ì•„ ìš”ì²­ì— í•´ë‹¹í•˜ëŠ” ë¡œì§ì˜ ì§„ìž…ì  ìŠˆí¼ ì¸í„°íŽ˜ì´ìŠ¤ì¸ CommandAction í´ëž˜ìŠ¤ì˜ ë©”ì†Œë“œë¥¼ í˜¸ì¶œí•œë‹¤. 
- * ê·¸ëŸ¬ë©´ ìŠˆí¼ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ í†µí•´ì„œ í•´ë‹¹ ìž‘ì—…ì„ ì²˜ë¦¬í•  ëª…ë ¹ì–´ ì²˜ë¦¬ í´ëž˜ìŠ¤ì˜ requestPro(request, response) ë©”ì†Œë“œê°€ í˜¸ì¶œë˜ì–´ ìž‘ì—…ì„ ì²˜ë¦¬í•œë‹¤.
- * ì²˜ë¦¬ê²°ê³¼ì™€ ê²°ê³¼ë¥¼ í‘œì‹œí•  ë·°ì— ëŒ€í•œ ì •ë³´ëŠ” ë‹¤ì‹œ ì»¨íŠ¸ë¡¤ëŸ¬ë¡œ ë³´ë‚´ì§„ë‹¤. ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì´ ì •ë³´ë¥¼ Template.jspë¡œ ë³´ë‚´ë©´ í™”ë©´ì— ê²°ê³¼ê°€ í‘œì‹œëœë‹¤.
- * 
- * The Controller file, which is the controller, receives the user's request and calls the method of the CommandAction class which is the entry point super interface of the logic corresponding to the request.
- * Then, the requestPro (request, response) method of the command processing class to process the job through the super interface is called to process the job.
- * Information about the processing result and the view to display the result is sent back to the controller. When the controller sends this information to Template.jsp, the results are displayed on the screen.
- */
+
 @WebServlet(
 	urlPatterns = { 
 		"/Controller", 
@@ -41,7 +45,7 @@ import com.wedeal.command.CommandAction;
 	})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//ëª…ë ¹ì–´ì™€ ëª…ë ¹ì–´ ì²˜ë¦¬ í´ëž˜ìŠ¤ë¥¼ ìŒìœ¼ë¡œ ì €ìž¥
+	//명령어와 명령어 처리 클래스를 쌍으로 저장
 	private Map<String, Object> commandMap = new HashMap<String, Object>();      
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,34 +57,34 @@ public class Controller extends HttpServlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
-    //ëª…ë ¹ì–´ì™€ ì²˜ë¦¬í´ëž˜ìŠ¤ê°€ ë§¤í•‘ë˜ì–´ ìžˆëŠ” properties íŒŒì¼ì„ ì½ì–´ì„œ 
-    //HashMapê°ì²´ì¸ commandMapì— ì €ìž¥
+    //명령어와 처리클래스가 매핑되어 있는 properties 파일을 읽어서 
+    //HashMap객체인 commandMap에 저장
 	public void init(ServletConfig config) throws ServletException {
 		
-		//initParamsì—ì„œ propertyConfigì˜ ê°’ì„ ì½ì–´ì˜´
+		//initParams에서 propertyConfig의 값을 읽어옴
 		String props = config.getInitParameter("propertyConfig");
-		String realFolder = "/property"; //propertiesíŒŒì¼ì´ ì €ìž¥ëœ í´ë”
-		//ì›¹ì–´í”Œë¦¬ì¼€ì´ì…˜ ë£¨íŠ¸ ê²½ë¡œ
+		String realFolder = "/property"; //properties파일이 저장된 폴더
+		//웹어플리케이션 루트 경로
 		ServletContext context = config.getServletContext();
-		//realFolderë¥¼ ì›¹ì–´í”Œë¦¬ì¼€ì´ì…˜ ì‹œìŠ¤í…œìƒì˜ ì ˆëŒ€ê²½ë¡œë¡œ ë³€ê²½
+		//realFolder를 웹어플리케이션 시스템상의 절대경로로 변경
 		String realPath = context.getRealPath(realFolder) +"\\"+props;
 							    
-		//ëª…ë ¹ì–´ì™€ ì²˜ë¦¬í´ëž˜ìŠ¤ì˜ ë§¤í•‘ì •ë³´ë¥¼ ì €ìž¥í•  Propertiesê°ì²´ ìƒì„±
+		//명령어와 처리클래스의 매핑정보를 저장할 Properties객체 생성
 		Properties pr = new Properties();
 		FileInputStream f = null;
 		try{
-			//command.propertiesíŒŒì¼ì˜ ë‚´ìš©ì„ ì½ì–´ì˜´
+			//command.properties파일의 내용을 읽어옴
 			f = new FileInputStream(realPath); 
-			//command.propertiesì˜ ë‚´ìš©ì„ Propertiesê°ì²´ prì— ì €ìž¥
+			//command.properties의 내용을 Properties객체 pr에 저장
 			pr.load(f);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}finally {
 			if (f != null) try { f.close(); } catch(IOException ex) {}
 		}
-		//Setê°ì²´ì˜ iterator()ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•´ Iteratorê°ì²´ë¥¼ ì–»ì–´ëƒ„
+		//Set객체의 iterator()메소드를 사용해 Iterator객체를 얻어냄
 		Iterator<?> keyIter = pr.keySet().iterator();
-		//Iteratorê°ì²´ì— ì €ìž¥ëœ ëª…ë ¹ì–´ì™€ ì²˜ë¦¬í´ëž˜ìŠ¤ë¥¼ commandMapì— ì €ìž¥
+		//Iterator객체에 저장된 명령어와 처리클래스를 commandMap에 저장
 		while( keyIter.hasNext() ) {
 			String command = (String)keyIter.next();
 			String className = pr.getProperty(command);
@@ -104,7 +108,7 @@ public class Controller extends HttpServlet {
 	protected void doGet(
 		HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		requestPro(request, response);//ìš”ì²­ì²˜ë¦¬ ë©”ì†Œë“œ í˜¸ì¶œ
+		requestPro(request, response);//요청처리 메소드 호출
 	}
 
 	/**
@@ -113,12 +117,11 @@ public class Controller extends HttpServlet {
 	protected void doPost(
 		HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
-		requestPro(request, response);//ìš”ì²­ì²˜ë¦¬ ë©”ì†Œë“œ í˜¸ì¶œ
+		requestPro(request, response);//요청처리 메소드 호출
 	}
 	
-	//ì›¹ë¸Œë¼ìš°ì €ì˜ ìš”ì²­ì„ ë¶„ì„í•˜ê³ , í•´ë‹¹ ë¡œì§ì˜ ì²˜ë¦¬ë¥¼ í•  ëª¨ë¸ ì‹¤í–‰ ë°
-	//ì²˜ë¦¬ ê²°ê³¼ë¥¼ ë·°ì— ë³´ëƒ„
-
+	//웹브라우저의 요청을 분석하고, 해당 로직의 처리를 할 모델 실행 및
+	//처리 결과를 뷰에 보냄
 	private void requestPro(
 		HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
@@ -126,10 +129,8 @@ public class Controller extends HttpServlet {
 		CommandAction com=null;
 		try {
 			String command = request.getRequestURI();
-
 	        if(command.indexOf(request.getContextPath()) == 0) 
 	           command = command.substring(request.getContextPath().length());
-
 	        com = (CommandAction)commandMap.get(command);  
 	        view = com.requestPro(request, response);
 		}catch(Throwable e) {
@@ -140,7 +141,4 @@ public class Controller extends HttpServlet {
 	       request.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(request, response);
 	}
-
 }
-}
-
