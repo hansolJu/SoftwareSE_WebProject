@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="WebProject">
+    <wb-module deploy-name="Register">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/" source-path="/src"/>
-        <property name="context-root" value="WebProject"/>
-        <property name="java-output-path" value="/WebProject/build/classes"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="Register"/>
+        <property name="java-output-path" value="/Register/build/classes"/>
     </wb-module>
 </project-modules>

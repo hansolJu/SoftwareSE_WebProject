@@ -20,6 +20,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.wedeal.command.CommandAction;
 
+<<<<<<< HEAD
+@WebServlet(
+		urlPatterns = { 
+				"/Controller", 
+				"*.do"
+		}, 
+		initParams = { 
+				@WebInitParam(name = "propertyConfig", value = "commandMapping.properties")
+		})
+public class Controller extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	//¸í·É¾î¿Í ¸í·É¾î Ã³¸® Å¬·¡½º¸¦ ½ÖÀ¸·Î ÀúÀå
+=======
 /**
  * Servlet implementation class Controller
  * 
@@ -42,6 +55,7 @@ import com.wedeal.command.CommandAction;
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//ëª…ë ¹ì–´ì™€ ëª…ë ¹ì–´ ì²˜ë¦¬ í´ë˜ìŠ¤ë¥¼ ìŒìœ¼ë¡œ ì €ì¥
+>>>>>>> master
 	private Map<String, Object> commandMap = new HashMap<String, Object>();      
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,6 +67,34 @@ public class Controller extends HttpServlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
+<<<<<<< HEAD
+    //¸í·É¾î¿Í Ã³¸®Å¬·¡½º°¡ ¸ÅÇÎµÇ¾î ÀÖ´Â properties ÆÄÀÏÀ» ÀĞ¾î¼­ 
+    //HashMap°´Ã¼ÀÎ commandMap¿¡ ÀúÀå
+	public void init(ServletConfig config) throws ServletException {
+		System.out.println("1");
+		//initParams¿¡¼­ propertyConfigÀÇ °ªÀ» ÀĞ¾î¿È
+		String props = config.getInitParameter("propertyConfig");
+		System.out.println("2");
+		String realFolder = "/property"; //propertiesÆÄÀÏÀÌ ÀúÀåµÈ Æú´õ
+		//À¥¾îÇÃ¸®ÄÉÀÌ¼Ç ·çÆ® °æ·Î
+		ServletContext context = config.getServletContext();
+		System.out.println("3");
+		//realFolder¸¦ À¥¾îÇÃ¸®ÄÉÀÌ¼Ç ½Ã½ºÅÛ»óÀÇ Àı´ë°æ·Î·Î º¯°æ
+		String realPath = context.getRealPath(realFolder) +"\\"+props;
+							    
+		//¸í·É¾î¿Í Ã³¸®Å¬·¡½ºÀÇ ¸ÅÇÎÁ¤º¸¸¦ ÀúÀåÇÒ Properties°´Ã¼ »ı¼º
+		Properties pr = new Properties();
+		System.out.println("4");
+		FileInputStream f = null;
+		try{
+			//command.propertiesÆÄÀÏÀÇ ³»¿ëÀ» ÀĞ¾î¿È
+			f = new FileInputStream(realPath); 
+			//command.propertiesÀÇ ³»¿ëÀ» Properties°´Ã¼ pr¿¡ ÀúÀå
+			System.out.println("5");
+			pr.load(f);
+			
+			System.out.println("6");
+=======
     //ëª…ë ¹ì–´ì™€ ì²˜ë¦¬í´ë˜ìŠ¤ê°€ ë§¤í•‘ë˜ì–´ ìˆëŠ” properties íŒŒì¼ì„ ì½ì–´ì„œ 
     //HashMapê°ì²´ì¸ commandMapì— ì €ì¥
 	public void init(ServletConfig config) throws ServletException {
@@ -73,11 +115,29 @@ public class Controller extends HttpServlet {
 			f = new FileInputStream(realPath); 
 			//command.propertiesì˜ ë‚´ìš©ì„ Propertiesê°ì²´ prì— ì €ì¥
 			pr.load(f);
+>>>>>>> master
 		}catch (IOException e) {
 			e.printStackTrace();
 		}finally {
 			if (f != null) try { f.close(); } catch(IOException ex) {}
 		}
+<<<<<<< HEAD
+		//Set°´Ã¼ÀÇ iterator()¸Ş¼Òµå¸¦ »ç¿ëÇØ Iterator°´Ã¼¸¦ ¾ò¾î³¿
+		Iterator<?> keyIter = pr.keySet().iterator();
+		//Iterator°´Ã¼¿¡ ÀúÀåµÈ ¸í·É¾î¿Í Ã³¸®Å¬·¡½º¸¦ commandMap¿¡ ÀúÀå
+		while( keyIter.hasNext() ) {
+			String command = (String)keyIter.next();
+			System.out.println(command);
+			String className = pr.getProperty(command);
+			System.out.println(className);
+			try{
+				Class<?> commandClass = Class.forName(className);//ÇØ´ç ¹®ÀÚ¿­À» Å¬·¡½º·Î ¸¸µç´Ù.
+				System.out.println("7");
+			    Object commandInstance = commandClass.newInstance();//ÇØ´çÅ¬·¡½ºÀÇ °´Ã¼¸¦ »ı¼º
+			    System.out.println("8");
+			    commandMap.put(command, commandInstance);// Map°´Ã¼ÀÎ commandMap¿¡ °´Ã¼ ÀúÀå
+				System.out.println("9");
+=======
 		//Setê°ì²´ì˜ iterator()ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•´ Iteratorê°ì²´ë¥¼ ì–»ì–´ëƒ„
 		Iterator<?> keyIter = pr.keySet().iterator();
 		//Iteratorê°ì²´ì— ì €ì¥ëœ ëª…ë ¹ì–´ì™€ ì²˜ë¦¬í´ë˜ìŠ¤ë¥¼ commandMapì— ì €ì¥
@@ -88,6 +148,7 @@ public class Controller extends HttpServlet {
 				Class<?> commandClass = Class.forName(className);
 				Object commandInstance = commandClass.newInstance();
 				commandMap.put(command, commandInstance);
+>>>>>>> master
 			}catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}catch (InstantiationException e) {
@@ -104,7 +165,12 @@ public class Controller extends HttpServlet {
 	protected void doGet(
 		HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+<<<<<<< HEAD
+		// TODO Auto-generated method stub
+		requestPro(request, response);//¿äÃ»Ã³¸® ¸Ş¼Òµå È£Ãâ
+=======
 		requestPro(request, response);//ìš”ì²­ì²˜ë¦¬ ë©”ì†Œë“œ í˜¸ì¶œ
+>>>>>>> master
 	}
 
 	/**
@@ -113,11 +179,20 @@ public class Controller extends HttpServlet {
 	protected void doPost(
 		HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
+<<<<<<< HEAD
+		// TODO Auto-generated method stub
+		requestPro(request, response);//¿äÃ»Ã³¸® ¸Ş¼Òµå È£Ãâ
+	}
+	
+	//À¥ºê¶ó¿ìÀúÀÇ ¿äÃ»À» ºĞ¼®ÇÏ°í, ÇØ´ç ·ÎÁ÷ÀÇ Ã³¸®¸¦ ÇÒ ¸ğµ¨ ½ÇÇà ¹×
+	//Ã³¸® °á°ú¸¦ ºä¿¡ º¸³¿
+=======
 		requestPro(request, response);//ìš”ì²­ì²˜ë¦¬ ë©”ì†Œë“œ í˜¸ì¶œ
 	}
 	
 	//ì›¹ë¸Œë¼ìš°ì €ì˜ ìš”ì²­ì„ ë¶„ì„í•˜ê³ , í•´ë‹¹ ë¡œì§ì˜ ì²˜ë¦¬ë¥¼ í•  ëª¨ë¸ ì‹¤í–‰ ë°
 	//ì²˜ë¦¬ ê²°ê³¼ë¥¼ ë·°ì— ë³´ëƒ„
+>>>>>>> master
 	private void requestPro(
 		HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
@@ -125,8 +200,15 @@ public class Controller extends HttpServlet {
 		CommandAction com=null;
 		try {
 			String command = request.getRequestURI();
+<<<<<<< HEAD
+			System.out.println(command);
 	        if(command.indexOf(request.getContextPath()) == 0) 
 	           command = command.substring(request.getContextPath().length());
+	        System.out.println(command);
+=======
+	        if(command.indexOf(request.getContextPath()) == 0) 
+	           command = command.substring(request.getContextPath().length());
+>>>>>>> master
 	        com = (CommandAction)commandMap.get(command);  
 	        view = com.requestPro(request, response);
 		}catch(Throwable e) {
@@ -137,4 +219,8 @@ public class Controller extends HttpServlet {
 	       request.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(request, response);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
