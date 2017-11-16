@@ -45,7 +45,6 @@ $(document).ready(function(){
 				  user_id:$("#id").val(), 
 				  user_pw:$("#user_pw").val(),
 			      user_hope:$("input[name=user_hope]:checked").val()};
-		  alert("눌리긴함");
 		  $.ajax({
 		      type:"post",
 		      url:"/wedeal/registerPro.do",

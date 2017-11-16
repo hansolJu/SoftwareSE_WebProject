@@ -3,7 +3,7 @@ package wedeal.bean;
  * 코드설명
  * 작성자:이재윤
  * 수정자:
- * 최종수정일: 17.11.15
+ * 최종수정일: 17.11.1
  */
 public class UserDataBean {
 	private String user_name;

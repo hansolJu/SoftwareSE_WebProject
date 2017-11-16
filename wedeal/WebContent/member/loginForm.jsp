@@ -6,24 +6,22 @@
 <script src="/wedeal/js/jquery-1.11.0.min.js"></script>
 <script src="/wedeal/member/login.js"></script>
 
-<c:if test="${empty sessionScope.id}">
+<c:if test="${empty sessionScope.user_id}">
   <div id="lStatus">
      <ul>
-        <li><label for="cid">아이디</label>
-            <input id="cid" name="cid" type="email" size="20" 
-              maxlength="50" placeholder="example@kings.com">
-            <label for="cpasswd">비밀번호</label>
-            <input id="cpasswd" name="cpasswd" type="password" 
-              size="20" placeholder="6~16자 숫자/문자" maxlength="16">
+        <li><label for="user_id">아이디</label>
+            <input type="text" id="user_id" placeholder="아이디" name="user_id" maxlength="10" autofocus>
+            <label for="user_pw">비밀번호</label>
+            <input type="password" id="user_pw" placeholder="비밀번호" name="user_pw" maxlength="20">
             <button id="uLogin">로그인</button>
             <button id="uRes">회원가입</button>
      </ul>
   </div>
 </c:if>
-<c:if test="${!empty sessionScope.id}">
+<c:if test="${!empty sessionScope.user_id}">
   <div id="lStatus">
      <ul>
-        <li>${sessionScope.id}님이 로그인 하셨습니다.
+        <li>${sessionScope.user_id}님이 로그인 하셨습니다.
            <div id="info">
              <table>
                <tr height="10">
