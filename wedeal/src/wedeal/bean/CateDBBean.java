@@ -131,9 +131,50 @@ public class CateDBBean {
 		return null;
 	}
 	
+	/*
 	//카테고리 리스트를 출력
 	public ArrayList<CateDataBean> getList(){
-		String SQL="SELECT * FROM out_cate ORDER BY out_cate_num DESC";
+		String SQL="SELECT * FROM cate ORDER BY cate_num DESC";
+		ArrayList<CateDataBean> list = new ArrayList<CateDataBean>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				CateDataBean catedatabean = new CateDataBean();
+				catedatabean.setCate_num(rs.getInt(1));
+				catedatabean.setCate_name(rs.getString(2));
+				catedatabean.setCate_date(rs.getString(3));
+				catedatabean.setCate_parent(rs.getInt(4));
+				list.add(catedatabean);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}*/
+	
+	public ArrayList<CateDataBean> in_getList(){
+		String SQL="SELECT * FROM cate WHERE cate_parent > 0 ORDER BY cate_num DESC";
+		ArrayList<CateDataBean> list = new ArrayList<CateDataBean>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				CateDataBean catedatabean = new CateDataBean();
+				catedatabean.setCate_num(rs.getInt(1));
+				catedatabean.setCate_name(rs.getString(2));
+				catedatabean.setCate_date(rs.getString(3));
+				catedatabean.setCate_parent(rs.getInt(4));
+				list.add(catedatabean);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<CateDataBean> getList(){
+		String SQL="SELECT * FROM cate WHERE cate_parent IS NULL ORDER BY cate_num DESC";
 		ArrayList<CateDataBean> list = new ArrayList<CateDataBean>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
