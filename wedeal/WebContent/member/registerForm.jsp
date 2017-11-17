@@ -6,8 +6,6 @@
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<link rel="stylesheet" href="/wedeal/css/style.css"/>
 <script src="/wedeal/js/jquery-1.11.0.min.js"></script>
 <!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script> -->
 <script src="/wedeal/member/register.js"></script>
@@ -17,18 +15,13 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './UserRegisterCheckServlet',
+				url: './ConfirmIdAction',
 				data: {user_id: user_id},
 				success: function(result){
-				if(result == 1){
-						$('#checkMessage').html('사용할 수 있는 아이디입니다.');
-						$('#checkType').attr('class', 'modal-content panel-success');
-				}
-				else{
-					$('#checkMessage').html('사용할 수 없는 아이디입니다.');
-					$('#checkType').attr('class', 'modal-content panel-warning');
-				}
-				$('#checkModal').modal("show");
+				if(result == 1)
+						alert("사용할 수 있는 아이디입니다.");
+				else
+					alert("사용할 수 없는 아이디 입니다.");
 				}
 			})
 		}
@@ -36,8 +29,8 @@
 			var user_pw = $('#user_pw').val();
 			var check_passwd = $('#check_passwd').val();
 			if(user_pw != check_passwd){
-				$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
-			}else{
+				$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.')}
+			else{
 				$('#passwordCheckMessage').html('');
 			}
 		}
@@ -76,3 +69,27 @@
 					<button id="cancle">취소</button>											
    </ul>
 </div>
+<%
+		String messageContent = null;
+		if(session.getAttribute("messageContent") !=null) {
+			messageContent = (String) session.getAttribute("messageContent");
+		}
+		String messageType = null;
+		if(session.getAttribute("messageType") !=null) {
+			messageType = (String) session.getAttribute("messageType");
+		}
+
+		if(messageContent != null){
+	%>
+	
+	<% if(messageType.equals("오류 메시지"))%>
+		<script>
+			alert(<%= messageType %>+"의"+<%= messageContent %>);
+		</script>
+	<%
+		session.removeAttribute("messageContent");
+		session.removeAttribute("messageType");
+		}
+	%>
+</body>
+</html>
