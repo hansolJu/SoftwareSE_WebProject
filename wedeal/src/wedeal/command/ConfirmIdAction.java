@@ -1,28 +1,41 @@
 package wedeal.command;
-/**
- * 코드설명
- * 작성자:이재윤
- * 수정자:
- * 최종수정일: 17.11.15
- */
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wedeal.bean.UserDBBean;
+/**
+ * Servlet implementation class ConfirmIdAction
+ */
+@WebServlet("/ConfirmIdAction")
+public class ConfirmIdAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ConfirmIdAction() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-public class ConfirmIdAction implements CommandAction {
-
-	@Override
-	public String requestPro(HttpServletRequest request,
-			HttpServletResponse response) throws Throwable {
-
-		request.setCharacterEncoding("utf-8");		
-		String user_id = request.getParameter("user_id");
-		//주어진 id의 중복여부를 체크해 값을 반환.
-		UserDBBean manager = UserDBBean.getinstance();
-		int check= manager.registerCheck(user_id);
-		
-		request.setAttribute("check", new Integer(check));
-		return "/member/confirmId.jsp";
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }

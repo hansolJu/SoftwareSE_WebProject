@@ -6,7 +6,7 @@
 <script src="/wedeal/js/jquery-1.11.0.min.js"></script>
 <script src="/wedeal/member/modify.js"></script>
 
-<c:if test="${empty sessionScope.id}">
+<c:if test="${empty sessionScope.user_id}">
   <meta http-equiv="Refresh" content="0;url=/wedeal/index.do">
 </c:if>
 

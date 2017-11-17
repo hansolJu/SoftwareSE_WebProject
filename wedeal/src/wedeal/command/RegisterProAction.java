@@ -30,14 +30,7 @@ public class RegisterProAction implements CommandAction {
 		member.setUser_id(request.getParameter("user_phone"));
 		member.setUser_pw(request.getParameter("user_pw"));
 		member.setUser_hope(request.getParameter("user_hope"));
-        
-		//연결확인부분
-		System.out.println(member.getUser_name());
-		System.out.println(member.getUser_age());
-		System.out.println(member.getUser_phone());
-		System.out.println(member.getUser_id());
-		System.out.println(member.getUser_pw());
-		System.out.println(member.getUser_hope());
+       
 		//회원가입처리
 		UserDBBean dbPro = UserDBBean.getinstance();
 		dbPro.register(member);
