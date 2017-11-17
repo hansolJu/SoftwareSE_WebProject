@@ -237,4 +237,71 @@ public class UserDBBean {
 			}
 			return true;
 		}
+		/**
+		 * 
+		 * @param user_id
+		 * @return UserDataBean
+		 * 관리자가 사용자의 id를 검색하거나 metadata 사용시 이용
+		 */
+		public UserDataBean getUserByID(String user_id) {
+	        UserDataBean user = new UserDataBean();
+	        PreparedStatement preparedStatement = null;
+	    	ResultSet  rs = null;
+	        try {
+	        	conn = DbUtil.getConnection();
+	            preparedStatement = conn.prepareStatement("select * from user where user_id=?");
+	            preparedStatement.setString(1, user_id);
+	            rs = preparedStatement.executeQuery();
+
+	            if (rs.next()) {
+	                user.setUser_name(rs.getString("user_age"));
+	                user.setUser_age(rs.getString("user_age"));
+	                user.setUser_phone(rs.getString("user_phone"));
+	                user.setUser_id(rs.getString("user_id"));
+	                user.setUser_pw(rs.getString("user_pw"));
+	                user.setUser_hope(rs.getString("user_hope_1"));
+	                user.setUser_date(rs.getDate("user_date"));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        finally {
+	        	DbUtil.close(conn, preparedStatement, rs);
+	        }
+	        return user;
+	    }
+	    /**
+	     * 
+	     * @param userName
+	     * @return User
+	     * 관리자가 회원을 이름으로 조회하는 메소드
+	     */
+	    public UserDataBean getUserByName(String userName) {
+	        UserDataBean user = new UserDataBean();
+	        PreparedStatement preparedStatement = null;
+	    	ResultSet  rs = null;
+	        try {
+	        	conn = DbUtil.getConnection();
+	            preparedStatement = conn.prepareStatement("select * from user where user_name=?");
+	            preparedStatement.setString(1, userName);
+	            rs = preparedStatement.executeQuery();
+
+	            if (rs.next()) {
+	                user.setUser_name(rs.getString("user_name"));
+	                user.setUser_age(rs.getString("user_age"));
+	                user.setUser_phone(rs.getString("user_phone"));
+	                user.setUser_id(rs.getString("user_id"));
+	                user.setUser_pw(rs.getString("user_pw"));
+	                user.setUser_hope(rs.getString("user_hope"));
+	                user.setUser_date(rs.getDate("user_date"));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        finally {
+	        	DbUtil.close(conn, preparedStatement, rs);
+	        }
+	        return user;
+	    }
+
 }
