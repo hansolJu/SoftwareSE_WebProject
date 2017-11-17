@@ -26,8 +26,9 @@ public class ConfirmIdAction extends HttpServlet {
 		//주어진 id의 중복여부를 체크해 값을 반환.
 		UserDBBean manager = UserDBBean.getinstance();
 		int check= manager.registerCheck(user_id);
+		System.out.println("check = "+check);
 		
-		request.setAttribute("check", new Integer(check));
+		response.getWriter().write(manager.registerCheck(user_id)+"");
 	}
 
 }

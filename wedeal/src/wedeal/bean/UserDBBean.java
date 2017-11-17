@@ -92,11 +92,11 @@ public class UserDBBean {
 			rs = pstmt.executeQuery();
 			//no
 			if(rs.next() || user_id.equals("")) {
-				return 1;
+				return 0;
 			}
 			//ok
 			else{
-				return -1;
+				return 1;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -108,7 +108,7 @@ public class UserDBBean {
 				e.printStackTrace();
 			}
 		}
-		return 0;//error
+		return -1;//error
 	}
 	
 	//add user ȸ�����Կ� ���
