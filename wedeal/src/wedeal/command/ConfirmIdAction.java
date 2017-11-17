@@ -7,35 +7,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class ConfirmIdAction
- */
+import wedeal.bean.UserDBBean;
+
 @WebServlet("/ConfirmIdAction")
 public class ConfirmIdAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ConfirmIdAction() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");		
+		String user_id = request.getParameter("user_id");
+		//주어진 id의 중복여부를 체크해 값을 반환.
+		UserDBBean manager = UserDBBean.getinstance();
+		int check= manager.registerCheck(user_id);
+		
+		request.setAttribute("check", new Integer(check));
 	}
 
 }
