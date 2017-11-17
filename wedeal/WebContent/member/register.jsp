@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<script src="/wedeal/js/jquery-1.11.0.min.js"></script>
-	<title>È¸¿ø°¡ÀÔ</title>
+	<title>íšŒì›ê°€ì…</title>
 	<script type="text/javascript">
 		function registerCheckFunction(){
 			var user_id = $('#user_id').val();
@@ -15,9 +15,9 @@
 				data: {user_id: user_id},
 				success: function(result){
 					if(result == 1)
-						alert("»ç¿ëÇÒ ¼ö ÀÖ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+						alert("ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
 				else
-					alert("»ç¿ëÇÒ ¼ö ¾ø´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù.");
+					alert("ì‚¬ìš©í•  ìˆ˜ ì—†ëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤.");
 				}
 			})
 		}
@@ -25,7 +25,7 @@
 			var user_pw = $('#user_pw').val();
 			var check_passwd = $('#check_passwd').val();
 			if(user_pw != check_passwd){
-				$('#passwordCheckMessage').html('ºñ¹Ğ¹øÈ£°¡ ¼­·Î ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.');
+				$('#passwordCheckMessage').html('ë¹„ë°€ë²ˆí˜¸ê°€ ì„œë¡œ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');
 			}else{
 				$('#passwordCheckMessage').html('');
 			}
@@ -35,35 +35,35 @@
 <body>
 	<div id="regForm" class="box">
    <ul>
-   	  <li><h3 style="text-align: center;">È¸¿ø°¡ÀÔ</h3>
-   	  <li><label for="user_name">ÀÌ¸§</label>
-				    <input type="text" id="user_name" name="user_name" placeholder="ÀÌ¸§">
-	  <li><label for="user_age">³ªÀÌ</label>
+   	  <li><h3 style="text-align: center;">íšŒì›ê°€ì…</h3>
+   	  <li><label for="user_name">ì´ë¦„</label>
+				    <input type="text" id="user_name" name="user_name" placeholder="ì´ë¦„">
+	  <li><label for="user_age">ë‚˜ì´</label>
 					<select id="user_age" name="user_age">
-					<option value="">¿¬·É´ë¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.</option>
-					<option value="10">10´ë</option>
-					<option value="20">20´ë</option>
-					<option value="30">30´ë</option>
-					<option value="40">40´ë</option>
-					<option value="50">50´ë</option>
-					<option value="60">60´ë ÀÌ»ó</option>
+					<option value="">ì—°ë ¹ëŒ€ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.</option>
+					<option value="10">10ëŒ€</option>
+					<option value="20">20ëŒ€</option>
+					<option value="30">30ëŒ€</option>
+					<option value="40">40ëŒ€</option>
+					<option value="50">50ëŒ€</option>
+					<option value="60">60ëŒ€ ì´ìƒ</option>
 					</select>
-	  <li><label for="user_phone">ÇÚµåÆù ¹øÈ£</label>
-					<input type="text" id="user_phone" placeholder="ÇÚµåÆù ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä." name="user_phone" maxlength="20">
-	  <li><label for="user_id">¾ÆÀÌµğ</label>
-					<input type="text" id="user_id" placeholder="¾ÆÀÌµğ" name="user_id" maxlength="10" autofocus>
-					<button onclik="registerCheckFunction();" type="button">Áßº¹Ã¼Å©</button>
-	  <li><label for="user_pw">ºñ¹Ğ¹øÈ£</label>
-					<input type="password" id="user_pw" onkeyup="passwordCheckFunction();" placeholder="ºñ¹Ğ¹øÈ£" name="user_pw" maxlength="20">
-	  <li><label for="repass">ºñ¹Ğ¹øÈ£ È®ÀÎ</label>
-					<input type="password" id="check_passwd" onkeyup="passwordCheckFunction();" placeholder="ºñ¹Ğ¹øÈ£ È®ÀÎ" name="check_passwd" maxlength="20">
-	  <li><label for="user_hope">°ü½É»óÇ°</label>
-					<input type="radio" name="user_hope" autocomplete="off" value="ÀÇ·ù" selected>ÀÇ·ù
-					<input type="radio" name="user_hope" autocomplete="off" value="°¡Àü">°¡Àü
-					<input type="radio" name="user_hope" autocomplete="off" value="µµ¼­">µµ¼­
+	  <li><label for="user_phone">í•¸ë“œí° ë²ˆí˜¸</label>
+					<input type="text" id="user_phone" placeholder="í•¸ë“œí° ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”." name="user_phone" maxlength="20">
+	  <li><label for="user_id">ì•„ì´ë””</label>
+					<input type="text" id="user_id" placeholder="ì•„ì´ë””" name="user_id" maxlength="10" autofocus>
+					<button onclik="registerCheckFunction();" type="button">ì¤‘ë³µì²´í¬</button>
+	  <li><label for="user_pw">ë¹„ë°€ë²ˆí˜¸</label>
+					<input type="password" id="user_pw" onkeyup="passwordCheckFunction();" placeholder="ë¹„ë°€ë²ˆí˜¸" name="user_pw" maxlength="20">
+	  <li><label for="repass">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
+					<input type="password" id="check_passwd" onkeyup="passwordCheckFunction();" placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸" name="check_passwd" maxlength="20">
+	  <li><label for="user_hope">ê´€ì‹¬ìƒí’ˆ</label>
+					<input type="radio" name="user_hope" autocomplete="off" value="ì˜ë¥˜" selected>ì˜ë¥˜
+					<input type="radio" name="user_hope" autocomplete="off" value="ê°€ì „">ê°€ì „
+					<input type="radio" name="user_hope" autocomplete="off" value="ë„ì„œ">ë„ì„œ
 	  <li><h5 style="color: red;" id="passwordCheckMessage"></h5>
-				<li class="label2"><button id="process">°¡ÀÔ</button>
-					<button id="cancle">Ãë¼Ò</button>											
+				<li class="label2"><button id="process">ê°€ì…</button>
+					<button id="cancle">ì·¨ì†Œ</button>											
    </ul>
 </div>
 <%
@@ -79,9 +79,9 @@
 		if(messageContent != null){
 	%>
 	
-	<% if(messageType.equals("¿À·ù ¸Ş½ÃÁö"))%>
+	<% if(messageType.equals("ì˜¤ë¥˜ ë©”ì‹œì§€"))%>
 		<script>
-			alert(<%= messageType %>+"ÀÇ"+<%= messageContent %>);
+			alert(<%= messageType %>+"ì˜"+<%= messageContent %>);
 		</script>
 	<%
 		session.removeAttribute("messageContent");

@@ -1,14 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!-- 
 회원가입폼
 작성자 : 주한솔
 최종수정자 : 이재윤
 최종수정일 : 17.11.15
  -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<script src="/wedeal/js/jquery-1.11.0.min.js"></script>
-<!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script> -->
+
+
 <script src="/wedeal/member/register.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <script type="text/javascript">
 		function registerCheckFunction(){
@@ -55,7 +56,7 @@
 					<input type="text" id="user_phone" placeholder="핸드폰 번호를 입력해 주세요." name="user_phone" maxlength="20">
 	  <li><label for="user_id">아이디</label>
 					<input type="text" id="user_id" placeholder="아이디" name="user_id" maxlength="10" autofocus>
-					<button onclik="registerCheckFunction()" type="button">중복체크</button>
+					<button onclick="registerCheckFunction()" type="button">중복체크</button>
 	  <li><label for="user_pw">비밀번호</label>
 					<input type="password" id="user_pw" onkeyup="passwordCheckFunction();" placeholder="비밀번호" name="user_pw" maxlength="20">
 	  <li><label for="repass">비밀번호 확인</label>
