@@ -1,19 +1,45 @@
 <!-- 
-ÀüÃ¼È¸¿ø°ü¸® ÆäÀÌÁö
-ÀÛ¼ºÀÚ : Á¤ÀºÁø
-¼öÁ¤ÀÚ:
-ÃÖÁ¾¼öÁ¤ÀÏ : 17.11.16
+ì „ì²´íšŒì›ê´€ë¦¬ í˜ì´ì§€
+ì‘ì„±ì : ì •ì€ì§„
+ìˆ˜ì •ì:
+ìµœì¢…ìˆ˜ì •ì¼ : 17.11.16
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
-<%@ page import="java.util.*" %>
-<%@ page import="wedeal.bean.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<script src="/wedeal/js/jquery-1.11.0.min.js"></script>
+<script src="/wedeal/mngr/member/fullMemberManage.js"></script>
 
-</body>
-</html>
+
+<div class="list">
+<div id="button">
+	<button id="bb">ì œë°œã… </button>
+</div>
+	<c:if test="${empty count}">
+		<ul>
+			<li>ì‚¬ìš©ìê°€ ì—†ìŠµë‹ˆë‹¤.
+		</ul>
+	</c:if>
+	<c:if test="${count > 0}">
+		<table>
+			<tr>
+				<th>ì‚¬ìš©ì ì´ë¦„</th>
+				<th>ê°€ì… ë‚ ì§œ</th>
+				<th>ì‚¬ìš©ì ì•„ì´ë””</th>
+				<th>ì‚¬ìš©ì ì•„ì´ë””</th>
+			</tr>
+			<c:forEach var="user" items="${userList}">
+				<tr>
+					<td>${user.getUser_name()}</td>
+					<td>${user.getUser_date()}</td>
+					<td>${user.getUser_id()}</td>
+					<td>${user.getUser_id()}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+</div>
+
