@@ -13,6 +13,25 @@
 <script src="/wedeal/member/register.js"></script>
 
 <script type="text/javascript">
+		function registerCheckFunction(){
+			var user_id = $('#user_id').val();
+			$.ajax({
+				type: 'POST',
+				url: './UserRegisterCheckServlet',
+				data: {user_id: user_id},
+				success: function(result){
+				if(result == 1){
+						$('#checkMessage').html('사용할 수 있는 아이디입니다.');
+						$('#checkType').attr('class', 'modal-content panel-success');
+				}
+				else{
+					$('#checkMessage').html('사용할 수 없는 아이디입니다.');
+					$('#checkType').attr('class', 'modal-content panel-warning');
+				}
+				$('#checkModal').modal("show");
+				}
+			})
+		}
 		function passwordCheckFunction(){
 			var user_pw = $('#user_pw').val();
 			var check_passwd = $('#check_passwd').val();
@@ -22,7 +41,7 @@
 				$('#passwordCheckMessage').html('');
 			}
 		}
-	</script>
+</script>
 	
 <div id="regForm" class="box">
    <ul>
@@ -43,7 +62,7 @@
 					<input type="text" id="user_phone" placeholder="핸드폰 번호를 입력해 주세요." name="user_phone" maxlength="20">
 	  <li><label for="user_id">아이디</label>
 					<input type="text" id="user_id" placeholder="아이디" name="user_id" maxlength="10" autofocus>
-					<button id="checkId" type="button">중복체크</button>
+					<button onclik="registerCheckFunction()" type="button">중복체크</button>
 	  <li><label for="user_pw">비밀번호</label>
 					<input type="password" id="user_pw" onkeyup="passwordCheckFunction();" placeholder="비밀번호" name="user_pw" maxlength="20">
 	  <li><label for="repass">비밀번호 확인</label>
