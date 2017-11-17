@@ -138,8 +138,7 @@ public class Controller extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("cont",view);
-	    RequestDispatcher dispatcher = 
-	       request.getRequestDispatcher("/index.jsp");
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(request, response);
 	}
 }

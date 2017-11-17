@@ -20,7 +20,7 @@ import wedeal.bean.UserDataBean;
 
 
 public class UserDBBean {
-	private Connection conn;
+	private Connection conn = null;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
@@ -72,13 +72,14 @@ public class UserDBBean {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(user_pw)) 
-					return 1; //�α��� ����
+					return 1; //로그인
+				else
+					return 0; //비번이 틀림
 			}
-			return 0; //���̵�&��й�ȣ Ʋ��
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -2; //����
+		return -1; //아이디 없음
 	}
 	
 	//check id(join) �ߺ�Ȯ�ο� ���

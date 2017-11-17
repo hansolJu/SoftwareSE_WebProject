@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<link rel="stylesheet" href="/wedeal/css/style.css"/>
+<link rel="stylesheet" href="/shoppingmall/css/style.css"/>
 
 <div id="header">
   <div id="logo" class="box">
-    <img class="noborder" id="logo" src="/wedeal/images/mollalogo3.png"/>
+    <img class="noborder" id="logo" src="/shoppingmall/images/mollalogo3.png"/>
   </div>
   <div id="auth" class="box">
     <c:if test="${type == 0}">
