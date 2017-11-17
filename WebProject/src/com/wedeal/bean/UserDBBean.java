@@ -12,8 +12,6 @@ import javax.naming.InitialContext;
 import org.apache.tomcat.jdbc.pool.DataSource;
 
 import com.wedeal.bean.UserDataBean;
-import user.likeDAO;
-import user.userDTO;
 
 public class UserDBBean {
 	private Connection conn;
@@ -45,9 +43,9 @@ public class UserDBBean {
 		return ds.getConnection();
 	}*/
 	
-	//ÇöÀç ½Ã°£À» ¼­¹ö¿¡ ³Ö¾îÁØ´Ù.
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
 	public String getDate() {
-		String SQL="SELECT NOW()";//ÇöÀç ½Ã°£À» µ¹·ÁÁØ´Ù.
+		String SQL="SELECT NOW()";//ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			rs=pstmt.executeQuery();
@@ -59,7 +57,7 @@ public class UserDBBean {
 		return "";
 	}
 	
-	//id/pw¸¦ °Ë»öÇÒ¶§ »ç¿ëÇÏ´Â ¸Þ¼Òµå (·Î±×ÀÎ)
+	//id/pwï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½ (ï¿½Î±ï¿½ï¿½ï¿½)
 	public int login(String user_id,String user_pw) {
 		String SQL = "SELECT user_pw FROM USER WHERE user_id = ?";
 		try {
@@ -68,16 +66,16 @@ public class UserDBBean {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(user_pw)) 
-					return 1; //·Î±×ÀÎ ¼º°ø
+					return 1; //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			}
-			return 0; //¾ÆÀÌµð&ºñ¹Ð¹øÈ£ Æ²¸²
+			return 0; //ï¿½ï¿½ï¿½Ìµï¿½&ï¿½ï¿½Ð¹ï¿½È£ Æ²ï¿½ï¿½
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -2; //¿À·ù
+		return -2; //ï¿½ï¿½ï¿½ï¿½
 	}
 	
-	//check id(join) Áßº¹È®ÀÎ¿¡ »ç¿ë
+	//check id(join) ï¿½ßºï¿½È®ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½
 	public int registerCheck(String user_id) {
 		String SQL="SELECT * FROM USER WHERE user_id = ?";
 		
@@ -106,7 +104,7 @@ public class UserDBBean {
 		return -1;//error
 	}
 	
-	//add user È¸¿ø°¡ÀÔ¿¡ »ç¿ë
+	//add user È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½
 	public int register(UserDataBean member) {
 		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
@@ -119,7 +117,6 @@ public class UserDBBean {
 			pstmt.setString(5, member.getUser_pw());
 			pstmt.setString(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
-			int result = new likeDAO().create(member.getUser_id());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -134,35 +131,6 @@ public class UserDBBean {
 		return -1;//error
 	}
 	
-	//get user info
-		public userDTO getUser(String user_id) {
-			String sql = "select * from user where user_id=?";
-			userDTO user = new userDTO();
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, user_id);
-				rs = pstmt.executeQuery();
-				
-				rs.next();
-				user.setUser_name(rs.getString("user_name"));
-				user.setUser_age(rs.getString("user_age"));
-				user.setUser_phone(rs.getString("user_phone"));
-				user.setUser_id(rs.getString("user_id"));
-				user.setUser_pw(rs.getString("user_pw"));
-				user.setUser_hope(rs.getString("user_hope"));
-				
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					if(rs !=null) rs.close();
-					if(pstmt !=null) pstmt.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-			return user;
-		}
 		
 		//user_phone modify
 		public boolean modifyPhone(String user_id, String user_phone) {

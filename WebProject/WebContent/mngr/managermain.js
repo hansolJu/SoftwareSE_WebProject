@@ -3,19 +3,23 @@
 var status = true;
 
 $(document).ready(function(){
-	$("#member").click(function(){//[회원]버튼 클릭
-		window.location.href("/shoppingmall/mg/bookRegisterForm.do");
+	$("#memberList").click(function(){//[전체 회원 정보]버튼 클릭
+		window.location.href("/Webproject/mg/bookRegisterForm.do");
 	});
-	
-	$("#step").click(function(){//[스탭]버튼 클릭
-		window.location.href("/shoppingmall/mg/bookList.do?book_kind=all");
+	$("#bannedList").click(function(){//[강제 탈퇴 맴버]버튼 클릭
+		window.location.href("/Webproject/mg/bookRegisterForm.do");
 	});
-	
-	$("#menu").click(function(){//[메뉴]버튼 클릭
-		window.location.href("/shoppingmall/mg/orderList.do");
+	$("#stepList").click(function(){//[스탭]버튼 클릭
+		window.location.href("/Webproject/mg/bookList.do?book_kind=all");
 	});
-	
-	$("#spam").click(function(){//[삭제글,댓글]버튼 클릭
-		window.location.href("/shoppingmall/mg/qnaList.do");
+	$("#menuList").click(function(){//[메뉴 관리]버튼 클릭
+		window.location.href("/Webproject/mg/menuPro.do");
 	});
+	$("#spamList").click(function(){//[신고된 게시글]버튼 클릭
+		window.location.href("/Webproject/mg/qnaList.do");
+	});
+	$("#deletedList").click(function(){//[삭제글,댓글]버튼 클릭
+		window.location.href("/Webproject/mg/qnaList.do");
+	});
+
 });
