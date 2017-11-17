@@ -4,8 +4,8 @@ $(document).ready(function(){
 	});
 	
 	$("#uLogin").click(function(){//[로그인]버튼 클릭
-		  var query = {id : $("#cid").val(), 
-				       passwd:$("#cpasswd").val()};
+		  var query = {user_id : $("#user_id").val(), 
+				       user_pw:$("#user_pw").val()};
 		  
 		  $.ajax({
 		     type: "POST",
@@ -20,11 +20,11 @@ $(document).ready(function(){
 		    		window.location.href("/wedeal/index.do");
 		    	 }else if(check == "0"){
 		    	  	alert("비밀번호 틀림");
-		    	  	$("#cpasswd").val("");
+		    	  	$("#user_pw").val("");
 		    	 }else{
 		    	    alert("아이디 틀림");
-		    	    $("#cid").val("");
-		    	    $("#cpasswd").val("");
+		    	    $("#user_id").val("");
+		    	    $("#user_pw").val("");
 		        }
 		 	}
 		  });
