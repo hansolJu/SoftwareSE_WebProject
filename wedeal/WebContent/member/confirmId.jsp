@@ -11,4 +11,5 @@
 <link rel="stylesheet" href="/wedeal/css/style.css"/>
 <script src="/wedeal/js/jquery-1.11.0.min.js"></script>
 
+
 <p id="ck">${check}

@@ -1,3 +1,9 @@
+/**
+ * 코드설명
+ * 작성자:이재윤
+ * 수정자:
+ * 최종수정일: 17.11.15
+ */
 package wedeal.command;
 
 import java.sql.Timestamp;
@@ -5,8 +11,8 @@ import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wedeal.bean.LogonDBBean;
-import wedeal.bean.LogonDataBean;
+import wedeal.bean.UserDBBean;
+import wedeal.bean.UserDataBean;
 
 public class RegisterProAction implements CommandAction {
 
@@ -17,17 +23,17 @@ public class RegisterProAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 		
 		//회원가입 정보
-		LogonDataBean member = new LogonDataBean();
-		member.setId(request.getParameter("id"));
-        member.setPasswd(request.getParameter("passwd"));
-        member.setName(request.getParameter("name"));
-        member.setReg_date(new Timestamp(System.currentTimeMillis()));
-		member.setAddress(request.getParameter("address"));
-		member.setTel(request.getParameter("tel"));
-        
+		UserDataBean member = new UserDataBean();
+		member.setUser_name(request.getParameter("user_name"));
+		member.setUser_age(Integer.parseInt(request.getParameter("user_age")));
+		member.setUser_phone(request.getParameter("user_phone"));
+		member.setUser_id(request.getParameter("user_phone"));
+		member.setUser_pw(request.getParameter("user_pw"));
+		member.setUser_hope(request.getParameter("user_hope"));
+       
 		//회원가입처리
-        LogonDBBean dbPro = LogonDBBean.getInstance();
-        dbPro.insertMember(member);
+		UserDBBean dbPro = UserDBBean.getinstance();
+		dbPro.register(member);
 		
 		return "/member/registerPro.jsp";
 	}
