@@ -45,6 +45,7 @@
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
+					 	<li><a href="user/userInfo.jsp">내 정보</a></li>
 					 </ul>
 				</li>
 			</ul>
