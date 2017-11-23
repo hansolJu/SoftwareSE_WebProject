@@ -93,8 +93,8 @@
 					<div class="form-group" style="text-align: center; margin: 0 auto;">
 						관심상품
 						<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-primary active">
-									<input type="radio" name="user_hope" autocomplete="off" value="의류" selected>의류
+								<label class="btn btn-primary">
+									<input type="radio" name="user_hope" autocomplete="off" value="의류">의류
 								</label>
 								<label class="btn btn-primary">
 									<input type="radio" name="user_hope" autocomplete="off" value="가전">가전
