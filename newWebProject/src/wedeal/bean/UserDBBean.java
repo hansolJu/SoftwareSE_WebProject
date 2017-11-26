@@ -26,16 +26,15 @@ public class UserDBBean {
 
 	private UserDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/user?autoReconnect=true&useSSL=false";
-			String dbID = "blesk";
-			String dbPW = "6572609";
+			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
+			String dbID = "root";
+			String dbPW = "wjd123";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 	/*private Connection getConnection() throws Exception{
 		Context initCtx = new InitialContext();
 		Context envCtx = (Context) initCtx.lookup("java:comp:/env");
@@ -262,8 +261,6 @@ public class UserDBBean {
 					rs.close();
 				if (pstmt != null)
 					pstmt.close();
-				if (conn != null)
-					conn.close();
 			} catch (Exception e2) {
 			}
 		}
@@ -287,8 +284,6 @@ public class UserDBBean {
 					rs.close();
 				if (pstmt != null)
 					pstmt.close();
-				if (conn != null)
-					conn.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -312,8 +307,6 @@ public class UserDBBean {
 					rs.close();
 				if (pstmt != null)
 					pstmt.close();
-				if (conn != null)
-					conn.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -326,7 +319,7 @@ public class UserDBBean {
 	public ArrayList<UserDataBean> getBannedUser() {
 		ArrayList<UserDataBean> list = new ArrayList<UserDataBean>();
 		try {
-			String sql = "select * from user where user_available = true";
+			String sql = "select * from user where user_available = false";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -349,8 +342,6 @@ public class UserDBBean {
 					rs.close();
 				if (pstmt != null)
 					pstmt.close();
-				if (conn != null)
-					conn.close();
 			} catch (Exception e2) {
 			}
 		}

@@ -22,8 +22,8 @@ import wedeal.bean.UserDataBean;
 /**
  * 활동 정지 상태의 회원의 정지 상태를 해제 시켜주는 서블릿
  */
-@WebServlet("/UserStartAction")
-public class UserStartAction extends HttpServlet {
+@WebServlet("/MngrUserStartAction")
+public class MngrUserStartAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);

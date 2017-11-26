@@ -63,8 +63,4 @@ public class UserDataBean {
 	public void setUser_date(String user_date) {
 		this.user_date = user_date;
 	}
-	public int getUser_available() {
-		return user_available;
-	}
-
 }
