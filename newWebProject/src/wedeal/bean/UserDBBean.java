@@ -26,9 +26,9 @@ public class UserDBBean {
 
 	private UserDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
-			String dbID = "jy";
-			String dbPW = "1365";
+			String dbURL = "jdbc:mysql://localhost:3306/user?autoReconnect=true&useSSL=false";
+			String dbID = "blesk";
+			String dbPW = "6572609";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		}catch(Exception e) {
