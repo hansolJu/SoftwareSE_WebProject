@@ -104,9 +104,9 @@ public class UserDBBean {
 		return -1;//error
 	}
 
-	//add user ȸ�����Կ� ���
+	//add user 
 	public int register(UserDataBean member) {
-		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			pstmt = conn.prepareStatement(SQL);
@@ -117,6 +117,7 @@ public class UserDBBean {
 			pstmt.setString(5, member.getUser_pw());
 			pstmt.setString(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
+			pstmt.setBoolean((int) 8 ,member.getUser_available());
 			//int result = new likeDAO().create(member.getUser_id());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -209,13 +210,13 @@ public class UserDBBean {
 		return true;
 	}
 
-	//user delete
+	//User Delete
 	public boolean deleteUser(String user_id) {
 		String sql = "delete from user where user_id=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -234,7 +235,6 @@ public class UserDBBean {
 	 * 모든 유저의 리스트를 반환하는 메소드
 	 * @return
 	 */
-
 	public ArrayList<UserDataBean> getAllUser() {
 		ArrayList<UserDataBean> list = new ArrayList<UserDataBean>();
 		try {
