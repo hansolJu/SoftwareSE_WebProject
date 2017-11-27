@@ -32,8 +32,8 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="http://localhost:8080/newWebProject/login.jsp">로그인</a></li>
-					 	<li><a href="http://localhost:8080/newWebProject/join.jsp">회원가입</a></li>
+					 	<li><a href="user/login.jsp">로그인</a></li>
+					 	<li><a href="user/join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
@@ -45,7 +45,7 @@
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
+					 	<li><a href="user/userInfo.jsp">내 정보</a></li>
 					 </ul>
 				</li>
 			</ul>
