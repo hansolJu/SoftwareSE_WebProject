@@ -12,7 +12,7 @@
 
 2. 환경은 Apache Tomcat v9.0, Jre1.8.0_144, 이클립스 OXYZEN.1, MySQL 5.6, JQuery1.11.0 버전으로 작성되었습니다.
 
-1. This project is a photo distribution system created by Term Project in the class time of professor Seung-ki Kwak, Computer Science Department, Kyonggi University.
+1. This project is a photo distribution system created by Term Project in the class time of professor Seung-ki Chae, Computer Science Department, Kyonggi University.
 
 2. The environment is written in Apache Tomcat v9.0, Jre1.8.0_144, Eclipse OXYZEN.1, MySQL 5.6, JQuery1.11.0.
 ###
