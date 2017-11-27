@@ -50,13 +50,13 @@ public class LoginAction extends HttpServlet {
 		else if(result == 0) {
 			request.getSession().setAttribute("messageType", "오류 메세지");
 			request.getSession().setAttribute("messageContent", "아이디 혹은 비밀번호가 맞지 않습니다.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 		}
 		
 		else {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "내부적인 오류입니다. 다시 시도해 주세요.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 		}
 	}
 
