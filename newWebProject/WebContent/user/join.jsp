@@ -54,7 +54,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="./RegisterAction">
+				<form method="post" action="./../RegisterAction">
 					<h3 style="text-align: center;">회원가입</h3>
 					
 					<div class="form-group">
