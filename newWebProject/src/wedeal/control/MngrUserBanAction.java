@@ -22,8 +22,8 @@ import wedeal.bean.UserDataBean;
 /**
  *회원을 황동 정지 시키는 서블릿
  */
-@WebServlet("/UserBanAction")
-public class UserBanAction extends HttpServlet {
+@WebServlet("/MngrUserBanAction")
+public class MngrUserBanAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -32,7 +32,6 @@ public class UserBanAction extends HttpServlet {
 		String user_id = request.getParameter("user_id");
 		UserDBBean.getinstance().banUser(user_id);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/memeber/fullMemberManage.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("/mngr/member/fullMemberManage.jsp");
 	}
 }

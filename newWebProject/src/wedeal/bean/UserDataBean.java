@@ -15,7 +15,7 @@ public class UserDataBean {
 	private String user_date;
 	private boolean user_available;
 
-	public boolean getUser_available1() {
+	public boolean getUser_available() {
 		return user_available;
 	}
 	public void setUser_available(boolean user_available) {
@@ -63,8 +63,4 @@ public class UserDataBean {
 	public void setUser_date(String user_date) {
 		this.user_date = user_date;
 	}
-	public boolean getUser_available() {
-		return user_available;
-	}
-
 }

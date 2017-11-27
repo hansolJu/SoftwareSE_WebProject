@@ -24,19 +24,13 @@
 				<th>이름</th>
 				<th>가입 날짜</th>
 				<th>정지 해제</th>
-				<th>강제 탈퇴</th>
 			</tr>
-			<c:forEach var="user" items="${stoppedUserList}">
+			<c:forEach var="user" items="${bannedUserList}">
 				<tr>
 					<td>${user.getUser_id()}</td>
 					<td>${user.getUser_name()}</td>
 					<td>${user.getUser_date()}</td>
-					<td><form action="/UserStartAction?user_id=user.getUser_id" method = "post">
-					<input type = submit value = "정지 해제">
-				</form></td>
-					<td><form action="/UserDeleteAction?user_id=user.getUser_id" method = "post">
-					<input type = submit value = "강제 탈퇴">
-				</form></td>
+					<td><td><a href="/newWebProject/MngrUserStartAction?user_id=${user.getUser_id()}">정지 해제</a></td>
 				</tr>
 			</c:forEach>
 		</table>
