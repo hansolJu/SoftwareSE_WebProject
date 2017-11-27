@@ -22,62 +22,7 @@
 </head>
 
 <body>
-	<%
-		String session_id = null;
-		//세션 설정
-		if(session.getAttribute("user_id")!=null){
-			session_id = (String)session.getAttribute("user_id");
-		}
-		UserDBBean user = UserDBBean.getinstance();
-		UserDataBean userinfo = user.getUser(session_id);
-		
-	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.jsp">WeDEAL</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">메인</a></li>
-				<li><a href="board.jsp">게시판</a></li>
-			</ul>
-			<%
-				if(session_id == null){
-				//-------------------------------------------------------로그인이 되어있지 않은 경우
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
-					 <ul class="dropdown-menu">
-					 	<li><a href="login.jsp">로그인</a></li>
-					 	<li><a href="join.jsp">회원가입</a></li>
-					 </ul>
-				</li>
-			</ul>
-			<% 
-				} else{
-				//-------------------------------------------------------로그인이 되어있는 경우
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">설정<span class="caret"></span></a>
-					 <ul class="dropdown-menu">
-					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="userinfo.jsp" >내 정보</a></li>
-					 </ul>
-				</li>
-			</ul>
-			<%
-				} 
-			%>
-		</div>
-	</nav>
-	
+	<jsp:include page="../Menubar.jsp" />
 	<!-- 회원 메뉴 -->
 	<div id="menu" style="display:inline-block; border-right:1px solid; float:left; height:400px; width:15%; padding:10px;">
 		<ul style="list-style:none;">
@@ -94,13 +39,13 @@
 			<br>
 			<div>
 				<form name="modify" method="POST" action="./../UserPhoneModifyAction">
-				<table>
-					<tr>
-						<td>수정할 연락처 : <input type="text" name="user_phone" size="15"></td>
-					</tr>
-				</table>
-				<hr>
-				<input type="submit" name="Submit" value="수정">
+				<div class="form-group">
+					<h5>연락처</h5>
+					<input type="text" class="form-control" id="user_phone" placeholder="연락처" name="user_phone" maxlength="20">
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary form-control" value="확인">
+				</div>
 				</form>
 			</div>
 		</div>
