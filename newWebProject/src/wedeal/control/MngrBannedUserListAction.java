@@ -16,8 +16,8 @@ import wedeal.bean.UserDataBean;
 /**
  * 활동 정지된 회원들을 가져오는 서블릿
  */
-@WebServlet("/BannedUserListAction")
-public class BannedUserListAction extends HttpServlet {
+@WebServlet("/MngrBannedUserListAction")
+public class MngrBannedUserListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -25,11 +25,10 @@ public class BannedUserListAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<UserDataBean> bannedUserList = null;
 		bannedUserList = UserDBBean.getinstance().getBannedUser();
-		if(bannedUserList.size() > 0)
-			request.setAttribute("bannedUserList", bannedUserList);
+		request.setAttribute("bannedUserList", bannedUserList);
 		request.setAttribute("count", new Integer(bannedUserList.size()));
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/memeber/fullMemberManage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/memeber/stopMemberManage.jsp");
 		dispatcher.forward(request, response);
 	}
 }
