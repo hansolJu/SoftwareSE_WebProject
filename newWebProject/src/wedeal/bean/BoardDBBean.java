@@ -14,7 +14,6 @@ public class BoardDBBean {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-
 	private static BoardDBBean instance = new BoardDBBean();
 
 	public static BoardDBBean getinstance() {
@@ -24,8 +23,8 @@ public class BoardDBBean {
 	private BoardDBBean() {
 		try {
 			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
-			String dbID = "root";
-			String dbPW = "wjd123";
+			String dbID = "jy";
+			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		}catch(Exception e) {
@@ -93,10 +92,6 @@ public class BoardDBBean {
 		String SQL2="SELECT * FROM board WHERE board_num < ? AND cate_num = ? AND board_available = 1 ORDER BY board_num DESC LIMIT 8";
 		ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
 		try {
-			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-			rs=pstmt.executeQuery();
-			
 				if(cate_num == 0) {
 					PreparedStatement pstmt=conn.prepareStatement(SQL1);
 					pstmt.setInt(1, getNext()-(pageNumber-1)*8);
@@ -376,44 +371,35 @@ public class BoardDBBean {
 	}
 		
 		
-		/*public ArrayList<BoardDataBean> AllgetList(){
-			String SQL="SELECT * FROM board ORDER BY board_like DESC";
-			ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
-			
-			try {
+	//좋아요 순서대로 짜름 -->추천글을 위함
+			public ArrayList<BoardDataBean> AllgetList(){
+				String SQL="SELECT * FROM board ORDER BY board_like DESC";
+				ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
 				
-					if(cate_num == 0) {
-						PreparedStatement pstmt=conn.prepareStatement(SQL1);
-						pstmt.setInt(1, getNext()-(pageNumber-1)*8);
+				try {
+						PreparedStatement pstmt=conn.prepareStatement(SQL);
 						rs=pstmt.executeQuery();
+						
+					while(rs.next()) {
+						BoardDataBean board = new BoardDataBean();
+						board.setCate_num(rs.getInt(1));
+						board.setBoard_num(rs.getInt(2));
+						board.setBoard_title(rs.getString(3));
+						board.setBoard_price(rs.getInt(4));
+						board.setUser_id(rs.getString(5));
+						board.setBoard_date(rs.getString(6));
+						board.setBoard_content(rs.getString(7));
+						board.setBoard_image(rs.getString(8));
+						board.setBoard_path(rs.getString(9));
+						board.setBoard_hit(rs.getInt(10));
+						board.setBoard_available(rs.getInt(11));
+						board.setBoard_like(rs.getInt(12));
+						list.add(board);
 					}
-					else {
-						PreparedStatement pstmt=conn.prepareStatement(SQL2);
-						pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-						pstmt.setInt(2, cate_num);
-						rs=pstmt.executeQuery();
-					}
-
-				while(rs.next()) {
-					BoardDataBean board = new BoardDataBean();
-					board.setCate_num(rs.getInt(1));
-					board.setBoard_num(rs.getInt(2));
-					board.setBoard_title(rs.getString(3));
-					board.setBoard_price(rs.getInt(4));
-					board.setUser_id(rs.getString(5));
-					board.setBoard_date(rs.getString(6));
-					board.setBoard_content(rs.getString(7));
-					board.setBoard_image(rs.getString(8));
-					board.setBoard_path(rs.getString(9));
-					board.setBoard_hit(rs.getInt(10));
-					board.setBoard_available(rs.getInt(11));
-					board.setBoard_like(rs.getInt(12));
-					list.add(board);
+					return list;
+				}catch(Exception e) {
+					e.printStackTrace();
 				}
-				return list;
-			}catch(Exception e) {
-				e.printStackTrace();
+				return null;
 			}
-			return null;
-		}*/
 }

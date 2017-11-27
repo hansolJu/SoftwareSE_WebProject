@@ -10,6 +10,7 @@ public class DeclarationDataBean {
 	private int declaration_num;
 	private String declaration_date;
 	private String user_id;//신고자 아이디
+	private String declaration_content;
 	
 	public int getBoard_num() {
 		return board_num;
@@ -34,5 +35,11 @@ public class DeclarationDataBean {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public String getDeclaration_content() {
+		return declaration_content;
+	}
+	public void setDeclaration_content(String declaration_content) {
+		this.declaration_content = declaration_content;
 	}
 }

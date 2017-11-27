@@ -31,7 +31,12 @@
 	
 	<!-- 상단바 -->
 	<jsp:include page="Menubar.jsp"/>
-	
+	<style type="text/css">
+	a, a:hover{
+		color: #000000;
+		text-decoration: none;
+	};
+	</style>
 	<!-- 메뉴 생성 부분 -->
 	<menutag:menu/>
 	<%
@@ -107,9 +112,9 @@
 			<% if(request.getParameter("user_id") != null) {%>
 					
 					<% if(LikeDBBean.getinstance().check_id(request.getParameter("user_id"),board.getBoard_num()) == -1) {%>
-					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a>
+					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"><%=board.getBoard_like() %></span></a>
 					<%} else{ %>
-					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"><%=board.getBoard_like() %></span></a>
 					<%} %>
 					<a href="./DeclarationAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
 			
@@ -118,6 +123,40 @@
 				<a href="update.jsp?board_num=<%= board.getBoard_num() %>&cate_num=<%=board.getCate_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="./BoardDeleteAction?cate_num=<%=board.getCate_num()%>&board_num=<%=board.getBoard_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 			<%} %>
+		</div>
+	</div>
+	
+	<!-- 메타데이터 활용 -->
+	<div class='container'>
+		<div class='row'>
+			<table class='table table-striped' style='border: 1px solid #dddddd' width='700' height='300'>
+				<thead>
+					<tr>
+						<th colspan='3' style='background-color: #eeeeee; text-align: center;' height='30'>고객님이 좋아할만한 물품 </th>
+					</tr>
+				</thead>
+			 <tbody>
+			 	<tr>
+		<%
+			LikeDBBean like = LikeDBBean.getinstance();
+			ArrayList<Integer> recommand = like.getBoard(like.getUser(board_num),board_num);
+			int count = 0;
+				for(int i = 0; i < recommand.size(); i++){//3개까지 보여줌
+					BoardDataBean list = BoardDBBean.getinstance().getBoard(recommand.get(i));
+					if(count>3) break;
+					count++;
+				image = list.getBoard_image();
+				images = image.split("/");
+		%>	
+		<td align="center"><a href="view.jsp?board_num=<%=list.getBoard_num() %>&user_id=${user_id}"><%=list.getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
+		<label>작성자:<%=list.getUser_id() %></label><%="<br>"%>
+		<a href="view.jsp?board_num=<%=list.getBoard_num()%>&user_id=${user_id}"><img src="<%= list.getBoard_path() %>\<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
+	<%
+		}
+	%>
+				</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	
@@ -160,14 +199,13 @@
 							int comment_num = list.get(i).getComment_num();
 					%>
 						<td>
-						<input type=button onclick="updateComment();" class="btn btn-primary" value="수정">
+						<a href="updatecommand.jsp?comment_num=<%=comment_num%>&board_num=<%=board_num %>" class="btn btn-primary">수정</a>
 						<a onclick="return confirm('정말로 삭제하시겠습니까?')"  href="./CommentDeleteAction?comment_num=<%=comment_num %>&board_num=<%=board_num %>" class="btn btn-primary">삭제</a>
 						</td>
 					</tr>
 					<%
 						}	}
 					%>
-				
 				</tbody>
 			</table>
 			</form>

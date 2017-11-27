@@ -122,7 +122,7 @@ public class CateDBBean {
 				catedatabean.setCate_name(rs.getString(2));
 				catedatabean.setCate_date(rs.getString(3));
 				catedatabean.setCate_parent(rs.getInt(4));
-				catedatabean.setCate_available(rs.getBoolean(5));
+
 				return catedatabean;
 			}
 		}catch(Exception e) {

@@ -60,7 +60,6 @@ public class BoardUpdateAction extends HttpServlet {
 		String[] old = boarddt.getBoard_image().split("/"); //기존 파일들의 불러옴
 		String[] select_image;
 		ArrayList<String> old_image = new ArrayList<String>();
-		String d;
 		
 		//arrayList에 현재 이미지들을 넣어줌
 		for(int i = 0; i < old.length; i++) {
