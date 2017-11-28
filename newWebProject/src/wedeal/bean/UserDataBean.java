@@ -13,12 +13,12 @@ public class UserDataBean {
 	private String user_pw;
 	private String user_hope;
 	private String user_date;
-	private boolean user_available;
+	private int user_available;
 
-	public boolean getUser_available() {
+	public int getUser_available() {
 		return user_available;
 	}
-	public void setUser_available(boolean user_available) {
+	public void setUser_available(int user_available) {
 		this.user_available = user_available;
 	}
 	public String getUser_name() {

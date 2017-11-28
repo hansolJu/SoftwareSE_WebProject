@@ -2,20 +2,21 @@
 메니저 메인페이지
 작성자: 주한솔
 수정자: 주한솔(11.19)
-:
+수정자 : 정은진
+수정내용 : 회원 관리 부분(js포함)
 최종수정일: 17.11.23
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src= "http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="/newWebProjectTwo/mngr/managermain.js"></script>
+<script src="/newWebProject/mngr/managermain.js"></script>
+	<jsp:include page="/Menubar.jsp"/>
 	<div id="mList">
 		<ul>
 			<li>회원 관리
 			<li><button id="member">전제회원정보</button><!-- 전체 회원을 출력하는 리스트 출력 및 특정회원을 활동정지나 강제탈퇴 할수있음 -->
-			<li><button id="mStopActive">활동정지 맴버</button> <!-- 활동정지된 맴버 리스트를 출력 -->
-			<li><button id="mBanned">강제 탈퇴 맴버</button> <!-- 강제 탈퇴된 맴버 리스트를 출력 -->
+			<li><button id="mBanned">활동 정지 맴버</button> <!-- 강제 탈퇴된 맴버 리스트를 출력 -->
 		</ul>
 		
 		<ul>

@@ -32,28 +32,38 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="user/login.jsp">로그인</a></li>
-					 	<li><a href="user/join.jsp">회원가입</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/login.jsp">로그인</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
 			</c:if>
 			<c:if test="${user_id ne null}">
+			<c:if test="${user_available == '2'}">
+			<button onclick="location.href='/mngr/managerMain.jsp'">관리</button>
+			</c:if>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="user/userInfo.jsp">내 정보</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
 					 </ul>
 				</li>
 			</ul>
 			</c:if>
 			<!-- 은진이 검색부분 연결!!! -->
-			<form class="navbar-form navbar-right" role="search">
+			<form class="navbar-form navbar-right" role="search" name="Search" method=post action="SearchAction">
+			<select name="searchItem">
+        		<option>제목</option>
+        		<option>내용</option>
+        		<option>댓글</option>
+        		<option>작성자</option>
+        		<option>제목+내용</option>
+        	</select>
         	<div class="form-group">
-          	<input type="text" class="form-control" placeholder="Search">
+          	<input type="text" class="form-control" placeholder="Search" name="keyword">
         	</div>
         	<button type="submit" class="btn btn-default">Search</button>
       		</form>

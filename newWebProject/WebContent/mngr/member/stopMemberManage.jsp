@@ -10,11 +10,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<script src="/newWebProject/js/jquery-1.11.0.min.js"></script>
 <script src="/newWebProject/mngr/member/fullMemberManage.js"></script>
-
-
-<div id="userList">
+<jsp:include page="/Menubar.jsp" />
+<div id="bannedUserList">
 		<ul>
 			<li>활동 정지 회원수 : ${count}</li>
 		</ul>
@@ -27,12 +25,13 @@
 			</tr>
 			<c:forEach var="user" items="${bannedUserList}">
 				<tr>
-					<td>${user.getUser_id()}</td>
-					<td>${user.getUser_name()}</td>
-					<td>${user.getUser_date()}</td>
-					<td><td><a href="/newWebProject/MngrUserStartAction?user_id=${user.getUser_id()}">정지 해제</a></td>
+					<td>${user.user_id}</td>
+					<td>${user.user_name}</td>
+					<td>${user.user_date}</td>
+					<td><a href="/newWebProject/MngrUserStartAction?user_id=${user.user_id}">정지 해제</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 </div>
-<hr><button onclick = "../managerMain.jsp">뒤로 가기</button>
+<hr>
+<button onclick="location.href='mngr/managerMain.jsp'">돌아가기</button>

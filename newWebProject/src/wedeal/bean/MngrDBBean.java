@@ -20,9 +20,9 @@ public class MngrDBBean {
 
 	private MngrDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
-			String dbID = "root";
-			String dbPW = "123123";
+			String dbURL = "jdbc:mysql://204.249.22.34:3306/se?autoReconnect=true&useSSL=false";
+			String dbID = "jy";
+			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		} catch (Exception e) {

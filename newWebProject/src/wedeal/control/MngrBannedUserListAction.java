@@ -23,14 +23,15 @@ public class MngrBannedUserListAction extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		ArrayList<UserDataBean> bannedUserList = null;
 		bannedUserList = UserDBBean.getinstance().getBannedUser();
 		request.setAttribute("bannedUserList", bannedUserList);
 		request.setAttribute("count", new Integer(bannedUserList.size()));
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/memeber/stopMemberManage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/member/stopMemberManage.jsp");
 		dispatcher.forward(request, response);
 	}
 }
-
-

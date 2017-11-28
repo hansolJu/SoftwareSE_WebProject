@@ -19,7 +19,7 @@ public class CommentDBBean {
 	
 	private CommentDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
 			String dbID = "jy";
 			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
