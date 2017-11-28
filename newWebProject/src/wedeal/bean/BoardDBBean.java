@@ -20,9 +20,9 @@ public class BoardDBBean {
       return instance;
    }
 
-   private BoardDBBean() {
+	private BoardDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://204.249.22.34:3306/se?autoReconnect=true&useSSL=false";
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
 			String dbID = "jy";
 			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -31,6 +31,7 @@ public class BoardDBBean {
 			e.printStackTrace();
 		}
 	}
+
 
    //현재 시간을 서버에 넣어준다.
    public String getDate() {

@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="wedeal.bean.*" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="menutag" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 
 	게시판 페이지

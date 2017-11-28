@@ -32,8 +32,13 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
+<<<<<<< HEAD
 					 	<li><a href="http://localhost:8080/newWebProject/login.jsp">로그인</a></li>
 					 	<li><a href="http://localhost:8080/newWebProject/join.jsp">회원가입</a></li>
+=======
+					 	<li><a href="./user/login.jsp">로그인</a></li>
+					 	<li><a href="./user/join.jsp">회원가입</a></li>
+>>>>>>> branch 'master' of https://github.com/hansolJu/SoftwareSE_WebProject.git
 					 </ul>
 				</li>
 			</ul>
