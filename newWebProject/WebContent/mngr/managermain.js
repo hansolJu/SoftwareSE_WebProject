@@ -11,15 +11,11 @@ var status = true;
 
 $(document).ready(function(){
 	$("#member").click(function(){//[회원]버튼 클릭
-		window.location.href("/shoppingmall/mg/bookRegisterForm.do");
-	});
-	$("#mStopActive").click(function(){//[활동정지맴버]버튼 클릭
-		window.location.href("/shoppingmall/mg/bookRegisterForm.do");
+		window.location.href="/newWebProject/MngrUserListAction";
 	});
 	$("#mBanned").click(function(){//[강제탈퇴맴버]버튼 클릭
-		window.location.href("/shoppingmall/mg/bookRegisterForm.do");
+		window.location.href="/newWebProject/MngrBannedUserListAction";
 	});
-	
 	$("#step").click(function(){//[스탭]버튼 클릭
 		window.location.href("/shoppingmall/mg/bookList.do?book_kind=all");
 	});

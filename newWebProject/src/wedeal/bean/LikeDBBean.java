@@ -5,10 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 
 public class LikeDBBean {
 		private Connection conn = null;
@@ -22,7 +18,7 @@ public class LikeDBBean {
 		
 		private LikeDBBean() {
 			try {
-				String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
+				String dbURL = "jdbc:mysql://204.249.22.34:3306/se?autoReconnect=true&useSSL=false";
 				String dbID = "jy";
 				String dbPW = "1365";
 				Class.forName("com.mysql.jdbc.Driver");
@@ -134,52 +130,4 @@ public class LikeDBBean {
 			return null;
 		}
 		
-		//현재글을 좋아요한 user들의 list를 뽑음
-		public ArrayList<String> getUser(int board_num) {
-			String SQL="SELECT user_id FROM user_like WHERE board_num = ? ";
-			ArrayList<String> list = new ArrayList<String>();
-			
-			try {
-					PreparedStatement pstmt=conn.prepareStatement(SQL);
-					pstmt.setInt(1, board_num);
-					rs=pstmt.executeQuery();
-
-				while(rs.next()) {
-					String user_id;
-					user_id = rs.getString("user_id");
-					list.add(user_id);
-				}
-				return list;
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-		
-		//user들이 좋아요한 게시글들 번호를 뽑음
-		public ArrayList<Integer> getBoard(ArrayList<String> user_id,int board_num){
-			String SQL="SELECT board_num FROM user_like WHERE user_id = ? ";
-			ArrayList<Integer> list = new ArrayList<Integer>();
-			
-			try {
-					
-				for(int i = 0; i < user_id.size(); i++) {
-					PreparedStatement pstmt=conn.prepareStatement(SQL);
-					pstmt.setString(1, user_id.get(i));
-					rs=pstmt.executeQuery();
-					while(rs.next()) {
-						Integer new_board_num;
-						new_board_num = rs.getInt("board_num");
-						if(!list.contains(new_board_num) && new_board_num != board_num) {//리스트에 없고, 현재 게시글이 아닐 경우에만 추가
-							list.add(new_board_num);
-						}
-					}
-				}
-				Collections.shuffle(list); //골고루 뿌려주기 위해서 섞어버림
-				return list;
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
 }

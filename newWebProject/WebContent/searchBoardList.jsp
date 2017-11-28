@@ -63,17 +63,18 @@
 		ArrayList<BoardDataBean> list = null;
 		//ArrayList<BoardDataBean> out_list,in_list = null;
 		
-		if(cate == 0){
-			list = board.getList(0, pageNum);
-			length = board.allCount(cate);
-		}
-		else{
-			list = board.getList(cate, pageNum);
-			//if(CateDBBean.getinstance().getBoard(cate).getCate_parent() > 0)
-				//in_list = board.getList(CateDBBean.getinstance().getBoard(cate).getCate_parent(), pageNum);
-			length = board.allCount(cate); //+ board.allCount(CateDBBean.getinstance().getBoard(cate).getCate_parent());
-		}
-		
+		//if(cate == 0){
+		//	list = board.getList(0, pageNum);
+		//	length = board.allCount(cate);
+		//}
+		//else{
+		//	list = board.getList(cate, pageNum);
+		//	//if(CateDBBean.getinstance().getBoard(cate).getCate_parent() > 0)
+		//		//in_list = board.getList(CateDBBean.getinstance().getBoard(cate).getCate_parent(), pageNum);
+		//	length = board.allCount(cate); //+ board.allCount(CateDBBean.getinstance().getBoard(cate).getCate_parent());
+		//}
+		//
+		list = (ArrayList<BoardDataBean>)request.getAttribute("searchResultList");
 		if(list.size() == 0){
 		%>
 			<td align="center">등록된 게시글이 없습니다.</td>
@@ -121,7 +122,9 @@
     	<div class="form-group">
           	<input type="text" class="form-control" placeholder="Search" name="keyword">
         </div>
-        	<input type="hidden" name = "searchCategory" value = <%=cate%>> 
+        	<%
+        		request.setAttribute("searchCategory", cate);
+        	%>
         	<button type="submit" class="btn btn-default">Search</button>
     </form>
 	<c:if test="${user_id ne null}">

@@ -21,16 +21,16 @@ public class BoardDBBean {
    }
 
    private BoardDBBean() {
-      try {
-         String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
-         String dbID = "root";
-         String dbPW = "wjd123";
-         Class.forName("com.mysql.jdbc.Driver");
-         conn = DriverManager.getConnection(dbURL, dbID, dbPW);
-      }catch(Exception e) {
-         e.printStackTrace();
-      }
-   }
+		try {
+			String dbURL = "jdbc:mysql://204.249.22.34:3306/se?autoReconnect=true&useSSL=false";
+			String dbID = "jy";
+			String dbPW = "1365";
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
    //현재 시간을 서버에 넣어준다.
    public String getDate() {
