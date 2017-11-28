@@ -16,16 +16,6 @@
 <html>
 <head>
 	<title>Write 화면</title>
-	<script type="text/javascript">
-		function logout(){
-			var user_id = $('#user_id').val();
-			$.ajax({
-				type: 'POST',
-				url: './UserLogoutServlet',
-			})
-		}
-	</script>
-	
 </head>
 <body>
 	<!-- 상단바 -->
