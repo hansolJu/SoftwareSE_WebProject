@@ -1,7 +1,7 @@
 package wedeal.control;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,22 +14,21 @@ import wedeal.bean.UserDBBean;
 import wedeal.bean.UserDataBean;
 
 /**
- * 강제 탈퇴된 회원들을 가져오는 서블릿
+ * 활동 정지된 회원들을 가져오는 서블릿
  */
-@WebServlet("/DeletedUserListAction")
-public class DeletedUserListAction extends HttpServlet {
+@WebServlet("/MngrBannedUserListAction")
+public class MngrBannedUserListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<UserDataBean> deletedUserList = null;
-		deletedUserList = UserDBBean.getinstance().getDeletedUser();
-		if(deletedUserList.size() > 0)
-			request.setAttribute("deletedUserList'", deletedUserList);
-		request.setAttribute("count", new Integer(deletedUserList.size()));
+		ArrayList<UserDataBean> bannedUserList = null;
+		bannedUserList = UserDBBean.getinstance().getBannedUser();
+		request.setAttribute("bannedUserList", bannedUserList);
+		request.setAttribute("count", new Integer(bannedUserList.size()));
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/memeber/fullMemberManage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/memeber/stopMemberManage.jsp");
 		dispatcher.forward(request, response);
 	}
 }

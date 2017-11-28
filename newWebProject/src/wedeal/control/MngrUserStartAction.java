@@ -20,19 +20,19 @@ import wedeal.bean.UserDBBean;
 import wedeal.bean.UserDataBean;
 
 /**
- *회원을 황동 정지 시키는 서블릿
+ * 활동 정지 상태의 회원의 정지 상태를 해제 시켜주는 서블릿
  */
-@WebServlet("/UserStopAction")
-public class UserStopAction extends HttpServlet {
+@WebServlet("/MngrUserStartAction")
+public class MngrUserStartAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user_id = request.getParameter("user_id");
-		UserDBBean.getinstance().stopUser(user_id);
+		UserDBBean.getinstance().startUser(user_id);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/memeber/fullMemberManage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/memeber/fullMemberManage.jsp");
 		dispatcher.forward(request, response);
 	}
 }

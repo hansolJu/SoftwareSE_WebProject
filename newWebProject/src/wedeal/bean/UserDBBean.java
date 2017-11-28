@@ -10,45 +10,38 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
-
-import wedeal.bean.UserDataBean;
+import java.util.ArrayList;
 
 
 public class UserDBBean {
 	private Connection conn = null;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
+
 	private static UserDBBean instance = new UserDBBean();
-	
+
 	public static UserDBBean getinstance() {
 		return instance;
 	}
-	
+
 	private UserDBBean() {
 		try {
 			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
-			String dbID = "jy";
-			String dbPW = "1365";
+			String dbID = "root";
+			String dbPW = "wjd123";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 	/*private Connection getConnection() throws Exception{
 		Context initCtx = new InitialContext();
 		Context envCtx = (Context) initCtx.lookup("java:comp:/env");
 		DataSource ds = (DataSource) envCtx.lookup("jdbc/se");
 		return ds.getConnection();
 	}*/
-	
+
 	//���� �ð��� ������ �־��ش�.
 	public String getDate() {
 		String SQL="SELECT NOW()";//���� �ð��� �����ش�.
@@ -62,7 +55,7 @@ public class UserDBBean {
 		}
 		return "";
 	}
-	
+
 	//id/pw�� �˻��Ҷ� ����ϴ� �޼ҵ� (�α���)
 	public int login(String user_id,String user_pw) {
 		String SQL = "SELECT user_pw FROM USER WHERE user_id = ?";
@@ -81,11 +74,11 @@ public class UserDBBean {
 		}
 		return -1; //아이디 없음
 	}
-	
+
 	//check id(join) �ߺ�Ȯ�ο� ���
 	public int registerCheck(String user_id) {
 		String SQL="SELECT * FROM USER WHERE user_id = ?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user_id);
@@ -110,11 +103,11 @@ public class UserDBBean {
 		}
 		return -1;//error
 	}
-	
-	//add user ȸ�����Կ� ���
+
+	//add user 
 	public int register(UserDataBean member) {
-		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?)";
-		
+		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, member.getUser_name());
@@ -124,6 +117,7 @@ public class UserDBBean {
 			pstmt.setString(5, member.getUser_pw());
 			pstmt.setString(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
+			pstmt.setBoolean((int) 8 ,member.getUser_available());
 			//int result = new likeDAO().create(member.getUser_id());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -138,16 +132,16 @@ public class UserDBBean {
 		}
 		return -1;//error
 	}
-	
+
 	//get user info
-		public UserDataBean getUser(String user_id) {
-			String sql = "select * from user where user_id=?";
-			UserDataBean user = new UserDataBean();
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, user_id);
-				rs = pstmt.executeQuery();
-				
+	public UserDataBean getUser(String user_id) {
+		String sql = "select * from user where user_id=?";
+		UserDataBean user = new UserDataBean();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+
 			if(rs.next()) {
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_age(rs.getInt("user_age"));
@@ -155,86 +149,202 @@ public class UserDBBean {
 				user.setUser_id(rs.getString("user_id"));
 				user.setUser_pw(rs.getString("user_pw"));
 				user.setUser_hope(rs.getString("user_hope"));
-				}
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					if(rs !=null) rs.close();
-					if(pstmt !=null) pstmt.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
 			}
-			return user;
-		}
-		
-		//user_phone modify
-		public boolean modifyPhone(String user_id, String user_phone) {
-			String sql = "update user set user_phone=? where user_id=?";
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
 			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, user_phone);
-				pstmt.setString(2, user_id);
-				pstmt.executeUpdate();
-				
-			}catch(SQLException e){
+				if(rs !=null) rs.close();
+				if(pstmt !=null) pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+
+	//user_phone modify
+	public boolean modifyPhone(String user_id, String user_phone) {
+		String sql = "update user set user_phone=? where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_phone);
+			pstmt.setString(2, user_id);
+			pstmt.executeUpdate();
+
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch(Exception e) {
 				e.printStackTrace();
 				return false;
-			}finally {
-				try {
-					if(rs != null) rs.close();
-					if(pstmt != null) pstmt.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-					return false;
-				}
 			}
-			return true;
 		}
-		
-		//user_pw modify
-		public boolean modifyPasswd(String user_id, String user_pw) {
-			String sql = "update user set user_pw=? where user_id=?";
+		return true;
+	}
+
+	//user_pw modify
+	public boolean modifyPasswd(String user_id, String user_pw) {
+		String sql = "update user set user_pw=? where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_pw);
+			pstmt.setString(2, user_id);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
 			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, user_pw);
-				pstmt.setString(2, user_id);
-				pstmt.executeUpdate();
-			}catch(SQLException e) {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch(Exception e) {
 				e.printStackTrace();
 				return false;
-			}finally {
-				try {
-					if(rs != null) rs.close();
-					if(pstmt != null) pstmt.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-					return false;
-				}
 			}
-			return true;
 		}
-		
-		//user delete
-		public boolean deleteUser(String user_id) {
-			String sql = "delete from user where user_id=?";
+		return true;
+	}
+
+	//User Delete
+	public boolean deleteUser(String user_id) {
+		String sql = "delete from user where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
 			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, user_id);
-				pstmt.executeQuery();
-			}catch(SQLException e) {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch(Exception e) {
 				e.printStackTrace();
 				return false;
-			}finally {
-				try {
-					if(rs != null) rs.close();
-					if(pstmt != null) pstmt.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-					return false;
-				}
 			}
-			return true;
 		}
+		return true;
+	}
+	/**
+	 * 모든 유저의 리스트를 반환하는 메소드
+	 * @return
+	 */
+	public ArrayList<UserDataBean> getAllUser() {
+		ArrayList<UserDataBean> list = new ArrayList<UserDataBean>();
+		try {
+			String sql = "select * from user";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				UserDataBean user = new UserDataBean();
+				user.setUser_name(rs.getString("user_name"));
+				user.setUser_age(rs.getInt("user_age"));
+				user.setUser_phone(rs.getString("user_phone"));
+				user.setUser_id(rs.getString("user_id"));
+				user.setUser_pw(rs.getString("user_pw"));
+				user.setUser_hope(rs.getString("user_hope"));
+				user.setUser_date(rs.getString("user_date"));
+				user.setUser_available(rs.getBoolean("user_available"));
+				list.add(user);
+			}
+		} catch (Exception e) {
+			System.out.println("getAllUser err : " + e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+		return list;
+	}
+	/**
+	 * 한 회원을 활동 정지 시키는 메소드
+	 * @param user_id
+	 */
+	public void banUser(String user_id) {
+		try {
+			String sql = "update user set user_available = false where user_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+		}catch(Exception e) {
+			System.out.println("stopUser err : " + e.getMessage());
+		}
+		finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 한 회원의 활동 정지 상태를 해지시키는 메소드
+	 * @param user_id
+	 */
+	public void startUser(String user_id) {
+		try {
+			String sql = "update user set user_available = true where user_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+		}catch(Exception e) {
+			System.out.println("stopUser err : " + e.getMessage());
+		}
+		finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 활동 정지된 회원들의 리스트를 반환하는 메소드
+	 * @return
+	 */
+	public ArrayList<UserDataBean> getBannedUser() {
+		ArrayList<UserDataBean> list = new ArrayList<UserDataBean>();
+		try {
+			String sql = "select * from user where user_available = false";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				UserDataBean user = new UserDataBean();
+				user.setUser_name(rs.getString("user_name"));
+				user.setUser_age(rs.getInt("user_age"));
+				user.setUser_phone(rs.getString("user_phone"));
+				user.setUser_id(rs.getString("user_id"));
+				user.setUser_pw(rs.getString("user_pw"));
+				user.setUser_hope(rs.getString("user_hope"));
+				user.setUser_date(rs.getString("user_date"));
+				user.setUser_available(rs.getBoolean("user_available"));
+				list.add(user);
+			}
+		} catch (Exception e) {
+			System.out.println("getAllUser err : " + e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+		return list;
+	}
 }
