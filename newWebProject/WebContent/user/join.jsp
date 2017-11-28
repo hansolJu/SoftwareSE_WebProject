@@ -19,7 +19,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './ConfirmIdAction',
+				url: './../ConfirmIdAction',
 				data: {user_id: user_id},
 				success: function(result){
 				if(result == 1){
