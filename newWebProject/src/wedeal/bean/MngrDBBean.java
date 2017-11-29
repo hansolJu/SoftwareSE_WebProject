@@ -86,12 +86,37 @@ public class MngrDBBean {
 	}
 
 	public void addBoard(CateDataBean cateDataBean) {
-		// TODO Auto-generated method stub
-		
+		try {
+            PreparedStatement preparedStatement = conn.prepareStatement("insert into users(boardId,upBoardName,boardName,adminName,savePath,filepath) values (?, ?, ?, ?, ? )");
+            preparedStatement.setInt(1, cateDataBean.getCate_num());
+            preparedStatement.setString(2, cateDataBean.getUpCategoryName());
+            preparedStatement.setString(3, cateDataBean.getCate_name());
+            preparedStatement.setString(4, cateDataBean.getAdminName());
+            preparedStatement.setString(5, cateDataBean.getSavePath());
+            preparedStatement.setString(6, cateDataBean.getFileName());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }		
 	}
 
 	public void updateBoard(CateDataBean cateDataBean) {
-		// TODO Auto-generated method stub
+		try {
+            PreparedStatement preparedStatement = conn.prepareStatement("update users set upBoardName=?, boardName=?, adminName=?, filename=?, filepath=?" +
+                            "where cate_num=?");
+            
+            preparedStatement.setString(1, cateDataBean.getUpCategoryName());
+            preparedStatement.setString(2, cateDataBean.getCate_name());
+            preparedStatement.setString(3, cateDataBean.getAdminName());
+            preparedStatement.setString(4, cateDataBean.getSavePath());
+            preparedStatement.setString(5, cateDataBean.getFileName());
+            preparedStatement.setInt(6, cateDataBean.getCate_num());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		
 	}
 }

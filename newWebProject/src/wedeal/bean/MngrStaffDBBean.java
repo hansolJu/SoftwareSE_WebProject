@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MngrStaffDBBean {
@@ -29,8 +30,16 @@ public class MngrStaffDBBean {
 		}
 	}
 
-	public void deleteStaff(int staffId) {
-		// TODO Auto-generated method stub
+	public void deleteStaff(String staffId) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("delete from users where staffId=?");
+            preparedStatement.setString(1, staffId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 		
 	}
 
