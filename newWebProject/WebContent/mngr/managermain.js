@@ -17,15 +17,15 @@ $(document).ready(function(){
 		window.location.href="/newWebProject/MngrBannedUserListAction";
 	});
 	$("#step").click(function(){//[스탭]버튼 클릭
-		window.location.href("/shoppingmall/mg/bookList.do?book_kind=all");
+		window.location.href='staff/staffList.jsp';
 	});
 	$("#menu").click(function(){//[메뉴]버튼 클릭
 		window.location.href='menu/boardList.jsp';
 	});
 	$("#spam").click(function(){//[신고글]버튼 클릭
-		window.location.href("/shoppingmall/mg/spamList.do");
+		window.location.href='spam/spamList.jsp'
 	});
 	$("#deleted").click(function(){//[삭제글,댓글]버튼 클릭
-		window.location.href("/shoppingmall/mg/qnaList.do");
+		window.location.href='deleted/delList.jsp';
 	});
 });
