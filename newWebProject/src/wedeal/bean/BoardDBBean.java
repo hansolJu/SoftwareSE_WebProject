@@ -23,9 +23,9 @@ public class BoardDBBean {
 
 	private BoardDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
-			String dbID = "root";
-			String dbPW = "wjd123";
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
+			String dbID = "jy";
+			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		}catch(Exception e) {
@@ -93,21 +93,17 @@ public class BoardDBBean {
 		String SQL2="SELECT * FROM board WHERE board_num < ? AND cate_num = ? AND board_available = 1 ORDER BY board_num DESC LIMIT 8";
 		ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
 		try {
-			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-			rs=pstmt.executeQuery();
-			
-				if(cate_num == 0) {
-					PreparedStatement pstmt=conn.prepareStatement(SQL1);
-					pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-					rs=pstmt.executeQuery();
-				}
-				else {
-					PreparedStatement pstmt=conn.prepareStatement(SQL2);
-					pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-					pstmt.setInt(2, cate_num);
-					rs=pstmt.executeQuery();
-				}
+			if(cate_num == 0) {
+				PreparedStatement pstmt=conn.prepareStatement(SQL1);
+				pstmt.setInt(1, getNext()-(pageNumber-1)*8);
+				rs=pstmt.executeQuery();
+			}
+			else {
+				PreparedStatement pstmt=conn.prepareStatement(SQL2);
+				pstmt.setInt(1, getNext()-(pageNumber-1)*8);
+				pstmt.setInt(2, cate_num);
+				rs=pstmt.executeQuery();
+			}
 
 			while(rs.next()) {
 				BoardDataBean board = new BoardDataBean();
@@ -163,22 +159,22 @@ public class BoardDBBean {
 		}
 		return -1;
 	}
-	
+
 	//좋아요
-		public int like(int board_num,int board_like) {
-			String SQL="UPDATE board SET board_like = ? WHERE board_num = ?";
-			
-			try {
-				PreparedStatement pstmt=conn.prepareStatement(SQL);
-				pstmt.setInt(1, board_like);
-				pstmt.setInt(2, board_num);
-				return pstmt.executeUpdate();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			return -1;
+	public int like(int board_num,int board_like) {
+		String SQL="UPDATE board SET board_like = ? WHERE board_num = ?";
+
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1, board_like);
+			pstmt.setInt(2, board_num);
+			return pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		
+		return -1;
+	}
+
 	//하나의 게시글 정보를 얻어옴
 	public BoardDataBean getBoard(int board_num) {
 		String SQL="SELECT * FROM board WHERE board_num = ? AND board_available = 1";
@@ -374,14 +370,73 @@ public class BoardDBBean {
 		//DbUtil.close(conn, pstmt, rs);  //연결 해지
 		return searchCategoryProductList;
 	}
+	/*
+	 * 작성자 : 채지훈
+	 * 작성일 : 2017.11.29
+	 * 수정자 : 채지훈
+	 * 수정일 : 2107.11.29
+	 
+	public String getCateName(int cate_num) {
+		String sql = "select cate_name from cate where cate_num=?";
+		String name = null;
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cate_num);
+			rs=pstmt.executeQuery();
+			name = rs.getString(1);
+			System.out.println(name);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return name;
+	}*/
+	
+	/*
+	 * 작성자 : 채지훈
+	 * 작성일 : 2017.11.28
+	 * 수정자 : 채지훈
+	 * 수정일 : 2017.11.29
+	 */
+	public ArrayList<BoardDataBean> getUserBoardList(String user_id){
+		String sql = "select * from board where user_id=? and board_available=? order by board_num asc";
+		ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
 		
-		
-		/*public ArrayList<BoardDataBean> AllgetList(){
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, 1);
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				BoardDataBean board = new BoardDataBean();
+				board.setCate_num(rs.getInt(1));
+				board.setBoard_num(rs.getInt(2));
+				board.setBoard_title(rs.getString(3));
+				board.setBoard_price(rs.getInt(4));
+				board.setUser_id(rs.getString(5));
+				board.setBoard_date(rs.getString(6));
+				board.setBoard_content(rs.getString(7));
+				board.setBoard_image(rs.getString(8));
+				board.setBoard_path(rs.getString(9));
+				board.setBoard_hit(rs.getInt(10));
+				board.setBoard_available(rs.getInt(11));
+				board.setBoard_like(rs.getInt(12));
+				list.add(board);
+			}
+			return list;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	/*public ArrayList<BoardDataBean> AllgetList(){
 			String SQL="SELECT * FROM board ORDER BY board_like DESC";
 			ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
-			
+
 			try {
-				
+
 					if(cate_num == 0) {
 						PreparedStatement pstmt=conn.prepareStatement(SQL1);
 						pstmt.setInt(1, getNext()-(pageNumber-1)*8);
