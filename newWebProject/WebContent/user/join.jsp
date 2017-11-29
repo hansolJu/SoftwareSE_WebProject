@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.util.*" %>
+<%@ page import="wedeal.bean.*" %>
 <!-- 
 	회원가입 페이지
 	회원가입 각각 text들이 모두 채워져있지 않은 상태로 회원가입 버튼을 누르면 UserRegisterServlet에서 session으로 경고 메세지를 보냄
@@ -96,18 +97,19 @@
 					</div>
 					
 					<div class="form-group" style="text-align: center; margin: 0 auto;">
-						관심상품
+						관심상품<br>
 						<div class="btn-group" data-toggle="buttons">
+						<%
+							ArrayList<CateDataBean> cate = CateDBBean.getinstance().getList();
+							for(int i = 0; i < cate.size(); i++){
+						%>
 								<label class="btn btn-primary">
-									<input type="radio" name="user_hope" autocomplete="off" value="의류">의류
+									<input type="radio" name="user_hope" autocomplete="off" value="<%=cate.get(i).getCate_num()%>"><%=cate.get(i).getCate_name()%>
 								</label>
-								<label class="btn btn-primary">
-									<input type="radio" name="user_hope" autocomplete="off" value="가전">가전
-								</label>
-								<label class="btn btn-primary">
-									<input type="radio" name="user_hope" autocomplete="off" value="도서">도서
-								</label>
-								</div>
+						<%
+							}
+						%>
+						</div>
 					</div>
 					<div class="form-group">
 							<h5 align="center" style="color: red;" id="passwordCheckMessage"></h5>

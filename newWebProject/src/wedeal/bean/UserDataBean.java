@@ -11,7 +11,7 @@ public class UserDataBean {
 	private String user_phone;
 	private String user_id;
 	private String user_pw;
-	private String user_hope;
+	private int user_hope;
 	private String user_date;
 	private boolean user_available;
 
@@ -51,10 +51,10 @@ public class UserDataBean {
 	public void setUser_pw(String user_pw) {
 		this.user_pw = user_pw;
 	}
-	public String getUser_hope() {
+	public int getUser_hope() {
 		return user_hope;
 	}
-	public void setUser_hope(String user_hope) {
+	public void setUser_hope(int user_hope) {
 		this.user_hope = user_hope;
 	}
 	public String getUser_date() {
