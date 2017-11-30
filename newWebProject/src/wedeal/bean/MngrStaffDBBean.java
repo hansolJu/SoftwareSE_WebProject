@@ -20,7 +20,7 @@ public class MngrStaffDBBean {
 
 	private MngrStaffDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://204.249.22.34:3306/se?autoReconnect=true&useSSL=false";
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
 			String dbID = "jy";
 			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -50,7 +50,6 @@ public class MngrStaffDBBean {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				//여기도 테이블 몰라서 테이블에 맞게 추가해야대
 				MngrStaffDataBean staffdatabean = new MngrStaffDataBean();
 				staffdatabean.setAuthor(rs.getInt(1));
 				staffdatabean.setDate(rs.getString(2));

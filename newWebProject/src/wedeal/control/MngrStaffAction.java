@@ -14,7 +14,7 @@ import wedeal.bean.MngrStaffDBBean;
 /**
  * Servlet implementation class MngrStaffListAction
  */
-@WebServlet("/MngrStaffListAction")
+@WebServlet("/MngrStaffAction")
 public class MngrStaffAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String LIST = "/mngr/staff/staffList.jsp";
@@ -37,7 +37,7 @@ public class MngrStaffAction extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if (action.equalsIgnoreCase("delete")) {//삭제
-			int staffId = Integer.parseInt(request.getParameter("Id"));
+			String staffId = request.getParameter("Id");
 			dao.deleteStaff(staffId);
 			forward = LIST;
 			request.setAttribute("borads", dao.getAllList());
