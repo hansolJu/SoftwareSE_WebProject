@@ -175,6 +175,26 @@ public class CateDBBean {
 		return list;
 	}
 	
+	//전체 카테고리를 불러오는 부분
+		public ArrayList<CateDataBean> List(){
+			String SQL="SELECT * FROM cate ORDER BY cate_num DESC";
+			ArrayList<CateDataBean> list = new ArrayList<CateDataBean>();
+			try {
+				PreparedStatement pstmt=conn.prepareStatement(SQL);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					CateDataBean catedatabean = new CateDataBean();
+					catedatabean.setCate_num(rs.getInt(1));
+					catedatabean.setCate_name(rs.getString(2));
+					catedatabean.setCate_parent(rs.getInt(3));
+					list.add(catedatabean);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
 	//카테고리이름 수정하는 부분
 	public int update_cate(CateDataBean cate) {
 		String SQL="UPDATE cate SET cate_name = ? WHERE cate_num = ?";
