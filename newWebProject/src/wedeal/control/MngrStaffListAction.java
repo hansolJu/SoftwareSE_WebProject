@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MngrSpamListAction
+ * Servlet implementation class MngrStaffListAction
  */
-@WebServlet("/MngrSpamListAction")
-public class MngrSpamListAction extends HttpServlet {
+@WebServlet("/MngrStaffListAction")
+public class MngrStaffListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MngrSpamListAction() {
+    public MngrStaffListAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,12 +26,8 @@ public class MngrSpamListAction extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forward = "";
-		String action = request.getParameter("action");
-		
-		if(action.equalsIgnoreCase("delete")) {//대소문자에 관계없이
-			
-		}
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
