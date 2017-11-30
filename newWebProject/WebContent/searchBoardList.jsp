@@ -121,10 +121,8 @@
 	<form class="navbar-form navbar-center" role="search" name="CateSearch" method=post action="CategorySearchAction">
     	<div class="form-group">
           	<input type="text" class="form-control" placeholder="Search" name="keyword">
+          	<input type="hidden" name = "searchCategory" value = "<%=cate%>"> 
         </div>
-        	<%
-        		request.setAttribute("searchCategory", cate);
-        	%>
         	<button type="submit" class="btn btn-default">Search</button>
     </form>
 	<c:if test="${user_id ne null}">

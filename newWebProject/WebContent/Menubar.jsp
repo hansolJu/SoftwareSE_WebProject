@@ -39,8 +39,8 @@
 			</ul>
 			</c:if>
 			<c:if test="${user_id ne null}">
-			<c:if test="${user_available == '2'}">
-			<button onclick="location.href='/mngr/managerMain.jsp'">관리</button>
+			<c:if test="${user_available eq '2'}">
+				<button onclick="location.href='http://localhost:8080/newWebProject/mngr/managerMain.jsp'">관리</button>
 			</c:if>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
