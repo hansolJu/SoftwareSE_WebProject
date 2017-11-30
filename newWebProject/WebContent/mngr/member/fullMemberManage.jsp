@@ -10,12 +10,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<jsp:include page="/Menubar.jsp" />
+<jsp:include page="/mngr/managerMain.jsp" />
 <div id="userList">
 		<ul>
 			<li>가입한 회원수 : ${count}</li>
 		</ul>
-		<table>
+		<table class='table table-striped' style='border: 1px solid #dddddd' height='100'>
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
@@ -44,5 +44,4 @@
 			</c:forEach>
 		</table>
 </div>
-<hr>
-<button onclick="location.href='mngr/managerMain.jsp'">돌아가기</button>
+<center><button onclick="location.href='mngr/managerMain.jsp'" class = "btn btn-default" align="center">돌아가기</button></center>
