@@ -1,7 +1,7 @@
 package wedeal.bean;
 
 public class MngrStaffDataBean {
-	private int author;
+	private int author;//관리자,스탭구분
 	private String id;
 	private String date;
 	public int getAuthor() {
