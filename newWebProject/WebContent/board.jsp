@@ -20,6 +20,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="MetaData/css/demo.css" />
+     <link rel="stylesheet" type="text/css" href="MetaData/css/style.css" />
+     <noscript><link rel="stylesheet" type="text/css" href="MetaData/css/noJS.css"/></noscript>
 	<title>메인 화면</title>
 	<script type="text/javascript">
 		function logout(){
@@ -90,10 +93,12 @@
 			String image = list.get(i).getBoard_image();
 			String[] images = image.split("/");
 	%>	
-		<td align="center"><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
-		<label>작성자:<%=list.get(i).getUser_id() %></label><%="<br>"%>
-		<a href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="<%= list.get(i).getBoard_path() %>\<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
-		<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%></td>
+			<td align="center"><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}">
+			<%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
+			<label>작성자:<%=list.get(i).getUser_id() %></label><%="<br>"%>
+			<a href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="<%= list.get(i).getBoard_path() %>\<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
+			<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%>
+			</td>
 	<%
 		if((i+1)%4 == 0 && i > 0){
 	%>
@@ -121,8 +126,8 @@
 	<form class="navbar-form navbar-center" role="search" name="CateSearch" method=post action="CategorySearchAction">
     	<div class="form-group">
           	<input type="text" class="form-control" placeholder="Search" name="keyword">
+          	<input type="hidden" name = "searchCategory" value = "<%=cate%>"> 
         </div>
-        	<input type="hidden" name = "searchCategory" value = <%=cate%>> 
         	<button type="submit" class="btn btn-default">Search</button>
     </form>
 	<c:if test="${user_id ne null}">
@@ -130,5 +135,10 @@
 	</c:if>
 		</div>
 		</div>
+	<script type="text/javascript">
+            $(function () {
+                $(' #da-thumbs > li ').hoverdir();
+            });
+       </script>
 </body>
 </html>

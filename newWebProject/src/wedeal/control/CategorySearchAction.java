@@ -32,7 +32,7 @@ public class CategorySearchAction extends HttpServlet {
 		ArrayList<BoardDataBean> list = null;  //검색 결과를 가져올 list
 		try {  //해당 parameter가 없을 경우
 			searchName = request.getParameter("keyword");
-			searchCategory = (int) request.getAttribute("searchCategory");  //어떤 카테고리를 검사할지
+			searchCategory = Integer.parseInt(request.getParameter("searchCategory"));  //어떤 카테고리를 검사할지
 		} catch(NullPointerException e) {  //키워드의 내용이 없을 경우
 			e.printStackTrace();
 			request.setAttribute("error_message", e.getMessage() +"값을 입력해주세요");  //에러 메시지 저장

@@ -10,7 +10,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<script src="/newWebProject/mngr/member/fullMemberManage.js"></script>
 <jsp:include page="/Menubar.jsp" />
 <div id="userList">
 		<ul>

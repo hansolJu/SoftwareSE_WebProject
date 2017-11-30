@@ -494,10 +494,10 @@ public class BoardDBBean {
       PreparedStatement pstmt = null;
 
       ArrayList<BoardDataBean> searchCategoryProductList = new ArrayList<>();  //반환할 결과 리스트
-      pstmt = conn.prepareStatement("select board_num "
-            + "from board, (SELECT DISTINCT id, getpath_f(id) AS path FROM cate HAVING path LIKE ?) recate "
-            + "where board.cate_num = recate.id and board_available = 1");  //계층 카테고리 검색 (중복 제거)
-      pstmt.setString(1, "%" + categoryId + "%");
+      pstmt = conn.prepareStatement("select * from board, "
+      		+ "(SELECT cate_num, cate_name, getpath_f(cate_num) AS path FROM cate HAVING path LIKE ?) recate " + 
+      		"where board.cate_num = recate.cate_num;");  //계층 카테고리 검색 (중복 제거)
+      pstmt.setString(1, "%" + Integer.toString(categoryId) + "%");
 
       rs = pstmt.executeQuery();
       while(rs.next()) {
