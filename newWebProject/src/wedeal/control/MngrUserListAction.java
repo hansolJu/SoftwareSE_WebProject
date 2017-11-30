@@ -23,12 +23,15 @@ public class MngrUserListAction extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		ArrayList<UserDataBean> userList = null;
 		userList = UserDBBean.getinstance().getAllUser();
 		request.setAttribute("userList", userList);
 		request.setAttribute("count", new Integer(userList.size()));
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/member/fullMemberManage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/member/fullMemberManage.jsp");
 		dispatcher.forward(request, response);
 	}
 }

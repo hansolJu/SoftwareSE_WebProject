@@ -23,7 +23,7 @@ public class UserDBBean {
 	public static UserDBBean getinstance() {
 		return instance;
 	}
-
+	
 	private UserDBBean() {
 		try {
 			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
@@ -104,7 +104,7 @@ public class UserDBBean {
 		return -1;//error
 	}
 
-	//add user 
+	//add user ȸ�����Կ� ���
 	public int register(UserDataBean member) {
 		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -117,7 +117,7 @@ public class UserDBBean {
 			pstmt.setString(5, member.getUser_pw());
 			pstmt.setInt(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
-			pstmt.setBoolean((int) 8 ,member.getUser_available());
+			pstmt.setInt(8, member.getUser_available());
 			//int result = new likeDAO().create(member.getUser_id());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -149,6 +149,8 @@ public class UserDBBean {
 				user.setUser_id(rs.getString("user_id"));
 				user.setUser_pw(rs.getString("user_pw"));
 				user.setUser_hope(rs.getInt("user_hope"));
+				user.setUser_date(rs.getString("user_date"));
+				user.setUser_available(rs.getInt("user_available"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -210,13 +212,13 @@ public class UserDBBean {
 		return true;
 	}
 
-	//User Delete
+	//user delete
 	public boolean deleteUser(String user_id) {
 		String sql = "delete from user where user_id=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
-			pstmt.executeUpdate();
+			pstmt.executeQuery();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -235,6 +237,7 @@ public class UserDBBean {
 	 * 모든 유저의 리스트를 반환하는 메소드
 	 * @return
 	 */
+
 	public ArrayList<UserDataBean> getAllUser() {
 		ArrayList<UserDataBean> list = new ArrayList<UserDataBean>();
 		try {
@@ -250,7 +253,7 @@ public class UserDBBean {
 				user.setUser_pw(rs.getString("user_pw"));
 				user.setUser_hope(rs.getInt("user_hope"));
 				user.setUser_date(rs.getString("user_date"));
-				user.setUser_available(rs.getBoolean("user_available"));
+				user.setUser_available(rs.getInt("user_available"));
 				list.add(user);
 			}
 		} catch (Exception e) {
@@ -272,9 +275,10 @@ public class UserDBBean {
 	 */
 	public void banUser(String user_id) {
 		try {
-			String sql = "update user set user_available = false where user_id = ?";
+			String sql = "update user set user_available = 0 where user_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
+			pstmt.executeUpdate();
 		}catch(Exception e) {
 			System.out.println("stopUser err : " + e.getMessage());
 		}
@@ -295,9 +299,10 @@ public class UserDBBean {
 	 */
 	public void startUser(String user_id) {
 		try {
-			String sql = "update user set user_available = true where user_id = ?";
+			String sql = "update user set user_available = 1 where user_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
+			pstmt.executeUpdate();
 		}catch(Exception e) {
 			System.out.println("stopUser err : " + e.getMessage());
 		}
@@ -319,7 +324,7 @@ public class UserDBBean {
 	public ArrayList<UserDataBean> getBannedUser() {
 		ArrayList<UserDataBean> list = new ArrayList<UserDataBean>();
 		try {
-			String sql = "select * from user where user_available = false";
+			String sql = "select * from user where user_available = 0";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -331,7 +336,7 @@ public class UserDBBean {
 				user.setUser_pw(rs.getString("user_pw"));
 				user.setUser_hope(rs.getInt("user_hope"));
 				user.setUser_date(rs.getString("user_date"));
-				user.setUser_available(rs.getBoolean("user_available"));
+				user.setUser_available(rs.getInt("user_available"));
 				list.add(user);
 			}
 		} catch (Exception e) {

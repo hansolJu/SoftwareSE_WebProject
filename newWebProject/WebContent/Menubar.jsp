@@ -6,9 +6,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 	<title>메인 화면</title>
 </head>
 <body>
@@ -32,8 +32,8 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="./user/login.jsp">로그인</a></li>
-					 	<li><a href="./user/join.jsp">회원가입</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/login.jsp">로그인</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
@@ -45,15 +45,25 @@
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="user/userInfo.jsp">내 정보</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
+					 	<c:if test="${user_available eq '2'}">
+							<li><a href="http://localhost:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
+						</c:if>
 					 </ul>
 				</li>
 			</ul>
 			</c:if>
 			<!-- 은진이 검색부분 연결!!! -->
-			<form class="navbar-form navbar-right" role="search">
+			<form class="navbar-form navbar-right" role="search" name="Search" method=post action="SearchAction">
+			<select name="searchItem">
+        		<option>제목</option>
+        		<option>내용</option>
+        		<option>댓글</option>
+        		<option>작성자</option>
+        		<option>제목+내용</option>
+        	</select>
         	<div class="form-group">
-          	<input type="text" class="form-control" placeholder="Search">
+          	<input type="text" class="form-control" placeholder="Search" name="keyword">
         	</div>
         	<button type="submit" class="btn btn-default">Search</button>
       		</form>

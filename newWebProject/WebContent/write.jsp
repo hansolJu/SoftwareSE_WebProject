@@ -46,10 +46,21 @@
 					</tr>
 					<tr>
 						<td>
+						<select class="form-control" id="out_cate_num" name="out_cate_num">
+						<option value="">대 카테고리를 선택해 주세요</option>
+						<% 
+							CateDBBean cate = CateDBBean.getinstance();
+							ArrayList<CateDataBean> list = cate.getList(); //대 카테고리
+							for(int i = 0; i < list.size(); i++){
+						%>
+							<option value=""><%=list.get(i).getCate_name() %></option>
+						<%
+							}
+						%>
+						</select>
 						<select class="form-control" id="cate_num" name="cate_num">
 						<option>소 카테고리를 선택해 주세요</option>
 						<% 
-							CateDBBean cate = CateDBBean.getinstance();
 							ArrayList<CateDataBean> in_list = cate.in_getList();
 							for(int i = 0; i < in_list.size(); i++){
 						%>

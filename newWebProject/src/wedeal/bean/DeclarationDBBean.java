@@ -63,14 +63,13 @@ public class DeclarationDBBean {
 		
 	//DB에 입력 글쓰기
 	public int declaration(DeclarationDataBean declaration) {
-		String SQL="INSERT INTO declaration VALUES (?, ?, ?, ?, ?)";
+		String SQL="INSERT INTO declaration VALUES (?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, declaration.getBoard_num());
 			pstmt.setInt(2, getNext());
 			pstmt.setString(3, getDate());
 			pstmt.setString(4, declaration.getUser_id());
-			pstmt.setString(5, declaration.getDeclaration_content());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

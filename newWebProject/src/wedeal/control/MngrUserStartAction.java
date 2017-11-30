@@ -1,12 +1,14 @@
 /**
- * 관리자가 사용자를 강제 탈퇴시키는 서블릿
+ * 관리자가 활동 정지된 사용자를 정지 해제 시켜주는 서블릿
  * 작성일 : 17.11.19
- * 수정일 :
+ * 수정일 : 17.11.27
+ * 수정 내용 : 정지 해제를 시키고 정지된 회원들을 반환
  * 작성자 : 정은진
  */
 package wedeal.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -29,10 +31,18 @@ public class MngrUserStartAction extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		String user_id = request.getParameter("user_id");
 		UserDBBean.getinstance().startUser(user_id);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/memeber/fullMemberManage.jsp");
+		ArrayList<UserDataBean> bannedUserList = null; //정지 해제 후 보여줄 리스트
+		bannedUserList = UserDBBean.getinstance().getBannedUser();
+		request.setAttribute("bannedUserList", bannedUserList);
+		request.setAttribute("count", new Integer(bannedUserList.size()));
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/member/stopMemberManage.jsp");
 		dispatcher.forward(request, response);
 	}
 }
