@@ -115,7 +115,7 @@ public class UserDBBean {
 			pstmt.setString(3, member.getUser_phone());
 			pstmt.setString(4, member.getUser_id());
 			pstmt.setString(5, member.getUser_pw());
-			pstmt.setString(6, member.getUser_hope());
+			pstmt.setInt(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
 			pstmt.setInt(8, member.getUser_available());
 			//int result = new likeDAO().create(member.getUser_id());
@@ -148,7 +148,7 @@ public class UserDBBean {
 				user.setUser_phone(rs.getString("user_phone"));
 				user.setUser_id(rs.getString("user_id"));
 				user.setUser_pw(rs.getString("user_pw"));
-				user.setUser_hope(rs.getString("user_hope"));
+				user.setUser_hope(rs.getInt("user_hope"));
 				user.setUser_date(rs.getString("user_date"));
 				user.setUser_available(rs.getInt("user_available"));
 			}
@@ -251,7 +251,7 @@ public class UserDBBean {
 				user.setUser_phone(rs.getString("user_phone"));
 				user.setUser_id(rs.getString("user_id"));
 				user.setUser_pw(rs.getString("user_pw"));
-				user.setUser_hope(rs.getString("user_hope"));
+				user.setUser_hope(rs.getInt("user_hope"));
 				user.setUser_date(rs.getString("user_date"));
 				user.setUser_available(rs.getInt("user_available"));
 				list.add(user);
@@ -334,7 +334,7 @@ public class UserDBBean {
 				user.setUser_phone(rs.getString("user_phone"));
 				user.setUser_id(rs.getString("user_id"));
 				user.setUser_pw(rs.getString("user_pw"));
-				user.setUser_hope(rs.getString("user_hope"));
+				user.setUser_hope(rs.getInt("user_hope"));
 				user.setUser_date(rs.getString("user_date"));
 				user.setUser_available(rs.getInt("user_available"));
 				list.add(user);

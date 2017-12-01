@@ -35,7 +35,6 @@ public class CommentWriteAction extends HttpServlet {
 		String board_num = request.getParameter("board_num");
 		commentdt.setComment_content(request.getParameter("comment_content"));
 		commentdt.setUser_id(request.getParameter("user_id"));
-
 		
 		if(commentdt.getComment_content() == null || commentdt.getComment_content().equals("")){
 			request.getSession().setAttribute("messageType", "오류 메시지");

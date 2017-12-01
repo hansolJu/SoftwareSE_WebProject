@@ -25,12 +25,10 @@
         });
     </script>
 
-    <form method="POST" action='MngrMenuAction' enctype="multipart/form-data" name="frmAddBoard">
+    <form method="POST" action='MngrMenuAction' name="frmAddBoard">
         Board ID : <input type="text" readonly="readonly" name="cate_num" value="<c:out value="${board.cate_num}" />" /> <br /> 
         Board Name : <input type="text" name="cate_name" value="<c:out value="${board.cate_name}" />" /> <br /> 
         UpBoard Name : <input type="text" name="upCategoryName" value="<c:out value="${board.cate_name}" />" /> <br /> 
-        Admin Image : <input type="file" name="fileName" value="<c:out value="${board.fileName}" />" /> <br />
-        
         <input type="submit" value="Submit" />
     </form>
 </body>

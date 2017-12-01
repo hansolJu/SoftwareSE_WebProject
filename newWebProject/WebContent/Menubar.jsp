@@ -6,9 +6,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 	<title>메인 화면</title>
 </head>
 <body>
@@ -39,9 +39,6 @@
 			</ul>
 			</c:if>
 			<c:if test="${user_id ne null}">
-			<c:if test="${user_available eq '2'}">
-				<button onclick="location.href='http://localhost:8080/newWebProject/mngr/managerMain.jsp'">관리</button>
-			</c:if>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -49,6 +46,9 @@
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
 					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
+					 	<c:if test="${user_available eq '2'}">
+							<li><a href="http://localhost:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
+						</c:if>
 					 </ul>
 				</li>
 			</ul>

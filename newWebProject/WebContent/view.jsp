@@ -104,7 +104,7 @@
 				</tbody>
 			</table>
 			<a href="board.jsp?cate_num=<%=board.getBoard_num()%>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-			<% if(request.getParameter("user_id") != null) {%>
+			<c:if test="${user_id ne null}">
 					
 					<% if(LikeDBBean.getinstance().check_id(request.getParameter("user_id"),board.getBoard_num()) == -1) {%>
 					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a>
@@ -112,8 +112,8 @@
 					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
 					<%} %>
 					<a href="./DeclarationAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
-			
-			<% }
+			</c:if>
+			<%
 				if(request.getParameter("user_id").equals(board.getUser_id())) {%>
 				<a href="update.jsp?board_num=<%= board.getBoard_num() %>&cate_num=<%=board.getCate_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="./BoardDeleteAction?cate_num=<%=board.getCate_num()%>&board_num=<%=board.getBoard_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
@@ -124,7 +124,7 @@
 	<!-- 댓글 기능 -->
 	<div class="container">
 	<div class="row">
-		<form method="post" action="./CommentWriteAction?board_num=<%=board.getBoard_num()%>&cate_num=<%=board.getCate_num()%>&user_id=<%=board.getUser_id()%>">
+		<form method="post" action="./CommentWriteAction?board_num=<%=board.getBoard_num()%>&cate_num=<%=board.getCate_num()%>&user_id=${user_id}">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -156,18 +156,18 @@
 						<td><%=list.get(i).getComment_content() %></td>
 						<td><%=list.get(i).getComment_date().substring(0,11) + list.get(i).getComment_date().substring(11,13)+"시" + list.get(i).getComment_date().substring(14,16)+"분"%></td>
 					<%
-						if(request.getParameter("user_id").equals(board.getUser_id())){
+						if(request.getParameter("user_id").equals(list.get(i).getUser_id())){
 							int comment_num = list.get(i).getComment_num();
 					%>
 						<td>
-						<input type=button onclick="updateComment();" class="btn btn-primary" value="수정">
-						<a onclick="return confirm('정말로 삭제하시겠습니까?')"  href="./CommentDeleteAction?comment_num=<%=comment_num %>&board_num=<%=board_num %>" class="btn btn-primary">삭제</a>
+						<a href="updatecommand.jsp?board_num=<%=board_num%>&comment_num=<%=list.get(i).getComment_num()%>"><input type=button class="btn btn-primary" value="수정"></a>
+						<a onclick="return confirm('정말로 삭제하시겠습니까?')"  href="./CommentDeleteAction?comment_num=<%=list.get(i).getComment_num() %>&board_num=<%=board_num %>" class="btn btn-primary">삭제</a>
 						</td>
+						</tr>
+					<%} else{%>
+					<td></td>
 					</tr>
-					<%
-						}	}
-					%>
-				
+					<%}}%>
 				</tbody>
 			</table>
 			</form>

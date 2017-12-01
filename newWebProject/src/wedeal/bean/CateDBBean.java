@@ -42,20 +42,6 @@ public class CateDBBean {
 		}
 	}
 
-	//현재 시간을 서버에 넣어준다.
-	public String getDate() {
-			String SQL="SELECT NOW()";//현재 시간을 돌려준다.
-			try {
-				PreparedStatement pstmt=conn.prepareStatement(SQL);
-				rs=pstmt.executeQuery();
-				if(rs.next())
-					return rs.getString(1);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			return "";
-		}
-	
 	//추가될 카테고리 번호
 	public int getNext() {
 		String SQL="SELECT cate_num FROM cate ORDER BY cate_num DESC";
@@ -80,7 +66,6 @@ public class CateDBBean {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext());
 			pstmt.setString(2, cate_name);
-			pstmt.setString(3, getDate());
 			//만약 대 카테고리가 아니라면 이부분 을 수정해줘야함!
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -97,9 +82,8 @@ public class CateDBBean {
 				PreparedStatement pstmt=conn.prepareStatement(SQL);
 				pstmt.setInt(1, getNext());
 				pstmt.setString(2, cate_name);
-				pstmt.setString(3, getDate());
 				//만약 cate_parent가 존재하지 않으면 -1리턴 (오류)
-				if(getBoard(cate_parent) == null)
+				if(getcate(cate_parent) == null)
 					return -1;
 				pstmt.setInt(4, cate_parent);
 				return pstmt.executeUpdate();
@@ -110,8 +94,8 @@ public class CateDBBean {
 		}
 	
 	//현재 카테고리번호로 정보를 불러옴
-	public CateDataBean getBoard(int cate_num) {
-		String SQL="SELECT * FROM out_cate WHERE out_cate_num = ?";
+	public CateDataBean getcate(int cate_num) {
+		String SQL="SELECT * FROM cate WHERE cate_num = ?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, cate_num);
@@ -120,8 +104,7 @@ public class CateDBBean {
 				CateDataBean catedatabean = new CateDataBean();
 				catedatabean.setCate_num(rs.getInt(1));
 				catedatabean.setCate_name(rs.getString(2));
-				catedatabean.setCate_date(rs.getString(3));
-				catedatabean.setCate_parent(rs.getInt(4));
+				catedatabean.setCate_parent(rs.getInt(3));
 				return catedatabean;
 			}
 		}catch(Exception e) {
@@ -152,6 +135,7 @@ public class CateDBBean {
 		return list;
 	}*/
 	
+	//소 카테고리 불러오는 부분
 	public ArrayList<CateDataBean> in_getList(){
 		String SQL="SELECT * FROM cate WHERE cate_parent > 0 ORDER BY cate_num DESC";
 		ArrayList<CateDataBean> list = new ArrayList<CateDataBean>();
@@ -162,8 +146,7 @@ public class CateDBBean {
 				CateDataBean catedatabean = new CateDataBean();
 				catedatabean.setCate_num(rs.getInt(1));
 				catedatabean.setCate_name(rs.getString(2));
-				catedatabean.setCate_date(rs.getString(3));
-				catedatabean.setCate_parent(rs.getInt(4));
+				catedatabean.setCate_parent(rs.getInt(3));
 				list.add(catedatabean);
 			}
 		}catch(Exception e) {
@@ -172,6 +155,7 @@ public class CateDBBean {
 		return list;
 	}
 	
+	//대 카테고리를 불러오는 부분
 	public ArrayList<CateDataBean> getList(){
 		String SQL="SELECT * FROM cate WHERE cate_parent IS NULL ORDER BY cate_num DESC";
 		ArrayList<CateDataBean> list = new ArrayList<CateDataBean>();
@@ -182,14 +166,69 @@ public class CateDBBean {
 				CateDataBean catedatabean = new CateDataBean();
 				catedatabean.setCate_num(rs.getInt(1));
 				catedatabean.setCate_name(rs.getString(2));
-				catedatabean.setCate_date(rs.getString(3));
-				catedatabean.setCate_parent(rs.getInt(4));
+				catedatabean.setCate_parent(rs.getInt(3));
 				list.add(catedatabean);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	//전체 카테고리를 불러오는 부분
+		public ArrayList<CateDataBean> List(){
+			String SQL="SELECT * FROM cate ORDER BY cate_num DESC";
+			ArrayList<CateDataBean> list = new ArrayList<CateDataBean>();
+			try {
+				PreparedStatement pstmt=conn.prepareStatement(SQL);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					CateDataBean catedatabean = new CateDataBean();
+					catedatabean.setCate_num(rs.getInt(1));
+					catedatabean.setCate_name(rs.getString(2));
+					catedatabean.setCate_parent(rs.getInt(3));
+					list.add(catedatabean);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+	//카테고리이름 수정하는 부분
+	public int update_cate(CateDataBean cate) {
+		String SQL="UPDATE cate SET cate_name = ? WHERE cate_num = ?";
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1, cate.getCate_name());
+			pstmt.setInt(2, cate.getCate_num());
+			return pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	//카테고리 삭제하는 부분
+	public int delete_cate(int cate_num) {
+		String sql = "delete from cate where cate_num=?";
+		try {
+			if(!(getcate(cate_num).getCate_parent() > 0)) {
+				ArrayList<CateDataBean> list = in_getList();
+				for(int i = 0; i < list.size(); i++) {
+					if(list.get(i).getCate_parent() == cate_num) {
+						delete_cate(list.get(i).getCate_num());
+					}
+				}
+			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cate_num);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }
 
