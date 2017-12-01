@@ -68,6 +68,8 @@ public class CommentWriteAction extends HttpServlet {
 			return;
 		}
 		else {
+			request.getSession().setAttribute("messageType", "성공 메시지");
+			request.getSession().setAttribute("messageContent", "댓글 작성을 성공했습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
 			request.setAttribute("board_num", commentdt.getBoard_num());
 			view.forward(request, response);
