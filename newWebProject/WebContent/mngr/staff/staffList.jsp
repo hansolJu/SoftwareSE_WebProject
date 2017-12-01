@@ -4,53 +4,56 @@
 작성자: 주한솔
 최종수정일: 17.11.28
   -->
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Show All Users</title>
-</head>
-<body>
-	<table border=1>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<jsp:include page="/mngr/managerMain.jsp" />
+<div id="staffList" style="float:left; padding-left:30px; width:90%">
+		<ul>
+			<li>활동 정지 회원수 : ${count}</li>
+		</ul>
+	<table class='table table-striped' style="border: 1px solid #dddddd; height=100;">
 		<thead>
 			<tr>
-				<th>스탭 역할</th><!--0:홈페이지 운영자 1:신고 관리자  -->
-				<th>아이디 </th>
-				<th>스탭 선정일</th>
-				<th colspan=1>설정</th>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>가입 날짜</th>
+				<th>활동 상태</th>
+				<th>스탭 해임</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${staffs}" var="staff">
+			<c:forEach var="staff" items="${staffList}">
 				<tr>
-					<td>
+					<td>${staff.user_id}</td>
+					<td>${staff.user_name}</td>
+					<td>${staff.user_date}</td>
 					<c:choose>
-							<c:when test="${staff.author == '0'}">
-           						홈페이지 운영자
-       						</c:when>
-							<c:when test="${staff.author == '1'}">
-           						스탭
-       						</c:when>
-							<c:otherwise>
-          						그외
-       						</c:otherwise>
-						</c:choose>
-					</td> 
-					<td><c:out value="${staff.id}" /></td>
-					<td><c:out value="${staff.date}" /></td>
-					<td><a href="/newWebProject/MngrStaffAction?action=delete&boardId=<c:out value="${staff.Id}"/>">스탭삭제</a></td>
+						<c:when test="${staff.user_available == '1'}">
+							<td>활동</td>
+						</c:when>
+						<c:when test="${staff.user_available == '2'}">
+							<td>관리자</td>
+						</c:when>
+						<c:when test="${staff.user_available >= '3'}">
+							<td>활동(스탭)</td>
+						</c:when>
+						<c:otherwise>
+							<td>정지</td>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${staff.user_available != '2'}">
+							<c:if test="${my_available == '2'}">
+								<td><a href="/newWebProject/MngrStaffAction?mngrAction=dismissStaff&user_id=${staff.user_id}">스탭 해임</a></td>
+							</c:if>
+						</c:when>
+					</c:choose>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<p>
-		<a href="/newWebProject/MngrStaffAction?action=add">스탭 추가</a>
-		<a href="/newWebProject/mngr/managerMain.jsp">뒤로 가기</a>
-	</p>
-</body>
-</html>
+</div>

@@ -11,17 +11,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <jsp:include page="/mngr/managerMain.jsp" />
-<div id="userList">
+<div id="userList" style="float:left; padding-left:30px; width:90%">
 		<ul>
 			<li>가입한 회원수 : ${count}</li>
 		</ul>
-		<table class='table table-striped' style='border: 1px solid #dddddd' height='100'>
+		<table class='table table-striped' style="border: 1px solid #dddddd; height=100;">
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>가입 날짜</th>
 				<th>활동 상태</th>
 				<th>활동 정지</th>
+				<th>스탭 임명</th>
 			</tr>
 			<c:forEach var="user" items="${userList}">
 				<tr>
@@ -33,15 +34,24 @@
 							<td>활동</td>
 						</c:when>
 						<c:when test="${user.user_available == '2'}">
-							<td>활동(스텝)</td>
+							<td>관리자</td>
+						</c:when>
+						<c:when test="${user.user_available >= '3'}">
+							<td>활동(스탭)</td>
 						</c:when>
 						<c:otherwise>
 							<td>정지</td>
 						</c:otherwise>
 					</c:choose>
-					<td><a href="/newWebProject/MngrUserBanAction?user_id=${user.getUser_id()}">활동 정지</a></td>
+					<c:choose>
+						<c:when test="${user.user_available != '2'}">
+							<td><a href="/newWebProject/MngrUserAction?action=banUser&user_id=${user.getUser_id()}">활동 정지</a></td>
+							<c:if test="${my_available == '2'}">
+								<td><a href="/newWebProject/MngrUserAction?action=appointStaff&user_id=${user.getUser_id()}">스탭 임명</a></td>
+							</c:if>
+						</c:when>
+					</c:choose>
 				</tr>
 			</c:forEach>
 		</table>
 </div>
-<center><button onclick="location.href='mngr/managerMain.jsp'" class = "btn btn-default" align="center">돌아가기</button></center>
