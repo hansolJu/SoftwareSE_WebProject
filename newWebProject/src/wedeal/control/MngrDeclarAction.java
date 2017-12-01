@@ -1,6 +1,7 @@
 package wedeal.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,48 +11,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import wedeal.bean.BoardDBBean;
+import wedeal.bean.DeclarationDBBean;
+import wedeal.bean.DeclarationDataBean;
+import wedeal.bean.UserDBBean;
 
 /**
- * Servlet implementation class MngrSpamListAction
+ * Servlet implementation class MngrDeclarListAction
  */
 @WebServlet("/MngrDeclarAction")
 public class MngrDeclarAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String LIST = "/mngr/declar/staffList.jsp";
-	private BoardDBBean dao = BoardDBBean.getinstance();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MngrDeclarAction() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forward = "";
-		String action = request.getParameter("action");
-
-		if (action.equalsIgnoreCase("delete")) {//삭제
-			String staffId = request.getParameter("Id");
-			dao.deleteStaff(staffId);
-			forward = LIST;
-			request.setAttribute("borads", dao.getAllList());//
-		}
-
-		RequestDispatcher view = request.getRequestDispatcher(forward);
-		view.forward(request, response);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 
+		String action = request.getParameter("action");
+
+		if(action != null) {
+			if(action.equals("boardDelete")){
+				BoardDBBean.getinstance().delete(Integer.parseInt(request.getParameter("board_num")));
+			}
+			else if(action.equals("banUser")) {
+				String user_id = request.getParameter("user_id");
+				UserDBBean.getinstance().banUser(user_id);
+			}
+		}
+
+		ArrayList<DeclarationDataBean> declarList = null; 
+		declarList = DeclarationDBBean.getinstance().declaration_getList();
+		
+		request.setAttribute("declarList", declarList);
+		request.setAttribute("count", new Integer(declarList.size()));
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/declar/declarManage.jsp");
+		dispatcher.forward(request, response);
+	}
 }
