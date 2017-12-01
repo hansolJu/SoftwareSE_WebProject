@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CommentDBBean {
@@ -19,7 +20,7 @@ public class CommentDBBean {
 	
 	private CommentDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
 			String dbID = "jy";
 			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -180,5 +181,38 @@ public class CommentDBBean {
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	/*
+	 * 작성자 : 채지훈
+	 * 작성일 : 2017.11.28
+	 * 수정자 : 채지훈
+	 * 수정일 : 2017.11.28
+	 */
+	public ArrayList<CommentDataBean> getUserCommentList(String user_id){
+		ArrayList<CommentDataBean> commentlist = new ArrayList<CommentDataBean>();
+		String sql = "select * from comment where user_id=? and comment_available=? order by comment_num asc";
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, 1);
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				CommentDataBean comment = new CommentDataBean();
+				comment.setCate_num(rs.getInt(1));
+				comment.setBoard_num(rs.getInt(2));
+				comment.setComment_num(rs.getInt(3));
+				comment.setUser_id(rs.getString(4));
+				comment.setComment_content(rs.getString(5));
+				comment.setComment_date(rs.getString(6));
+				comment.setComment_available(rs.getInt(7));
+				commentlist.add(comment);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return commentlist;
 	}
 }
