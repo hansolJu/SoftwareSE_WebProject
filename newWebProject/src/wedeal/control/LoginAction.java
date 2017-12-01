@@ -42,7 +42,7 @@ public class LoginAction extends HttpServlet {
 		if(result == 1) {
 			//로그인 성공시 id 세션 부여
 			request.getSession().setAttribute("user_id",user_id);
-			request.getSession().setAttribute("user_available", Integer.toString(userdb.getUser(user_id).getUser_available()));
+			request.getSession().setAttribute("my_available", userdb.getUser(user_id).getUser_available());
 			response.sendRedirect("index.jsp"); //complete page로 redirect해야함
 			
 			return;

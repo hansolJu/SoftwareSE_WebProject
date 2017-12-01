@@ -46,7 +46,7 @@
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
 					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
-					 	<c:if test="${user_available eq '2'}">
+					 	<c:if test="${my_available >= '2'}">
 							<li><a href="http://localhost:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
 						</c:if>
 					 </ul>

@@ -47,7 +47,9 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${staff.user_available != '2'}">
-							<td><a href="/newWebProject/MngrStaffAction?mngrAction=dismissStaff&user_id=${staff.user_id}">스탭 해임</a></td>
+							<c:if test="${my_available == '2'}">
+								<td><a href="/newWebProject/MngrStaffAction?mngrAction=dismissStaff&user_id=${staff.user_id}">스탭 해임</a></td>
+							</c:if>
 						</c:when>
 					</c:choose>
 				</tr>
