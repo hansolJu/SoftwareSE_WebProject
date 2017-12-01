@@ -42,7 +42,7 @@ public class MngrDeclarAction extends HttpServlet {
 			if(action.equals("boardDelete")){
 				BoardDBBean.getinstance().delete(Integer.parseInt(request.getParameter("board_num")));
 			}
-			else if(action.equals("banUser")) {
+			else if(action.equals("ban")) {
 				String user_id = request.getParameter("user_id");
 				UserDBBean.getinstance().banUser(user_id);
 			}
@@ -54,7 +54,7 @@ public class MngrDeclarAction extends HttpServlet {
 		request.setAttribute("declarList", declarList);
 		request.setAttribute("count", new Integer(declarList.size()));
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/declar/declarManage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mngr/declar/declarList.jsp");
 		dispatcher.forward(request, response);
 	}
 }

@@ -5,25 +5,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="/newWebProject/js/bootstrap.js"></script>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<jsp:include page="/mngr/managerMain.jsp" />
 <title>카테고리 </title>
 </head>
 <body>
-	
-	<div class="row">
+	<div style="float:left; padding-left:30px; width:90%">
 		<form method="post" action="#">
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class='table table-striped' style="border: 1px solid #dddddd; height=100;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">카테고리 번호</th>
-						<th style="background-color: #eeeeee; text-align: center;">카테고리 이름</th>
-						<th style="background-color: #eeeeee; text-align: center;">상위 카테고리 이름</th>
-						<th style="background-color: #eeeeee; text-align: center;"></th>
+						<th>카테고리 번호</th>
+						<th>카테고리 이름</th>
+						<th>상위 카테고리 이름</th>
+						<th>설정</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,7 +46,7 @@
 				</tbody>
 			</table>
 			</form>
+			<a href="/newWebProject/MngrMenuAction?action=add"><input type=button class='btn btn-primary pull-right' value="추가"></a>
 		</div>
-		<a href="/newWebProject/MngrMenuAction?action=add"><input type=button class='btn btn-primary pull-right' value="추가"></a>
 </body>
 </html>

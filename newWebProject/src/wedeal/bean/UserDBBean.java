@@ -352,4 +352,61 @@ public class UserDBBean {
 		}
 		return list;
 	}
+	/**
+	 * 스탭의 리스트를 얻는 메소드
+	 * @return
+	 */
+	public ArrayList<UserDataBean> getAllStaff() {
+		ArrayList<UserDataBean> list = new ArrayList<UserDataBean>();
+		try {
+			String sql = "select * from user where user_available >= 2";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				UserDataBean user = new UserDataBean();
+				user.setUser_name(rs.getString("user_name"));
+				user.setUser_id(rs.getString("user_id"));
+				user.setUser_pw(rs.getString("user_pw"));
+				user.setUser_phone(rs.getString("user_phone"));
+				user.setUser_date(rs.getString("user_date"));
+				user.setUser_available(rs.getInt("user_available"));
+				list.add(user);
+			}
+		} catch (Exception e) {
+			System.out.println("getAllUser err : " + e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+		return list;
+	}
+	/**
+	 * 한 회원을 스탭으로 임명시키는 메소드
+	 * @param user_id
+	 */
+	public void appointStaff(String user_id) {
+		try {
+			String sql = "update user set user_available = 3 where user_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("stopUser err : " + e.getMessage());
+		}
+		finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 }
