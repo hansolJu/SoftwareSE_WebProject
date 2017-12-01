@@ -26,9 +26,9 @@ public class UserDBBean {
 
 	private UserDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
-			String dbID = "root";
-			String dbPW = "wjd123";
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
+			String dbID = "jy";
+			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
 		}catch(Exception e) {
@@ -117,7 +117,7 @@ public class UserDBBean {
 			pstmt.setString(5, member.getUser_pw());
 			pstmt.setString(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
-			pstmt.setBoolean((int) 8 ,member.getUser_available());
+			pstmt.setInt(8 , member.getUser_available());
 			//int result = new likeDAO().create(member.getUser_id());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -250,7 +250,7 @@ public class UserDBBean {
 				user.setUser_pw(rs.getString("user_pw"));
 				user.setUser_hope(rs.getString("user_hope"));
 				user.setUser_date(rs.getString("user_date"));
-				user.setUser_available(rs.getBoolean("user_available"));
+				user.setUser_available(rs.getInt("user_available"));
 				list.add(user);
 			}
 		} catch (Exception e) {
@@ -331,7 +331,7 @@ public class UserDBBean {
 				user.setUser_pw(rs.getString("user_pw"));
 				user.setUser_hope(rs.getString("user_hope"));
 				user.setUser_date(rs.getString("user_date"));
-				user.setUser_available(rs.getBoolean("user_available"));
+				user.setUser_available(rs.getInt("user_available"));
 				list.add(user);
 			}
 		} catch (Exception e) {
