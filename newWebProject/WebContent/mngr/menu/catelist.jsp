@@ -11,7 +11,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="/newWebProject/js/bootstrap.js"></script>
 
-<title>카테고리 수정</title>
+<title>카테고리 </title>
 </head>
 <body>
 	
@@ -35,13 +35,13 @@
 						<td><%=list.get(i).getCate_num() %></td>
 						<td><%=list.get(i).getCate_name() %></td>
 					<% if(list.get(i).getCate_parent()>0){ %>
-						<td><%=cate.getcate(list.get(i).getCate_parent()).getCate_name() %>
+						<td><%=cate.getcate(list.get(i).getCate_parent()).getCate_name()%>
 					<%} else{%>	
 						<td></td>
 					<%} %>
 						<td>
-						<a href="update.jsp?cate_num=<%=list.get(i).getCate_num()%>"><input type=button class="btn btn-primary" value="수정"></a>
-						<a onclick="return confirm('정말로 삭제하시겠습니까?')"  href="./DeleteCateAction" class="btn btn-primary">삭제</a>
+						<a href="/newWebProject/MngrMenuAction?action=update&cate_num=<%=list.get(i).getCate_num()%>"><input type=button class="btn btn-primary" value="수정"></a>
+						<a onclick="return confirm('정말로 삭제하시겠습니까?')"  href="/newWebProject/MngrMenuAction?action=delete&cate_num=<%=list.get(i).getCate_num()%>" class="btn btn-primary">삭제</a>
 						</td>
 					</tr>
 					<%} %>
@@ -49,6 +49,6 @@
 			</table>
 			</form>
 		</div>
-		<a href="addcate.jsp"><input type=button class='btn btn-primary pull-right' value="추가"></a>
+		<a href="/newWebProject/MngrMenuAction?action=add"><input type=button class='btn btn-primary pull-right' value="추가"></a>
 </body>
 </html>

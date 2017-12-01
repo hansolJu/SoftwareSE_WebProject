@@ -59,13 +59,13 @@ public class CateDBBean {
 	}
 	
 	//대 카테고리 추가하는부분 ->한솔오빠가 쓰는부분
-	public int add_out_cate(String cate_name) {
-		String SQL="INSERT INTO cate VALUES (?, ?, ?)";
+	public int add_out_cate(CateDataBean cate) {
+		String SQL="INSERT INTO cate (cate_num,cate_name) VALUES (?, ?)";
 		try {
 			//여기에 추가해야함
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext());
-			pstmt.setString(2, cate_name);
+			pstmt.setString(2, cate.getCate_name());
 			//만약 대 카테고리가 아니라면 이부분 을 수정해줘야함!
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -76,16 +76,13 @@ public class CateDBBean {
 	
 	//소 카테고리 추가하는부분 ->한솔오빠가 쓰는부분 대 카테고리가 있어야만 생성 가능
 		public int add_in_cate(String cate_name,int cate_parent) {
-			String SQL="INSERT INTO cate VALUES (?, ?, ?, ?)";
+			String SQL="INSERT INTO cate VALUES (?, ?, ?)";
 			try {
 				//여기에 추가해야함
 				PreparedStatement pstmt=conn.prepareStatement(SQL);
 				pstmt.setInt(1, getNext());
 				pstmt.setString(2, cate_name);
-				//만약 cate_parent가 존재하지 않으면 -1리턴 (오류)
-				if(getcate(cate_parent) == null)
-					return -1;
-				pstmt.setInt(4, cate_parent);
+				pstmt.setInt(3, cate_parent);
 				return pstmt.executeUpdate();
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -197,12 +194,13 @@ public class CateDBBean {
 		
 	//카테고리이름 수정하는 부분
 	public int update_cate(CateDataBean cate) {
-		String SQL="UPDATE cate SET cate_name = ? WHERE cate_num = ?";
+		String SQL="UPDATE cate SET cate_name = ?, cate_parent = ? WHERE cate_num = ?";
 		
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1, cate.getCate_name());
-			pstmt.setInt(2, cate.getCate_num());
+			pstmt.setInt(2, cate.getCate_parent());
+			pstmt.setInt(3, cate.getCate_num());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

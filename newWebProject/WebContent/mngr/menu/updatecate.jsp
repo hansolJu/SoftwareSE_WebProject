@@ -11,7 +11,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="/newWebProject/js/bootstrap.js"></script>
 
-<title>카테고리 추가</title>
+<title>카테고리 수정</title>
 </head>
 <body>
 	<div class="container">
@@ -19,7 +19,7 @@
 			<div class="col-lg-4">
 				<div class="jumbotron" style="padding-top: 20px;">
 					<form method="post" action="/newWebProject/MngrMenuAction">
-						<h3 style="text-align: center;">카테고리 생성</h3>
+						<h3 style="text-align: center;">카테고리 수정</h3>
 						<div class="form-group">
 							<select class="form-control" name="cate_parent">
 							<option value="">없음</option>
@@ -28,10 +28,11 @@
 								<option value="<%=list.get(i).getCate_num()%>"><%=list.get(i).getCate_name()%></option>
 							<%} %>
 							</select>
-							<input type="text" class="form-control" name="cate_name" placeholder="카테고리 이름">
+							<input type="text" class="form-control" name="cate_name" value="${cate_name}">
 						</div>
-							<input type="hidden" name="action" value="add_comp">
-							<input type="submit" class="btn btn-primary form-control" value="생성">
+							<input type="hidden" name="action" value="update_comp">
+							<inpit type="hideen" name="cate_num" value="${cate_num}">
+							<input type="submit" class="btn btn-primary form-control" value="수정">
 					</form>
 			</div>
 		<div class="col-lg-4"></div>

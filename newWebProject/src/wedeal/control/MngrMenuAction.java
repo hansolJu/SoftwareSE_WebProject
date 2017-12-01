@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import wedeal.bean.CateDBBean;
 import wedeal.bean.CateDataBean;
 import wedeal.bean.MngrDBBean;
 
@@ -26,11 +27,7 @@ import wedeal.bean.MngrDBBean;
 @WebServlet("/MngrMenuAction")
 public class MngrMenuAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String LIST_BORAD = "/mngr/menu/boardList.jsp";
-	private static String INSERT_OR_EDIT = "/mngr/menu/board.jsp";
-	private static String savePath = "C:\\workspace\\my\\savefile";
-	private static int maxSize = 5 * 1024 * 1024;
-	private MngrDBBean dao;
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,27 +41,25 @@ public class MngrMenuAction extends HttpServlet {
 	 * 삽입, 편집외 모든기능을 맡아서 한다.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forward = "";
+		String address = "";
 		String action = request.getParameter("action");
-
-		if (action.equalsIgnoreCase("delete")) {//삭제
-			int boardId = Integer.parseInt(request.getParameter("boardId"));
-			dao.deleteBoard(boardId);
-			forward = LIST_BORAD;
-			request.setAttribute("borads", dao.getAllBoard());
-		} else if (action.equalsIgnoreCase("edit")) {//수정
-			forward = INSERT_OR_EDIT;
-			int boardId = Integer.parseInt(request.getParameter("boardId"));
-			CateDataBean board = dao.getBoardById(boardId);
-			request.setAttribute("board", board);
-		} else if (action.equalsIgnoreCase("listUser")) {//출력
-			forward = LIST_BORAD;
-			request.setAttribute("borads", dao.getAllBoard());
-		} else {//삽입
-			forward = INSERT_OR_EDIT;
+		CateDBBean cate = CateDBBean.getinstance();
+		if (action.equals("delete")) {//삭제
+			int cate_num = Integer.parseInt(request.getParameter("cate_num"));
+			System.out.println(cate_num);
+			cate.delete_cate(cate_num);
+			address = "mngr/menu/catelist.jsp";
+		} else if (action.equals("update")) {//수정
+			int cate_num = Integer.parseInt(request.getParameter("cate_num"));
+			CateDataBean catedt = cate.getcate(cate_num); 
+			request.setAttribute("cate_name", catedt.getCate_name());
+			request.setAttribute("cate_num", cate_num);
+			address = "mngr/menu/updatecate.jsp";
+		} else if (action.equals("add")) {//삽입
+			address = "mngr/menu/addcate.jsp";
 		}
 
-		RequestDispatcher view = request.getRequestDispatcher(forward);
+		RequestDispatcher view = request.getRequestDispatcher(address);
 		view.forward(request, response);
 	}
 
@@ -73,52 +68,37 @@ public class MngrMenuAction extends HttpServlet {
 	 * 추가또는 편집을 맡아서 한다.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    	MultipartRequest multipartrequest = new MultipartRequest(request, savePath, maxSize, "utf-8",
-				new DefaultFileRenamePolicy());
-    	CateDataBean cateDataBean = new CateDataBean();
-    	String fileName = "";
-    	File file = null;
-    	Enumeration files = null;
-    	    	
-    	cateDataBean.setCate_name(multipartrequest.getParameter("boardName"));//게시판이름
-    	cateDataBean.setUpCategoryName(multipartrequest.getParameter("upBoardName"));//상위게시판 이름
-        cateDataBean.setAdminName(multipartrequest.getParameter("adminName"));
-        
-		try {
-			fileName = multipartrequest.getFilesystemName("fileName"); // 파일의 이름 얻기
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		CateDBBean cate = CateDBBean.getinstance();
+		String address = "";
+		String action = request.getParameter("action");
+		if(action.equals("update_comp")) {
+			CateDataBean catedt = new CateDataBean();
+			catedt.setCate_num(Integer.parseInt(request.getParameter("cate_num")));
+			catedt.setCate_name(request.getParameter("cate_name"));
 			
-			files = multipartrequest.getFileNames();//?
-			String name = (String) files.nextElement();
-			file = multipartrequest.getFile(name);
-
-			cateDataBean.setSavePath(savePath);
-			cateDataBean.setFileName(fileName);
-
-			if (fileName == null) { // 파일이 업로드 되지 않았을때
-				System.out.print("파일 업로드 되지 않았음");
-			} else { // 파일이 업로드 되었을때
-				System.out.println("File Name  : " + fileName);
-				System.out.println("Save Path : " + savePath);
-			} // else
-		} catch (Exception e) {
-			System.out.print("예외 발생 : " + e);
-		} // catch
-           
-		String boardId = multipartrequest.getParameter("boardId");
-        if(boardId == null || boardId.isEmpty())
-        {
-            dao.addBoard(cateDataBean);//게시판 생성
-        }
-        else
-        {
-        	cateDataBean.setCate_num(Integer.parseInt(boardId));	
-            dao.updateBoard(cateDataBean);//게시판 수정
-        }
-        
-        RequestDispatcher view = request.getRequestDispatcher(LIST_BORAD);
-        request.setAttribute("borads", dao.getAllBoard());
-        view.forward(request, response);
+			if(!request.getParameter("cate_parent").equals("")) {
+				catedt.setCate_parent(Integer.parseInt(request.getParameter("parent_num")));
+			}
+			cate.update_cate(catedt);
+			address = "mngr/menu/catelist.jsp";
+		}
+		
+		else if(action.equals("add_comp")) {
+			CateDataBean catedt = new CateDataBean();
+			catedt.setCate_name(request.getParameter("cate_name"));
+			if(!request.getParameter("cate_parent").equals("")) {
+				catedt.setCate_parent(Integer.parseInt(request.getParameter("cate_parent")));
+				cate.add_in_cate(catedt.getCate_name(), catedt.getCate_parent());
+			}
+			else {
+				cate.add_out_cate(catedt);
+			}
+			address = "mngr/menu/catelist.jsp";
+		}
+		RequestDispatcher view = request.getRequestDispatcher(address);
+		view.forward(request, response);
     }
 
 }
