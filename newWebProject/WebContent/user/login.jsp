@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 
 	로그인 페이지
@@ -10,9 +11,15 @@
 	최종 수정: 2017/11/05
 -->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://localhost:8080/newWebProject/css/bootstrap.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://localhost:8080/newWebProject/js/bootstrap.js"></script>
 	<title>로그인 화면</title>
 </head>
 <body>
