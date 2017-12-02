@@ -152,14 +152,6 @@
 		<url-pattern>/MngrUserAction</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>MngrUserBanAction</servlet-name>
-		<servlet-class>wedeal.control.MngrUserBanAction</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MngrUserBanAction</servlet-name>
-		<url-pattern>/MngrUserBanAction</url-pattern>
-	</servlet-mapping>
-	<servlet>
 		<servlet-name>SearchAction</servlet-name>
 		<servlet-class>wedeal.control.SearchAction</servlet-class>
 	</servlet>
