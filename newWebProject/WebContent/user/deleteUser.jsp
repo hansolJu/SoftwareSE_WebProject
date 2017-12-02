@@ -5,7 +5,7 @@
 	수정일 : 2017.11.26
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"
+	pageEncoding="UTF-8"
 	import="wedeal.bean.UserDBBean, wedeal.bean.UserDataBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,7 +26,7 @@
 	}
 
 	function begin() {
-		document.myform.passwd.focus();
+		document.withdraw.user_pw.focus();
 	}
 
 	function checkIt() {
@@ -38,7 +38,6 @@
 		return true;
 	}
 </script>
-</head>
 </head>
 <body>
 	<jsp:include page="../Menubar.jsp" />

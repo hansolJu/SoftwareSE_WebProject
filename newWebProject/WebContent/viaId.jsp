@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="wedeal.*" %>
+<%@ page import="wedeal.bean.SearchService" %>
 <!DOCTYPE html>
 <html>
 <head>

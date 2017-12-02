@@ -36,7 +36,6 @@ public class LoginAction extends HttpServlet {
 			response.sendRedirect("login.jsp");
 			return;
 		}
-		
 		int result=userdb.login(user_id, user_pw);
 		
 		if(result == 1) {

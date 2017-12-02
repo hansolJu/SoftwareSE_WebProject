@@ -1,5 +1,4 @@
 package wedeal.bean;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,19 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import wedeal.bean.*;;
+import wedeal.bean.*;
 
 public class BoardDBBean {
-   private Connection conn;
-   private PreparedStatement pstmt;
-   private ResultSet rs;
-
-   private static BoardDBBean instance = new BoardDBBean();
-
-   public static BoardDBBean getinstance() {
-      return instance;
-   }
-
+	
+	private Connection conn;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+	
+	
+	private static BoardDBBean instance = new BoardDBBean();
+	
+	public static BoardDBBean getinstance() {
+		return instance;
+	}
 	private BoardDBBean() {
 		try {
 			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
