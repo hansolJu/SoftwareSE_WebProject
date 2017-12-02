@@ -16,7 +16,7 @@
 	</head>
 
 	<body>
-		<form name="searchId" method="post" action="viaId.jsp">
+		<form name="searchId" method="post" action="showId.jsp">
 			<table width="700px" height="500px" align="center"  border="0" style="color:black; background-color: #e1f2f2; font-size:20px; ">
 		           <tr>
 		           <td>

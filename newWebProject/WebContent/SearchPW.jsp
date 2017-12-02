@@ -15,7 +15,7 @@
 	</style>
 </head>
 <body>
-	<form name="searchPw" method="post" action="viaPW.jsp">
+	<form name="searchPw" method="post" action="showPW.jsp">
 	
 			<table width="700px" height="500px" align="center"  border="0" style="color:black; background-color: #e1f2f2; font-size:20px; ">
 		           <tr>
