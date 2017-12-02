@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wedeal.bean.*;
+import wedeal.bean.CommentDBBean;
 
 @WebServlet("/CommentDeleteAction")
 public class CommentDeleteAction extends HttpServlet {
