@@ -1,84 +1,59 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ page import="wedeal.bean.SearchService" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="wedeal.bean.UserDBBean" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 
+	К╧└К╟─К╡┬М≤╦ Л╟╬Й╦╟К╔╪ М√┬Л²└ К∙▄
+	К╧└К╟─К╡┬М≤╦К╔╪ КЁ╢Л≈╛Лё╪К┼■ М▌≤Л²╢Л╖─
+ -->
+ 
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<title>╨Я╧п╧Ьхё х╝юн</title>
-	<style type="text/css">
-		div{
-			text-align:center;
-		}
-	</style>
-</head>
-<%
-   request.setCharacterEncoding("euc-kr");
-   String user_id = request.getParameter("user_id");
-   String Phone = request.getParameter("Phone");
-   String phone1 = request.getParameter("phone1");
-   String phone2 = request.getParameter("phone2");
-   String user_phone = Phone+"-"+phone1+"-"+phone2;
-   SearchService searchService = SearchService.getInstance();
-   String user_pw = searchService.searchPw(user_id, user_phone);
-%>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>К╧└К╟─К╡┬М≤╦ М≥∙Л²╦</title>
+	</head>
+	<%
+	   request.setCharacterEncoding("euc-kr");
+	   String user_id = request.getParameter("user_id");
+	   String user_phone = request.getParameter("user_id");
+	   UserDBBean userdbbean = UserDBBean.getinstance();
+	   String user_pw = userdbbean.searchPw(user_id, user_phone);
+	%>
 <body>	
-	<table width="700px" height="500px" align="center"  border="0" style="color:black; background-color: #e1f2f2; font-size:20px; ">
-	<tr>
-		<td>
-		<table width="500px" height="100px" align="center" border=0; style="background-color:white;" >
-		<tr>
-			<th>╨Я╧п╧Ьхё х╝юн</th>
-		</tr>
-		</table>
-		     
-    	<tr>
-     		<td>
-      		<table width="450px" align="center" border="0" style="font-size:19px">     						
-       			<tr>
-        		<td>
-		        <%if(user_id!= null){ %>
-				<tr>
-				    <td><div><%=user_id %>╢тюг ╨Я╧п╧Ьхё╢б</div></td>
-				</tr>
-				<tr>
-					<td><h1><div><%=user_pw %></div></h1><div>ют╢о╢ы.</div></td>
-				</tr>
-		        </td>
-				</tr>
-				<tr>
-					<td>
-					<table width="700px" align="center"  border="0" style="color:black;; margin-top:5%; font-size:20px; ">
-					<tr>
-        				<td>
-        				<div>
-        					<input type="button" value="╥н╠вюнго╠Б" class="btn btn-primary" onclick="location.href='login.jsp'">
-        				</div>
-        				</td>
-         			</tr>
-      				</table>
+		<jsp:include page="Menubar.jsp"/>
+		<div class="container">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-4">
+				<div class="jumbotron" style="padding-top: 20px;">
+					<h4 style="text-align: center;">К╧└К╟─К╡┬М≤╦ М≥∙Л²╦</h4>
+		        	<%if(user_id!= null){ %>	
+		        	<center>	
+		        	<br/><br/>				
+						<div class="form-group">
+							<%=user_id %>К▀≤Л²≤ К╧└К╟─К╡┬М≤╦К┼■
+						</div>
+						<div class="form-group">
+							<h1><%=user_pw %></h1>				
+						</div>
+						<div class="form-group">						
+							Л·┘К▀┬К▀╓.
+						</div><br/><br/><br/>				
+       					<input type="button" value="К║°Й╥╦Л²╦М∙≤Й╦╟" class="btn btn-primary" onclick="location.href='login.jsp'">
+      				</center>
       				<%} else{%>
-      				<tr>
-						<td><%=user_id %>╢т!</td>
-					</tr>
-					<tr>
-						<td><h1>╟║юта╓╨╦╟║ ╬Ь╫ю╢о╢ы.</h1></td>
-					</tr>
-					</table>
-					</td> 
-				</tr>       
-				<tr> 
-					<td>
-					<table width="150px"  align="center" border="0" style="margin-top:1%">
-					<tr>
-						<td><input type="button" value="х╦©Ь╟║ютго╠Б" class="btn btn-primary" onclick="location.href='join.jsp'"></td>
-						<td><input type="button" value="цЁю╫ю╦╥н" class="btn btn-primary" onclick="location.href='login.jsp'"></td>
-					</tr>
-					</table>   
-					<%} %>
-          			</table>
-     			</td>
-			</tr> 
-		</table>
+						<div class="form-group">
+							<br/><br/><br/>
+							<center><h1>Й╟─Л·┘Л═∙КЁ╢Й╟─ Л≈├Л┼╣К▀┬К▀╓.</h1></center>				
+						</div><br/><br/><br/><br/>
+						<center>				
+       					<input type="button" value="М ▄Л⌡░Й╟─Л·┘ М∙≤Й╦╟" class="btn btn-primary" onclick="location.href='join.jsp'">
+        				<input type="button" value="Л╡≤Л²▄Л°╪К║°" class="btn btn-primary" onclick="location.href='SearchPW.jsp'">     							
+						</center>
+					<%}%>
+			</div>
+			<div class="col-lg-4"></div>
+		</div>
+		</div>							
 </body>
 </html>

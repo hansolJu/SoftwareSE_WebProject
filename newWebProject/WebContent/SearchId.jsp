@@ -1,69 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 
+	ÏïÑÏù¥Îîî Ï∞æÍ∏∞ ÌéòÏù¥ÏßÄ
+ -->
+ 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>æ∆¿Ãµ √£±‚</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<script src="js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<style type="text/css">
-			div{
-				text-align:center;
-			}
-		</style>
+		<title>ÏïÑÏù¥Îîî Ï∞æÍ∏∞</title>
 	</head>
 
 	<body>
-		<form name="searchId" method="post" action="showId.jsp">
-			<table width="700px" height="500px" align="center"  border="0" style="color:black; background-color: #e1f2f2; font-size:20px; ">
-		           <tr>
-		           <td>
-		                <table width="500px" height="100px" align="center" border=0; style="background-color:white;" >
-		              		<tr>
-		                      	<th>æ∆¿Ãµ √£±‚</th>
-		                    </tr>
-		                </table>
-		          		<tr>
-		          			<td>
-		          				&nbsp;&nbsp;¿Ã∏ß∞˙ «⁄µÂ∆˘ π¯»£∏¶ ¿‘∑¬«ÿ¡÷ººø‰.
-		          			</td>
-       					</tr>
-    					<tr>
-     					<td>
-      						<table width="380px" align="center" border="0" style="font-size:19px">
-       						<tr>
-        						<td>¿Ã∏ß</td>
-       							<td><input type="text" name="user_name"></td>
-       						</tr>
-       						<tr>
-        						<td>»ﬁ¥Î∆˘</td>
-								<td><select name="Phone">
-					        	<option value ="010" selected="selected">010</option>
-					        	<option value ="011">011</option>
-					        	<option value ="016">016</option> 
-					        	<option value ="017">017</option>
-					        	</select> -
-					        	<input type="text" name="phone1" style="width:70px"> -
-					        	<input type="text" name="phone2" style="width:70px"></td>
-					        </tr>
-					        <table width="700px" align="center"  border="0" style="color:black; background-color: #e1f2f2; margin-top:5%; font-size:20px; ">
-					        <tr>
-        					<td>
-        						<div>
-        							<input type="submit" name="search" value="√£±‚" class="btn btn-primary">
-         							<input type="button" name="cancel" value="√Îº“" class="btn btn-primary" onclick="location.href='login.jsp'"></td>
-         						</div>
-         					</tr>
-      						</table>
-      						</table>
-     					</td>
-     					</tr>
-     				</td>
-    			</tr>
-			</table>
-		</form>
+		<jsp:include page="Menubar.jsp"/>
+		<div class="container">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-4">
+				<div class="jumbotron" style="padding-top: 20px;">
+					<form method="post" action="showId.jsp">
+						<h3 style="text-align: center;">ÏïÑÏù¥Îîî Ï∞æÍ∏∞</h3>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Ïù¥Î¶Ñ" name="user_name" maxlength="20">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Ìï∏ÎìúÌè∞ Î≤àÌò∏" name="user_phone" maxlength="20">
+						</div>
+						<input type="submit" class="btn btn-primary form-control" value="Ï∞æÍ∏∞"><br/><br/>
+						<center><a href="SearchPW.jsp">ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞</a> &emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;
+						<a href="join.jsp">ÌöåÏõêÍ∞ÄÏûÖ</a>
+						</center>			
+					</form>
+			</div>
+			<div class="col-lg-4"></div>
+		</div>
+		</div>								
 	</body>
 </html>
 
