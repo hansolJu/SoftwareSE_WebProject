@@ -6,9 +6,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://localhost:8080/newWebProject/css/bootstrap.css">
+<<<<<<< HEAD
+	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -47,7 +48,10 @@
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="user/userInfo.jsp">내 정보</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
+					 	<c:if test="${my_available >= '2'}">
+							<li><a href="http://localhost:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
+						</c:if>
 					 </ul>
 				</li>
 			</ul>

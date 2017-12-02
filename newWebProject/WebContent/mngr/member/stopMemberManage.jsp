@@ -10,15 +10,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<script src="/newWebProject/js/jquery-1.11.0.min.js"></script>
-<script src="/newWebProject/mngr/member/fullMemberManage.js"></script>
-
-
-<div id="userList">
+<jsp:include page="/mngr/managerMain.jsp" />
+<div id="bannedUserList" style="float:left; padding-left:30px; width:90%">
 		<ul>
 			<li>활동 정지 회원수 : ${count}</li>
 		</ul>
-		<table>
+		<table class='table table-striped' style='border: 1px solid #dddddd' height='100'>
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
@@ -27,12 +24,11 @@
 			</tr>
 			<c:forEach var="user" items="${bannedUserList}">
 				<tr>
-					<td>${user.getUser_id()}</td>
-					<td>${user.getUser_name()}</td>
-					<td>${user.getUser_date()}</td>
-					<td><td><a href="/newWebProject/MngrUserStartAction?user_id=${user.getUser_id()}">정지 해제</a></td>
+					<td>${user.user_id}</td>
+					<td>${user.user_name}</td>
+					<td>${user.user_date}</td>
+					<td><a href="/newWebProject/MngrBanAction?mngrAction=userStart&user_id=${user.user_id}">정지 해제</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 </div>
-<hr><button onclick = "../managerMain.jsp">뒤로 가기</button>

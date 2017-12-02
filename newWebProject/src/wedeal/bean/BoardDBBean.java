@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import wedeal.bean.*;;
+import wedeal.bean.*;
 
 public class BoardDBBean {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-
 
 	private static BoardDBBean instance = new BoardDBBean();
 
@@ -33,6 +32,7 @@ public class BoardDBBean {
 		}
 	}
 
+
 	//현재 시간을 서버에 넣어준다.
 	public String getDate() {
 		String SQL="SELECT NOW()";//현재 시간을 돌려준다.
@@ -51,6 +51,7 @@ public class BoardDBBean {
 	public int getNext() {
 		String SQL="SELECT board_num FROM board ORDER BY board_num DESC";
 
+
 		try {
 			pstmt=conn.prepareStatement(SQL);
 			rs=pstmt.executeQuery();
@@ -59,7 +60,7 @@ public class BoardDBBean {
 			}
 			return 1;//현재가 첫번째 게시글인 경우
 		}catch(Exception e) {
-			e.printStackTrace();	
+			e.printStackTrace();   
 		}
 		return -1;
 	}
@@ -86,7 +87,8 @@ public class BoardDBBean {
 			e.printStackTrace();
 		}
 		return -1;
-	}	
+	}   
+
 	//해당 게시판의 전체 게시글 list로 출력(8개씩)
 	public ArrayList<BoardDataBean> getList(int cate_num,int pageNumber){
 		String SQL1="SELECT * FROM board WHERE board_num < ? AND board_available = 1 ORDER BY board_num DESC LIMIT 8";
@@ -144,11 +146,9 @@ public class BoardDBBean {
 		}
 		return false;
 	}
-
 	//조회수 늘리기
 	public int count(int board_num,int board_hit) {
 		String SQL="UPDATE board SET board_hit = ? WHERE board_num = ?";
-
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, board_hit);
@@ -308,7 +308,156 @@ public class BoardDBBean {
 		PreparedStatement pstmt = null;
 
 		ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
-		pstmt = conn.prepareStatement("select * from product where name like '%'||?||'%'");  //해당 이름을 포함하는 물품 검색
+		pstmt = conn.prepareStatement("select * from board where board_title like ? and board_available = 1");  //해당 이름을 포함하는 물품 검색
+		pstmt.setString(1, "%" + searchName + "%");
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			//각 dto 변수 저장
+			BoardDataBean board = new BoardDataBean();
+			board.setCate_num(rs.getInt(1));
+			board.setBoard_num(rs.getInt(2));
+			board.setBoard_title(rs.getString(3));
+			board.setBoard_price(rs.getInt(4));
+			board.setUser_id(rs.getString(5));
+			board.setBoard_date(rs.getString(6));
+			board.setBoard_content(rs.getString(7));
+			board.setBoard_image(rs.getString(8));
+			board.setBoard_path(rs.getString(9));
+			board.setBoard_hit(rs.getInt(10));
+			board.setBoard_available(rs.getInt(11));
+			board.setBoard_like(rs.getInt(12));
+			searchNameProductList.add(board);  //리스트에 추가
+		}
+		//DbUtil.close(conn, pstmt, rs);  //연결 해지
+		return searchNameProductList;
+	}
+
+	/**
+	 * @param searchName
+	 * @return 결과 list 반환
+	 * @throws SQLException
+	 * 게시글의 내용으로 물품을 검색하는 메소드
+	 */
+	public ArrayList<BoardDataBean> selectProductByContent(String searchName) throws SQLException{
+		//conn = getConnection();  //connection 연결
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
+		pstmt = conn.prepareStatement("select * from board where board_content like ? and board_available = 1");  //해당 이름을 포함하는 물품 검색
+		pstmt.setString(1, "%" + searchName + "%");
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			//각 dto 변수 저장
+			BoardDataBean board = new BoardDataBean();
+			board.setCate_num(rs.getInt(1));
+			board.setBoard_num(rs.getInt(2));
+			board.setBoard_title(rs.getString(3));
+			board.setBoard_price(rs.getInt(4));
+			board.setUser_id(rs.getString(5));
+			board.setBoard_date(rs.getString(6));
+			board.setBoard_content(rs.getString(7));
+			board.setBoard_image(rs.getString(8));
+			board.setBoard_path(rs.getString(9));
+			board.setBoard_hit(rs.getInt(10));
+			board.setBoard_available(rs.getInt(11));
+			board.setBoard_like(rs.getInt(12));
+			searchNameProductList.add(board);  //리스트에 추가
+		}
+		//DbUtil.close(conn, pstmt, rs);  //연결 해지
+		return searchNameProductList;
+	}
+
+	/**
+	 * @param searchName
+	 * @return 결과 list 반환
+	 * @throws SQLException
+	 * 게시글의 이름과 내용으로 물품을 검색하는 메소드
+	 */
+	public ArrayList<BoardDataBean> selectProductByNameAndContent(String searchName) throws SQLException{
+		//conn = getConnection();  //connection 연결
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+
+		ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
+		pstmt = conn.prepareStatement("(select * from board where board_title like ? and board_available = 1)"
+				+ "union" + "(select * from board where board_content like ? and board_available = 1)");  //해당 이름을 포함하는 물품 검색
+		pstmt.setString(1, "%" + searchName + "%");
+		pstmt.setString(2, "%" + searchName + "%");
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			//각 dto 변수 저장
+			BoardDataBean board = new BoardDataBean();
+			board.setCate_num(rs.getInt(1));
+			board.setBoard_num(rs.getInt(2));
+			board.setBoard_title(rs.getString(3));
+			board.setBoard_price(rs.getInt(4));
+			board.setUser_id(rs.getString(5));
+			board.setBoard_date(rs.getString(6));
+			board.setBoard_content(rs.getString(7));
+			board.setBoard_image(rs.getString(8));
+			board.setBoard_path(rs.getString(9));
+			board.setBoard_hit(rs.getInt(10));
+			board.setBoard_available(rs.getInt(11));
+			board.setBoard_like(rs.getInt(12));
+			searchNameProductList.add(board);  //리스트에 추가
+		}
+		//DbUtil.close(conn, pstmt, rs);  //연결 해지
+		return searchNameProductList;
+	}
+
+	/**
+	 * @param searchName
+	 * @return 결과 list 반환
+	 * @throws SQLException
+	 * 게시글의 내용으로 물품을 검색하는 메소드
+	 */
+	public ArrayList<BoardDataBean> selectProductByComment(String searchName) throws SQLException{
+		//conn = getConnection();  //connection 연결
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+
+		ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
+		pstmt = conn.prepareStatement("SELECT * FROM board "
+				+ "where board.board_num in (select comment.board_num from comment where comment_content like ? and comment_available =1) "
+				+ "and board_available = 1");  //해당 댓글이 있는 게시글 반환
+		pstmt.setString(1, "%" + searchName + "%");
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			//각 dto 변수 저장
+			BoardDataBean board = new BoardDataBean();
+			board.setCate_num(rs.getInt(1));
+			board.setBoard_num(rs.getInt(2));
+			board.setBoard_title(rs.getString(3));
+			board.setBoard_price(rs.getInt(4));
+			board.setUser_id(rs.getString(5));
+			board.setBoard_date(rs.getString(6));
+			board.setBoard_content(rs.getString(7));
+			board.setBoard_image(rs.getString(8));
+			board.setBoard_path(rs.getString(9));
+			board.setBoard_hit(rs.getInt(10));
+			board.setBoard_available(rs.getInt(11));
+			board.setBoard_like(rs.getInt(12));
+			searchNameProductList.add(board);  //리스트에 추가
+		}
+		//DbUtil.close(conn, pstmt, rs);  //연결 해지
+		return searchNameProductList;
+	}
+
+	/**
+	 * @param searchName
+	 * @return 결과 list 반환
+	 * @throws SQLException
+	 * 게시글의 내용으로 물품을 검색하는 메소드
+	 */
+	public ArrayList<BoardDataBean> selectProductByUserName(String searchName) throws SQLException{
+		//conn = getConnection();  //connection 연결
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+
+		ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
+		pstmt = conn.prepareStatement("select * from "
+				+ "(select * from board where board.user_id in "
+				+ "(select user.user_id from user where user.user_available = 1 and user.user_id = ?) and board_available = 1) A;");  //해당 작성자가 작성한 게시물 검새
 		pstmt.setString(1, searchName);
 		rs = pstmt.executeQuery();
 		while(rs.next()) {
@@ -331,66 +480,8 @@ public class BoardDBBean {
 		//DbUtil.close(conn, pstmt, rs);  //연결 해지
 		return searchNameProductList;
 	}
-	/**
-	 * 
-	 * @param categoryId
-	 * @return
-	 * @throws SQLException
-	 * 상품명과 카테고리로 검색
-	 * TO-DO : 계층 검색
-	 */
-	public ArrayList<BoardDataBean> selectProductByCategory(String searchName, String categoryId) throws SQLException {
-		//conn = DbUtil.getConnection();  //connection 연결
-		PreparedStatement pstmt = null;
 
-		ArrayList<BoardDataBean> searchCategoryProductList = new ArrayList<>();  //반환할 결과 리스트
-		pstmt = conn.prepareStatement("select board_num "
-				+ "from board, (SELECT DISTINCT id, getpath_f(id) AS path FROM category HAVING path LIKE '%?%') recate "
-				+ "where board.cate_num = recate.id;");  //계층 카테고리 검색 (중복 제거)
-		pstmt.setString(1,  categoryId);
 
-		rs = pstmt.executeQuery();
-		while(rs.next()) {
-			//각 dto 변수 저장
-			BoardDataBean board = new BoardDataBean();
-			board.setCate_num(rs.getInt(1));
-			board.setBoard_num(rs.getInt(2));
-			board.setBoard_title(rs.getString(3));
-			board.setBoard_price(rs.getInt(4));
-			board.setUser_id(rs.getString(5));
-			board.setBoard_date(rs.getString(6));
-			board.setBoard_content(rs.getString(7));
-			board.setBoard_image(rs.getString(8));
-			board.setBoard_path(rs.getString(9));
-			board.setBoard_hit(rs.getInt(10));
-			board.setBoard_available(rs.getInt(11));
-			board.setBoard_like(rs.getInt(12));
-			searchCategoryProductList.add(board);  //리스트에 추가
-		}
-		//DbUtil.close(conn, pstmt, rs);  //연결 해지
-		return searchCategoryProductList;
-	}
-	/*
-	 * 작성자 : 채지훈
-	 * 작성일 : 2017.11.29
-	 * 수정자 : 채지훈
-	 * 수정일 : 2107.11.29
-	 
-	public String getCateName(int cate_num) {
-		String sql = "select cate_name from cate where cate_num=?";
-		String name = null;
-		try {
-			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, cate_num);
-			rs=pstmt.executeQuery();
-			name = rs.getString(1);
-			System.out.println(name);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return name;
-	}*/
-	
 	/*
 	 * 작성자 : 채지훈
 	 * 작성일 : 2017.11.28
@@ -400,7 +491,7 @@ public class BoardDBBean {
 	public ArrayList<BoardDataBean> getUserBoardList(String user_id){
 		String sql = "select * from board where user_id=? and board_available=? order by board_num asc";
 		ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
-		
+
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
@@ -431,44 +522,76 @@ public class BoardDBBean {
 	}
 
 
-	/*public ArrayList<BoardDataBean> AllgetList(){
-			String SQL="SELECT * FROM board ORDER BY board_like DESC";
-			ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
 
-			try {
+	/**
+	 * 
+	 * @param categoryId
+	 * @return
+	 * @throws SQLException
+	 * 상품명과 카테고리로 검색
+	 * TO-DO : 계층 검색
+	 */
+	public ArrayList<BoardDataBean> selectProductByCategory(String searchName, int categoryId) throws SQLException {
+		//conn = DbUtil.getConnection();  //connection 연결
+		PreparedStatement pstmt = null;
 
-					if(cate_num == 0) {
-						PreparedStatement pstmt=conn.prepareStatement(SQL1);
-						pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-						rs=pstmt.executeQuery();
-					}
-					else {
-						PreparedStatement pstmt=conn.prepareStatement(SQL2);
-						pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-						pstmt.setInt(2, cate_num);
-						rs=pstmt.executeQuery();
-					}
+		ArrayList<BoardDataBean> searchCategoryProductList = new ArrayList<>();  //반환할 결과 리스트
+		pstmt = conn.prepareStatement("select * from board, "
+				+ "(SELECT cate_num, cate_name, getpath_f(cate_num) AS path FROM cate HAVING path LIKE ?) recate " + 
+				"where board.cate_num = recate.cate_num;");  //계층 카테고리 검색 (중복 제거)
+		pstmt.setString(1, "%" + Integer.toString(categoryId) + "%");
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			//각 dto 변수 저장
+			BoardDataBean board = new BoardDataBean();
+			board.setCate_num(rs.getInt(1));
+			board.setBoard_num(rs.getInt(2));
+			board.setBoard_title(rs.getString(3));
+			board.setBoard_price(rs.getInt(4));
+			board.setUser_id(rs.getString(5));
+			board.setBoard_date(rs.getString(6));
+			board.setBoard_content(rs.getString(7));
+			board.setBoard_image(rs.getString(8));
+			board.setBoard_path(rs.getString(9));
+			board.setBoard_hit(rs.getInt(10));
+			board.setBoard_available(rs.getInt(11));
+			board.setBoard_like(rs.getInt(12));
+			searchCategoryProductList.add(board);  //리스트에 추가
+		}
+		//DbUtil.close(conn, pstmt, rs);  //연결 해지
+		return searchCategoryProductList;
+	}
 
-				while(rs.next()) {
-					BoardDataBean board = new BoardDataBean();
-					board.setCate_num(rs.getInt(1));
-					board.setBoard_num(rs.getInt(2));
-					board.setBoard_title(rs.getString(3));
-					board.setBoard_price(rs.getInt(4));
-					board.setUser_id(rs.getString(5));
-					board.setBoard_date(rs.getString(6));
-					board.setBoard_content(rs.getString(7));
-					board.setBoard_image(rs.getString(8));
-					board.setBoard_path(rs.getString(9));
-					board.setBoard_hit(rs.getInt(10));
-					board.setBoard_available(rs.getInt(11));
-					board.setBoard_like(rs.getInt(12));
-					list.add(board);
-				}
-				return list;
-			}catch(Exception e) {
-				e.printStackTrace();
+
+	//좋아요 순서대로 짜름 -->추천글을 위함
+	public ArrayList<BoardDataBean> AllgetList(){
+		String SQL="SELECT * FROM board ORDER BY board_like DESC";
+		ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
+
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				BoardDataBean board = new BoardDataBean();
+				board.setCate_num(rs.getInt(1));
+				board.setBoard_num(rs.getInt(2));
+				board.setBoard_title(rs.getString(3));
+				board.setBoard_price(rs.getInt(4));
+				board.setUser_id(rs.getString(5));
+				board.setBoard_date(rs.getString(6));
+				board.setBoard_content(rs.getString(7));
+				board.setBoard_image(rs.getString(8));
+				board.setBoard_path(rs.getString(9));
+				board.setBoard_hit(rs.getInt(10));
+				board.setBoard_available(rs.getInt(11));
+				board.setBoard_like(rs.getInt(12));
+				list.add(board);
 			}
-			return null;
-		}*/
+			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

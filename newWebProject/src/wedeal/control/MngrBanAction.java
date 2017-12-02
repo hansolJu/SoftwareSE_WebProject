@@ -14,23 +14,40 @@ import wedeal.bean.UserDBBean;
 import wedeal.bean.UserDataBean;
 
 /**
- * 활동 정지된 회원들을 가져오는 서블릿
+ * Servlet implementation class MngrBanAction
  */
-@WebServlet("/MngrBannedUserListAction")
-public class MngrBannedUserListAction extends HttpServlet {
+@WebServlet("/MngrBanAction")
+public class MngrBanAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String mngrAction = request.getParameter("mngrAction");
+		
+		if(mngrAction != null) {
+			if(mngrAction.equals("userStart")) {
+				UserDBBean.getinstance().startUser(request.getParameter("user_id"));
+			}
+		}
+		
 		ArrayList<UserDataBean> bannedUserList = null;
 		bannedUserList = UserDBBean.getinstance().getBannedUser();
 		request.setAttribute("bannedUserList", bannedUserList);
 		request.setAttribute("count", new Integer(bannedUserList.size()));
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/memeber/stopMemberManage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/mngr/member/stopMemberManage.jsp");
 		dispatcher.forward(request, response);
 	}
 }
-
-

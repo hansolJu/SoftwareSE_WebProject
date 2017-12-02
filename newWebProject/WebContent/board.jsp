@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter"%>
-<%@ page import="java.util.*"%>
-<%@ page import="wedeal.bean.*"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="menutag"%>
+    pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.util.*" %>
+<%@ page import="wedeal.bean.*" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="menutag" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 
 	게시판 페이지
@@ -20,15 +21,19 @@
 <html>
 <head>
 <title>메인 화면</title>
-<script type="text/javascript">
-	function logout() {
-		var user_id = $('#user_id').val();
-		$.ajax({
-			type : 'POST',
-			url : './LogoutAction',
-		})
-	}
-</script>
+	<link rel="stylesheet" type="text/css" href="MetaData/css/demo.css" />
+     <link rel="stylesheet" type="text/css" href="MetaData/css/style.css" />
+     <noscript><link rel="stylesheet" type="text/css" href="MetaData/css/noJS.css"/></noscript>
+	<title>메인 화면</title>
+	<script type="text/javascript">
+		function logout(){
+			var user_id = $('#user_id').val();
+			$.ajax({
+				type: 'POST',
+				url: './LogoutAction',
+			})
+		}
+	</script>
 <style type="text/css">
 a, a:hover {
 	color: #000000;
@@ -36,6 +41,7 @@ a, a:hover {
 }
 ;
 </style>
+
 </head>
 <body>
 	<!-- 상단바 -->
@@ -135,5 +141,10 @@ a, a:hover {
 			</c:if>
 		</div>
 	</div>
+	<script type="text/javascript">
+            $(function () {
+                $(' #da-thumbs > li ').hoverdir();
+            });
+       </script>
 </body>
 </html>

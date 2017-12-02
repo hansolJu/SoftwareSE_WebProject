@@ -32,26 +32,27 @@ public class RegisterAction extends HttpServlet {
 		user.setUser_phone(request.getParameter("user_phone"));
 		user.setUser_id(request.getParameter("user_id"));
 		user.setUser_pw(request.getParameter("user_pw"));
-		user.setUser_hope(request.getParameter("user_hope"));
 		String check_passwd=request.getParameter("check_passwd");
 		String user_age=request.getParameter("user_age");
+		String user_hope=request.getParameter("user_hope");
 		
 		
-		if(user.getUser_name() == null || user.getUser_name().equals("") || user_age == null || user_age.equals("") || user.getUser_phone() == null || user.getUser_phone().equals("") || user.getUser_id() == null || user.getUser_id().equals("") || user.getUser_pw() == null || user.getUser_pw().equals("") || user.getUser_hope() == null || user.getUser_hope().equals("") || check_passwd == null || check_passwd.equals("")) {
+		if(user.getUser_name() == null || user.getUser_name().equals("") || user_age == null || user_age.equals("") || user.getUser_phone() == null || user.getUser_phone().equals("") || user.getUser_id() == null || user.getUser_id().equals("") || user.getUser_pw() == null || user.getUser_pw().equals("") || user_hope == null || user_hope.equals("") || check_passwd == null || check_passwd.equals("")) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "모든 내용을 입력하세요.");
-			response.sendRedirect("user/join.jsp");
+			response.sendRedirect("join.jsp");
 			return;
 		}
 		
 		if(!user.getUser_pw().equals(check_passwd)) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "비밀번호가 일치하지 않습니다.");
-			response.sendRedirect("user/join.jsp");
+			response.sendRedirect("join.jsp");
 			return;
 		}
 		
 		user.setUser_age(Integer.parseInt(user_age));
+		user.setUser_hope(Integer.parseInt(user_hope));
 		int result = manager.register(user);
 		
 		if(result ==1) {
@@ -63,7 +64,7 @@ public class RegisterAction extends HttpServlet {
 		else {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "이미 존재하는 회원입니다.");
-			response.sendRedirect("user/join.jsp");
+			response.sendRedirect("join.jsp");
 		}
 	}
 

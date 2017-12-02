@@ -35,7 +35,6 @@ public class CommentWriteAction extends HttpServlet {
 		String board_num = request.getParameter("board_num");
 		commentdt.setComment_content(request.getParameter("comment_content"));
 		commentdt.setUser_id(request.getParameter("user_id"));
-
 		
 		if(commentdt.getComment_content() == null || commentdt.getComment_content().equals("")){
 			request.getSession().setAttribute("messageType", "오류 메시지");
@@ -69,6 +68,8 @@ public class CommentWriteAction extends HttpServlet {
 			return;
 		}
 		else {
+			request.getSession().setAttribute("messageType", "성공 메시지");
+			request.getSession().setAttribute("messageContent", "댓글 작성을 성공했습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
 			request.setAttribute("board_num", commentdt.getBoard_num());
 			view.forward(request, response);
