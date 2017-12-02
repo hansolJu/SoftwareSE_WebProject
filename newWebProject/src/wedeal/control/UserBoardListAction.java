@@ -15,7 +15,7 @@ import wedeal.bean.BoardDataBean;
 /**
  * Servlet implementation class UserBoardList
  */
-@WebServlet("/UserBoardList")
+@WebServlet(value = "/UserBoardList", name = "UserBoardList")
 public class UserBoardListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

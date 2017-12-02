@@ -15,7 +15,7 @@ import wedeal.bean.CommentDataBean;
 /**
  * Servlet implementation class UserCommentList
  */
-@WebServlet("/UserCommentList")
+@WebServlet(value = "/UserCommentList", name = "UserCommentList")
 public class UserCommentListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

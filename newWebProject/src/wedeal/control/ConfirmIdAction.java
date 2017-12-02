@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import wedeal.bean.UserDBBean;
 
-@WebServlet("/ConfirmIdAction")
+@WebServlet(value = "/ConfirmIdAction", name = "ConfirmIdAction")
 public class ConfirmIdAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

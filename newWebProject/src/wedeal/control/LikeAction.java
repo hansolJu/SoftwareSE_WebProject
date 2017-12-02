@@ -15,7 +15,7 @@ import wedeal.bean.LikeDBBean;
 import wedeal.bean.LikeDataBean;
 
 
-@WebServlet("/LikeAction")
+@WebServlet(value = "/LikeAction", name = "LikeAction")
 public class LikeAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

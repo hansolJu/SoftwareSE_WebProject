@@ -22,7 +22,7 @@ import wedeal.bean.UserDataBean;
 /**
  *회원을 황동 정지 시키는 서블릿
  */
-@WebServlet("/MngrUserBanAction")
+@WebServlet(value = "/MngrUserBanAction", name = "MngrUserBanAction")
 public class MngrUserBanAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

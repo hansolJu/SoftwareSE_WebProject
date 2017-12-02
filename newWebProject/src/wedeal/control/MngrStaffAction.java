@@ -16,7 +16,7 @@ import wedeal.bean.UserDataBean;
 /**
  * Servlet implementation class MngrStaffListAction
  */
-@WebServlet("/MngrStaffAction")
+@WebServlet(value = "/MngrStaffAction", name = "MngrStaffAction")
 public class MngrStaffAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String LIST = "/mngr/staff/staffList.jsp";

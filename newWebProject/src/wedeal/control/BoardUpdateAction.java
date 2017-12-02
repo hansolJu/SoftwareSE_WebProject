@@ -20,7 +20,7 @@ import wedeal.bean.BoardDBBean;
 import wedeal.bean.BoardDataBean;
 
 
-@WebServlet("/BoardUpdateAction")
+@WebServlet(value = "/BoardUpdateAction", name = "BoardUpdateAction")
 public class BoardUpdateAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String board_path = "C:\\Users\\jaeyo\\eclipse-workspace\\image";

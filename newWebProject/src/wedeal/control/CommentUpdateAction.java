@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import wedeal.bean.CommentDBBean;
 import wedeal.bean.CommentDataBean;
 
-@WebServlet("/CommentUpdateAction")
+@WebServlet(value = "/CommentUpdateAction", name = "CommentUpdateAction")
 public class CommentUpdateAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

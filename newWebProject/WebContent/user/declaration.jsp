@@ -20,7 +20,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './UserLogoutServlet',
+				url: '../UserLogoutServlet',
 			})
 		}
 	</script>
@@ -32,7 +32,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="./DeclarationAction">
+				<form method="post" action="../DeclarationAction">
 					<h3 style="text-align: center;">신고 사유</h3>
 					<div class="form-group">
 						<textarea class="form-control" name="declaration_content" style="height: 100px;"></textarea>

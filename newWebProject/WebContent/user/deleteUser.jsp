@@ -54,7 +54,7 @@
 		<h3>회원 탈퇴</h3>
 		<hr>
 		<div>
-			<form name="withdraw" method="post" action="./../UserWithDrawAction" onSubmit="return checkIt()" >
+			<form name="withdraw" method="post" action="../UserWithDrawAction" onSubmit="return checkIt()" >
 				비밀번호 <input type="password" name="user_pw" size="20">
 				<hr>
 				<input type="submit" name="Submit" value="탈퇴" size="15">

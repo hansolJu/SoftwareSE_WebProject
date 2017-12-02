@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/BoardWriteAction")
+@WebServlet(value = "/BoardWriteAction", name = "BoardWriteAction")
 public class BoardWriteAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String board_path = "C:\\Users\\jaeyo\\eclipse-workspace\\image";

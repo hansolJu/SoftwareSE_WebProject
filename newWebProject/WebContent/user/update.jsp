@@ -44,7 +44,7 @@
 	<div class="container">
 		<div class="row">
 		<!-- 테이블 색 -->
-			<form method="post" enctype="multipart/form-data" action="./BoardUpdateAction?cate_num=<%=board.getCate_num()%>&board_num=<%=board.getBoard_num()%>">
+			<form method="post" enctype="multipart/form-data" action="../BoardUpdateAction?cate_num=<%=board.getCate_num()%>&board_num=<%=board.getBoard_num()%>">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>

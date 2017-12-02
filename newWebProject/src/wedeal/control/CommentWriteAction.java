@@ -13,7 +13,7 @@ import wedeal.bean.CommentDBBean;
 import wedeal.bean.CommentDataBean;
 
 
-@WebServlet("/CommentWriteAction")
+@WebServlet(value = "/CommentWriteAction", name = "CommentWriteAction")
 public class CommentWriteAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

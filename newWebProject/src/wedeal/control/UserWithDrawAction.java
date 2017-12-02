@@ -14,7 +14,7 @@ import wedeal.bean.UserDBBean;
 /**
  * Servlet implementation class UserWithDrawAction
  */
-@WebServlet("/UserWithDrawAction")
+@WebServlet(value = "/UserWithDrawAction", name = "UserWithDrawAction")
 public class UserWithDrawAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

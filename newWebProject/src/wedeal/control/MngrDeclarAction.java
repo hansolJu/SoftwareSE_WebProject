@@ -18,7 +18,7 @@ import wedeal.bean.UserDBBean;
 /**
  * Servlet implementation class MngrDeclarListAction
  */
-@WebServlet("/MngrDeclarAction")
+@WebServlet(value = "/MngrDeclarAction", name = "MngrDeclarAction")
 public class MngrDeclarAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

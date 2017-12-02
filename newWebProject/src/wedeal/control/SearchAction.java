@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import wedeal.bean.BoardDBBean;
 import wedeal.bean.BoardDataBean;
 
-@WebServlet("/SearchAction")
+@WebServlet(value = "/SearchAction", name = "SearchAction")
 public class SearchAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

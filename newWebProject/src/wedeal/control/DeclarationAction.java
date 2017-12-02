@@ -13,7 +13,7 @@ import wedeal.bean.DeclarationDBBean;
 import wedeal.bean.DeclarationDataBean;
 
 
-@WebServlet("/DeclarationAction")
+@WebServlet(value = "/DeclarationAction", name = "DeclarationAction")
 public class DeclarationAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
