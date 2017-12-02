@@ -13,7 +13,7 @@
 <html>
 <head>
 	<title>메인</title>
-	<script type="text/javascript">
+	<script type="text/javascript"> 
 		function logout(){
 			var user_id = $('#user_id').val();
 			$.ajax({
@@ -27,6 +27,7 @@
 	
 	<!-- 상단바 -->
 	<jsp:include page="Menubar.jsp"/>
+	
 	<style type="text/css">
 	a, a:hover{
 		color: #000000;
@@ -34,7 +35,7 @@
 	};
 	</style>
 	<!-- 메뉴 생성 부분 -->
-	<menutag:menu/>
+	<jsp:include page="sideMenubar.jsp" />
 	<!-- 추천부분 -->
 	<showtag:show/>
 </body>
