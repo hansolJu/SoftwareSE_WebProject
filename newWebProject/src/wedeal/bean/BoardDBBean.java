@@ -251,7 +251,7 @@ public class BoardDBBean {
    public int allCount(int cate_num) {
       String SQL1 = "SELECT COUNT(*) FROM board WHERE board_available = 1";
       String SQL2 = "SELECT COUNT(*) FROM board WHERE cate_num = ? AND board_available = 1";
-      String SQL3 = "SELECT COUNT(*) FROM board JOIN cate ON board.cate_num = cate.cate_num cate_parent = ? AND board_available = 1";
+      String SQL3 = "SELECT COUNT(*) FROM board JOIN cate ON board.cate_num = cate.cate_num WHERE cate.cate_parent = ? AND board_available = 1;";
 
       try {
          if(cate_num == 0) {
@@ -572,7 +572,39 @@ public class BoardDBBean {
       return searchCategoryProductList;
    }
       
-      
+   public ArrayList<BoardDataBean> getUserBoardList(String user_id){
+	      String sql = "select * from board where user_id=? and board_available=? order by board_num asc";
+	      ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
+
+	      try {
+	         PreparedStatement pstmt=conn.prepareStatement(sql);
+	         pstmt.setString(1, user_id);
+	         pstmt.setInt(2, 1);
+	         rs=pstmt.executeQuery();
+
+	         while(rs.next()) {
+	            BoardDataBean board = new BoardDataBean();
+	            board.setCate_num(rs.getInt(1));
+	            board.setBoard_num(rs.getInt(2));
+	            board.setBoard_title(rs.getString(3));
+	            board.setBoard_price(rs.getInt(4));
+	            board.setUser_id(rs.getString(5));
+	            board.setBoard_date(rs.getString(6));
+	            board.setBoard_content(rs.getString(7));
+	            board.setBoard_image(rs.getString(8));
+	            board.setBoard_path(rs.getString(9));
+	            board.setBoard_hit(rs.getInt(10));
+	            board.setBoard_available(rs.getInt(11));
+	            board.setBoard_like(rs.getInt(12));
+	            list.add(board);
+	         }
+	         return list;
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }
+	      return list;
+	   }
+   
    //좋아요 순서대로 짜름 -->추천글을 위함
          public ArrayList<BoardDataBean> AllgetList(){
             String SQL="SELECT * FROM board ORDER BY board_like DESC";
