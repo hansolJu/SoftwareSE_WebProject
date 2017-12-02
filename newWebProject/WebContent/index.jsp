@@ -17,7 +17,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: '../LogoutAction',
+				url: '/newWebProject/LogoutAction',
 			})
 		}
 	</script>
@@ -27,14 +27,15 @@
 	<!-- 상단바 -->
 	<jsp:include page="user/Menubar.jsp"/>
 	
+	<!-- 메뉴 생성 부분 -->
+	<menutag:menu/>
+	
 	<style type="text/css">
 	a, a:hover{
 		color: #000000;
 		text-decoration: none;
 	};
 	</style>
-	<!-- 메뉴 생성 부분 -->
-	<jsp:include page="/user/sideMenubar.jsp" />
 	<!-- 추천부분 -->
 	<showtag:show/>
 </body>

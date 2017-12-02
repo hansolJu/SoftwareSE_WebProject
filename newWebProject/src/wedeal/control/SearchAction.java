@@ -54,7 +54,7 @@ public class SearchAction extends HttpServlet {
 				list = searchService.selectProductByNameAndContent(searchName);
 			}
 			request.setAttribute("searchResultList", list);  //검색 결과 리스트 attribute에 저장
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/searchBoardList.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("user/searchBoardList.jsp");
 			dispatcher.forward(request, response);
 		} catch(SQLException e) {
 			e.printStackTrace();

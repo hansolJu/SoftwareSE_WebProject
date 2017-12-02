@@ -44,7 +44,7 @@ public class LikeAction extends HttpServlet {
 			request.getSession().setAttribute("messageType", "알림");
 			request.getSession().setAttribute("messageContent", "좋아요 취소");
 			//response.sendRedirect("view.jsp?board_num="+likedt.getBoard_num());
-			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 			request.setAttribute("board_num", likedt.getBoard_num());
 			view.forward(request, response);
 		}
@@ -55,7 +55,7 @@ public class LikeAction extends HttpServlet {
 			request.getSession().setAttribute("messageType", "알림");
 			request.getSession().setAttribute("messageContent", "좋아요 누름");
 			//response.sendRedirect("view.jsp?board_num="+likedt.getBoard_num());
-			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 			request.setAttribute("board_num", likedt.getBoard_num());
 			view.forward(request, response);
 		}

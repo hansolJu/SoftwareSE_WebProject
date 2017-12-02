@@ -78,7 +78,7 @@ public class BoardWriteAction extends HttpServlet {
 		if(boarddt.getBoard_title() == null || boarddt.getBoard_title().equals("") || boarddt.getBoard_content() == null || boarddt.getBoard_content().equals("")) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "모든 내용을 입력하세요.");
-			response.sendRedirect("write.jsp");
+			response.sendRedirect("user/write.jsp");
 			return;
 		}
 		
@@ -88,12 +88,12 @@ public class BoardWriteAction extends HttpServlet {
 			if(result == -1) {
 				request.getSession().setAttribute("messageType", "오류 메시지");
 				request.getSession().setAttribute("messageContent", "글쓰기에 실패했습니다.");
-				response.sendRedirect("write.jsp");
+				response.sendRedirect("user/write.jsp");
 				return;
 			}
 			
 			else {
-				response.sendRedirect("board.jsp?cate_num"+boarddt.getCate_num());
+				response.sendRedirect("user/board.jsp?cate_num"+boarddt.getCate_num());
 			}
 		}
 

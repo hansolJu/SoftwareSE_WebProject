@@ -40,7 +40,7 @@ public class CategorySearchAction extends HttpServlet {
 		try {
 			list = searchService.selectProductByCategory(searchName, searchCategory);  //카테고리 내에서 물품의 이름으로 검색하는 메소드 실행
 			request.setAttribute("searchResultList", list);  //검색 결과 리스트 attribute에 저장
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/searchBoardList.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("user/searchBoardList.jsp");
 			dispatcher.forward(request, response);
 		} catch(SQLException e) {
 			e.printStackTrace();

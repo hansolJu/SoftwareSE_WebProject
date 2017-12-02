@@ -100,7 +100,7 @@
 			<h3>비밀번호 수정</h3>
 			<br>
 			<div class="form-group">
-				<form name="modify" method="post"  action="../UserPassWdModifyAction">
+				<form name="modify" method="post"  action="/newWebProject/UserPassWdModifyAction">
 				비밀번호 : <input type="password" class="form-control" onkeyup="passwordCheckFunction();"  name="user_pw" size="20" />
 				<br>
 				비밀번호 확인 : <input type="password" class="form-control" onkeyup="passwordCheckFunction();"  name="check_passwd" size="20" />

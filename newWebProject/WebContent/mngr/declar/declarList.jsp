@@ -9,7 +9,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <jsp:include page="/mngr/managerMain.jsp" />
-
+<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 <title>신고글 관리</title>
 </head>
 <body>

@@ -36,7 +36,7 @@ public class BoardDeleteAction extends HttpServlet {
 		}
 		
 		else
-		response.sendRedirect("board.jsp?cate_num="+cate_num);
+		response.sendRedirect("user/board.jsp?cate_num="+cate_num);
 }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

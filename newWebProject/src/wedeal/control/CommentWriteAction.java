@@ -39,7 +39,7 @@ public class CommentWriteAction extends HttpServlet {
 		if(commentdt.getComment_content() == null || commentdt.getComment_content().equals("")){
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "모든 내용을 입력하세요.");
-			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 			request.setAttribute("board_num", commentdt.getBoard_num());
 			view.forward(request, response);
 			return;
@@ -48,7 +48,7 @@ public class CommentWriteAction extends HttpServlet {
 		else if(cate_num == null || cate_num.equals("") || board_num == null || board_num.equals("") || commentdt.getUser_id() == null || commentdt.getUser_id().equals("")) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "내부적인 오류입니다.");
-			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 			request.setAttribute("board_num", commentdt.getBoard_num());
 			view.forward(request, response);
 			return;
@@ -62,7 +62,7 @@ public class CommentWriteAction extends HttpServlet {
 		if(result == -1) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "댓글 작성 실패");
-			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 			request.setAttribute("board_num", commentdt.getBoard_num());
 			view.forward(request, response);
 			return;
@@ -70,7 +70,7 @@ public class CommentWriteAction extends HttpServlet {
 		else {
 			request.getSession().setAttribute("messageType", "성공 메시지");
 			request.getSession().setAttribute("messageContent", "댓글 작성을 성공했습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 			request.setAttribute("board_num", commentdt.getBoard_num());
 			view.forward(request, response);
 			}

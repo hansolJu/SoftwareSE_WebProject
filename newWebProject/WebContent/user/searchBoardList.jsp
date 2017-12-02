@@ -25,7 +25,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: '../LogoutAction',
+				url: '/newWebProject/LogoutAction',
 			})
 		}
 	</script>
@@ -118,7 +118,7 @@
 			<li><a href="board.jsp?pageNumber=<%=pageNum+1%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 			</ul>
 	</nav>
-	<form class="navbar-form navbar-center" role="search" name="CateSearch" method=post action="CategorySearchAction">
+	<form class="navbar-form navbar-center" role="search" name="CateSearch" method=post action="/newWebProject/CategorySearchAction">
     	<div class="form-group">
           	<input type="text" class="form-control" placeholder="Search" name="keyword">
           	<input type="hidden" name = "searchCategory" value = "<%=cate%>"> 

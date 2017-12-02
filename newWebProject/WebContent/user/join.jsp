@@ -20,7 +20,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: '../ConfirmIdAction',
+				url: '/newWebProject/ConfirmIdAction',
 				data: {user_id: user_id},
 				success: function(result){
 				if(result == 1){
@@ -55,7 +55,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="../RegisterAction">
+				<form method="post" action="/newWebProject/RegisterAction">
 					<h3 style="text-align: center;">회원가입</h3>
 					
 					<div class="form-group">
