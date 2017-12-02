@@ -6,10 +6,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
 	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="/newWebProject/js/bootstrap.js"></script>
-	<title>메인 화면</title>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -32,13 +32,16 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="http://localhost:8080/newWebProject/login.jsp">로그인</a></li>
-					 	<li><a href="http://localhost:8080/newWebProject/join.jsp">회원가입</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/user/login.jsp">로그인</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/user/join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
 			</c:if>
 			<c:if test="${user_id ne null}">
+			<c:if test="${user_available == '2'}">
+			<button onclick="location.href='/mngr/managerMain.jsp'">관리</button>
+			</c:if>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -79,7 +82,6 @@
 		if(session.getAttribute("messageType") !=null) {
 			messageType = (String) session.getAttribute("messageType");
 		}
-
 		if(messageContent != null){
 	%>
 	
