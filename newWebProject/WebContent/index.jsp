@@ -28,6 +28,9 @@
 	<!-- 상단바 -->
 	<jsp:include page="Menubar.jsp"/>
 	
+	<!-- 메뉴 생성 부분 -->
+	<menutag:menu/>
+	
 	<style type="text/css">
 	a, a:hover{
 		color: #000000;
@@ -35,8 +38,6 @@
 	};
 	</style>
 	<!-- 메뉴 생성 부분 -->
-	<jsp:include page="sideMenubar.jsp" />
-	<!-- 추천부분 -->
-	<showtag:show/>
+	
 </body>
 </html>
