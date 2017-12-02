@@ -29,23 +29,23 @@
 		})
 	}
 </script>
-</head>
-<body>
-	<!-- 상단바 -->
-	<jsp:include page="Menubar.jsp" />
-
-	<style type="text/css">
+<style type="text/css">
 a, a:hover {
 	color: #000000;
 	text-decoration: none;
 }
 ;
 </style>
-
+</head>
+<body>
+	<!-- 상단바 -->
+	<header>
+		<jsp:include page="Menubar.jsp" />
+	</header>>
 	<!-- 메뉴 생성 부분 -->
-	<%-- <menutag:menu/> --%>
-	<jsp:include page="sideMenubar.jsp" />
-
+	<aside>
+		<jsp:include page="sideMenubar.jsp" />
+	</aside>
 	<!-- 글 생성 부분 -->
 	<div class='container'>
 		<div class='row'>
@@ -62,8 +62,9 @@ a, a:hover {
 							if (request.getParameter("pageNumber") != null)
 								pageNum = Integer.parseInt(request.getParameter("pageNumber"));
 							int cate = 0;
-							if (request.getParameter("cate_num") != null)
+							if (request.getParameter("cate_num") != null){
 								cate = Integer.parseInt(request.getParameter("cate_num"));
+							}
 							int length = 0;
 							BoardDBBean board = BoardDBBean.getinstance();
 							ArrayList<BoardDataBean> list = null;

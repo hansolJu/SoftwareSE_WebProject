@@ -12,7 +12,7 @@
 <html>
 <head>
 	<title>메인</title>
-	<script type="text/javascript">
+	<script type="text/javascript"> 
 		function logout(){
 			var user_id = $('#user_id').val();
 			$.ajax({
@@ -27,8 +27,9 @@
 	
 	<!-- 상단바 -->
 	<jsp:include page="Menubar.jsp"/>
+	
 	<!-- 메뉴 생성 부분 -->
-	<menutag:menu/>
+	<jsp:include page="sideMenubar.jsp" />
 
 </body>
 </html>

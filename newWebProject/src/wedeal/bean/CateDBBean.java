@@ -32,7 +32,7 @@ public class CateDBBean {
 	
 	private CateDBBean() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/se?autoReconnect=true&useSSL=false";
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
 			String dbID = "jy";
 			String dbPW = "1365";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -122,7 +122,7 @@ public class CateDBBean {
 				catedatabean.setCate_name(rs.getString(2));
 				catedatabean.setCate_date(rs.getString(3));
 				catedatabean.setCate_parent(rs.getInt(4));
-				catedatabean.setCate_available(rs.getBoolean(5));
+				//catedatabean.setCate_available(rs.getBoolean(5));
 				return catedatabean;
 			}
 		}catch(Exception e) {
@@ -163,8 +163,7 @@ public class CateDBBean {
 				CateDataBean catedatabean = new CateDataBean();
 				catedatabean.setCate_num(rs.getInt(1));
 				catedatabean.setCate_name(rs.getString(2));
-				catedatabean.setCate_date(rs.getString(3));
-				catedatabean.setCate_parent(rs.getInt(4));
+				catedatabean.setCate_parent(rs.getInt(3));
 				list.add(catedatabean);
 			}
 		}catch(Exception e) {
@@ -183,8 +182,7 @@ public class CateDBBean {
 				CateDataBean catedatabean = new CateDataBean();
 				catedatabean.setCate_num(rs.getInt(1));
 				catedatabean.setCate_name(rs.getString(2));
-				catedatabean.setCate_date(rs.getString(3));
-				catedatabean.setCate_parent(rs.getInt(4));
+				catedatabean.setCate_parent(rs.getInt(3));
 				list.add(catedatabean);
 			}
 		}catch(Exception e) {
