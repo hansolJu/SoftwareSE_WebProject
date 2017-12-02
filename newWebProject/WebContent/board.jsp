@@ -20,7 +20,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>메인 화면</title>
 	<link rel="stylesheet" type="text/css" href="MetaData/css/demo.css" />
      <link rel="stylesheet" type="text/css" href="MetaData/css/style.css" />
      <noscript><link rel="stylesheet" type="text/css" href="MetaData/css/noJS.css"/></noscript>
@@ -34,24 +33,21 @@
 			})
 		}
 	</script>
-<style type="text/css">
-a, a:hover {
-	color: #000000;
-	text-decoration: none;
-}
-;
-</style>
-
 </head>
 <body>
 	<!-- 상단바 -->
-	<header>
-		<jsp:include page="Menubar.jsp" />
-	</header>>
+	<jsp:include page="Menubar.jsp"/>
+	
+	<style type="text/css">
+	a, a:hover{
+		color: #000000;
+		text-decoration: none;
+	};
+	</style>
+	
 	<!-- 메뉴 생성 부분 -->
-	<aside>
-		<jsp:include page="sideMenubar.jsp" />
-	</aside>
+	<menutag:menu/>
+	
 	<!-- 글 생성 부분 -->
 	<div class='container'>
 		<div class='row'>
@@ -61,86 +57,92 @@ a, a:hover {
 						<th colspan='5' style='background-color: #eeeeee; text-align: center;' height='30'>게시판</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<%
-							int pageNum = 1;
-							if (request.getParameter("pageNumber") != null)
-								pageNum = Integer.parseInt(request.getParameter("pageNumber"));
-							int cate = 0;
-							if (request.getParameter("cate_num") != null){
-								cate = Integer.parseInt(request.getParameter("cate_num"));
-							}
-							int length = 0;
-							BoardDBBean board = BoardDBBean.getinstance();
-							ArrayList<BoardDataBean> list = null;
-							//ArrayList<BoardDataBean> out_list,in_list = null;
+			 <tbody>
+			 	<tr>
+	<%
+		int pageNum = 1; if(request.getParameter("pageNumber") != null) pageNum = Integer.parseInt(request.getParameter("pageNumber")); //페이지번호 설정 
+		int cate = 0; if(request.getParameter("cate_num") != null) cate = Integer.parseInt(request.getParameter("cate_num")); //카테고리 번호 설정
+		int length = 0;
+		BoardDBBean board = BoardDBBean.getinstance();
+		CateDataBean cate_data = CateDBBean.getinstance().getcate(cate);
+		ArrayList<CateDataBean> cate_list = null;
+		ArrayList<BoardDataBean> list = null;
+		
+		//전체보기
+		if(cate == 0){
+			list = board.getList(0, pageNum);
+			length = board.allCount(cate);
+		}
+		
+		//카테고리 선택
+		else{
+			if(cate_data.getCate_parent() > 0){
+				list = board.getList(cate_data.getCate_num(), pageNum);
+				length = board.allCount(cate_data.getCate_num());
+			}
+			else{
+				list = board.getList(cate_data.getCate_num(), pageNum);
+				length = board.allCount(cate_data.getCate_num());
+			}
+		}
+		
+		if(list.size() == 0){
+		%>
+			<td align="center">등록된 게시글이 없습니다.</td>
+		<%	
+		}
+		else{
+		if(length%8 == 0)
+			length = length/8;
+		else if((length%8) != 0)
+			length = length/8 +1;
 
-							if (cate == 0) {
-								list = board.getList(0, pageNum);
-								length = board.allCount(cate);
-							} else {
-								list = board.getList(cate, pageNum);
-								//if(CateDBBean.getinstance().getBoard(cate).getCate_parent() > 0)
-								//in_list = board.getList(CateDBBean.getinstance().getBoard(cate).getCate_parent(), pageNum);
-								length = board.allCount(cate); //+ board.allCount(CateDBBean.getinstance().getBoard(cate).getCate_parent());
-							}
-
-							if (list.size() == 0) {
-						%>
-						<td align="center">등록된 게시글이 없습니다.</td>
-						<%
-							} else {
-								if (length % 8 == 0)
-									length = length / 8;
-								else if ((length % 8) != 0)
-									length = length / 8 + 1;
-
-								for (int i = 0; i < list.size(); i++) {
-									String image = list.get(i).getBoard_image();
-									String[] images = image.split("/");
-						%>
-						<td align="center"><a
-							href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
-							.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></a><%="<br>"%>
-							<label>작성자:<%=list.get(i).getUser_id()%></label><%="<br>"%> <a
-							href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img
-								src="<%=list.get(i).getBoard_path()%>\<%=images[0]%>"
-								height=200px width=200px></a><%="<br>"%> <%=list.get(i).getBoard_date().substring(0, 11) + list.get(i).getBoard_date().substring(11, 13)
-									+ "시" + list.get(i).getBoard_date().substring(14, 16) + "분"%></td>
-						<%
-							if ((i + 1) % 4 == 0 && i > 0) {
-						%>
-					</tr>
-					<tr>
-						<%
-							}
-								}
-							}
-						%>
-					</tr>
-				</tbody>
-			</table>
-			<nav>
-				<ul class="pagination">
-					<li><a href="board.jsp?PageNumber=<%=pageNum - 1%>"
-						aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-					<%
-						for (int j = 0; j < length; j++) {
-					%>
-					<li><a href="board.jsp?pageNumber=<%=(j + 1)%>"><%=(j + 1)%></a></li>
-					<%
-						}
-					%>
-					<li><a href="board.jsp?pageNumber=<%=pageNum + 1%>"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-				</ul>
-			</nav>
-			<c:if test="${user_id ne null}">
-				<a href="write.jsp" class='btn btn-primary pull-right'>글쓰기</a>
-			</c:if>
+		for(int i = 0; i < list.size(); i++){
+			String image = list.get(i).getBoard_image();
+			String[] images = image.split("/");
+	%>	
+			<td align="center"><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}">
+			<%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
+			<label>작성자:<%=list.get(i).getUser_id() %></label><%="<br>"%>
+			<a href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="<%= list.get(i).getBoard_path() %>\<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
+			<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%>
+			</td>
+	<%
+		if((i+1)%4 == 0 && i > 0){
+	%>
+		</tr>
+		<tr>
+	<%
+			}
+		}
+	}
+	%>
+		</tr></tbody></table>
+	<nav>
+		 <ul class="pagination">
+		 	 <li><a href="board.jsp?PageNumber=<%=pageNum-1%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+	<%
+		for(int j = 0; j < length; j++){
+	%>
+		<li><a href="board.jsp?pageNumber=<%=(j+1)%>"><%= (j+1) %></a></li>
+	<%
+		}
+	%>
+			<li><a href="board.jsp?pageNumber=<%=pageNum+1%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+			</ul>
+	</nav>
+	<form class="navbar-form navbar-center" role="search" name="CateSearch" method=post action="CategorySearchAction">
+    	<div class="form-group">
+          	<input type="text" class="form-control" placeholder="Search" name="keyword">
+          	<input type="hidden" name = "searchCategory" value = "<%=cate%>"> 
+        </div>
+        	<button type="submit" class="btn btn-default">Search</button>
+    </form>
+	<c:if test="${user_id ne null}">
+		<a href="write.jsp"  class='btn btn-primary pull-right'>글쓰기</a>
+	</c:if>
 		</div>
-	</div>
+		</div>
 	<script type="text/javascript">
             $(function () {
                 $(' #da-thumbs > li ').hoverdir();
