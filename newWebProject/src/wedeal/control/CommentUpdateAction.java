@@ -38,7 +38,7 @@ public class CommentUpdateAction extends HttpServlet {
 		System.out.println(commentdt.getBoard_num());//왜안가냐...
 		request.getSession().setAttribute("messageType", "성공 메시지");
 		request.getSession().setAttribute("messageContent", "댓글 수정을 성공했습니다.");
-		RequestDispatcher view = request.getRequestDispatcher("board.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("user/board.jsp");
 		request.setAttribute("board_num", commentdt.getBoard_num());
 		view.forward(request, response);
 		return;

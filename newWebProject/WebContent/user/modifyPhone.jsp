@@ -15,7 +15,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './../LogoutAction',
+				url: '/newWebProject/LogoutAction',
 			})
 		}
 	</script>
@@ -93,7 +93,7 @@
 			<h3>연락처 수정</h3>
 			<br>
 			<div>
-				<form name="modify" method="POST" action="./../UserPhoneModifyAction">
+				<form name="modify" method="POST" action="/newWebProject/UserPhoneModifyAction">
 				<table>
 					<tr>
 						<td>수정할 연락처 : <input type="text" name="user_phone" size="15"></td>

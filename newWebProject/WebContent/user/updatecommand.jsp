@@ -20,7 +20,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: '../UserLogoutServlet',
+				url: '/newWebProject/UserLogoutServlet',
 			})
 		}
 	</script>
@@ -37,7 +37,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="../CommentUpdateAction">
+				<form method="post" action="/newWebProject/CommentUpdateAction">
 					<h3 style="text-align: center;">댓글 수정</h3>
 					<div class="form-group">
 						<textarea class="form-control" name="comment_content" style="height: 100px;"><%=commentdt.getComment_content()%></textarea>

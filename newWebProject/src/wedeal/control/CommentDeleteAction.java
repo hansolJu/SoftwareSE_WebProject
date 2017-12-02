@@ -32,7 +32,7 @@ public class CommentDeleteAction extends HttpServlet {
 		if(result == -1) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "댓글 삭제를 실패했습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("board.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/board.jsp");
 			request.setAttribute("board_num", board_num);
 			view.forward(request, response);
 			return;
@@ -40,7 +40,7 @@ public class CommentDeleteAction extends HttpServlet {
 		else {
 			request.getSession().setAttribute("messageType", "성공 메시지");
 			request.getSession().setAttribute("messageContent", "댓글 삭제를 성공했습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 			request.setAttribute("board_num", board_num);
 			view.forward(request, response);
 			return;
