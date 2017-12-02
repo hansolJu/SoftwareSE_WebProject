@@ -91,37 +91,79 @@ public class BoardDBBean {
    public ArrayList<BoardDataBean> getList(int cate_num,int pageNumber){
       String SQL1="SELECT * FROM board WHERE board_num < ? AND board_available = 1 ORDER BY board_num DESC LIMIT 8";
       String SQL2="SELECT * FROM board WHERE board_num < ? AND cate_num = ? AND board_available = 1 ORDER BY board_num DESC LIMIT 8";
+      String SQL3="SELECT * FROM board JOIN cate ON board.cate_num = cate.cate_num WHERE board_num < ? AND cate_parent = ? AND board_available = 1 ORDER BY board_num DESC LIMIT 8";
+
       ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
+      ArrayList<CateDataBean> cate_list;
       try {
             if(cate_num == 0) {
                PreparedStatement pstmt=conn.prepareStatement(SQL1);
                pstmt.setInt(1, getNext()-(pageNumber-1)*8);
                rs=pstmt.executeQuery();
+               while(rs.next()) {
+                   BoardDataBean board = new BoardDataBean();
+                   board.setCate_num(rs.getInt(1));
+                   board.setBoard_num(rs.getInt(2));
+                   board.setBoard_title(rs.getString(3));
+                   board.setBoard_price(rs.getInt(4));
+                   board.setUser_id(rs.getString(5));
+                   board.setBoard_date(rs.getString(6));
+                   board.setBoard_content(rs.getString(7));
+                   board.setBoard_image(rs.getString(8));
+                   board.setBoard_path(rs.getString(9));
+                   board.setBoard_hit(rs.getInt(10));
+                   board.setBoard_available(rs.getInt(11));
+                   board.setBoard_like(rs.getInt(12));
+                   list.add(board);
+                }
             }
             else {
-               PreparedStatement pstmt=conn.prepareStatement(SQL2);
-               pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-               pstmt.setInt(2, cate_num);
-               rs=pstmt.executeQuery();
+               if(CateDBBean.getinstance().getcate(cate_num).getCate_parent() > 0) {
+            	   PreparedStatement pstmt=conn.prepareStatement(SQL2);
+                   pstmt.setInt(1, getNext()-(pageNumber-1)*8);
+                   pstmt.setInt(2, cate_num);
+                   rs=pstmt.executeQuery();
+                while(rs.next()) {
+       	            BoardDataBean board = new BoardDataBean();
+       	            board.setCate_num(rs.getInt(1));
+       	            board.setBoard_num(rs.getInt(2));
+       	            board.setBoard_title(rs.getString(3));
+       	            board.setBoard_price(rs.getInt(4));
+       	            board.setUser_id(rs.getString(5));
+       	            board.setBoard_date(rs.getString(6));
+       	            board.setBoard_content(rs.getString(7));
+       	            board.setBoard_image(rs.getString(8));
+       	            board.setBoard_path(rs.getString(9));
+       	            board.setBoard_hit(rs.getInt(10));
+       	            board.setBoard_available(rs.getInt(11));
+       	            board.setBoard_like(rs.getInt(12));
+       	            list.add(board);
+       		   }
             }
-
-         while(rs.next()) {
-            BoardDataBean board = new BoardDataBean();
-            board.setCate_num(rs.getInt(1));
-            board.setBoard_num(rs.getInt(2));
-            board.setBoard_title(rs.getString(3));
-            board.setBoard_price(rs.getInt(4));
-            board.setUser_id(rs.getString(5));
-            board.setBoard_date(rs.getString(6));
-            board.setBoard_content(rs.getString(7));
-            board.setBoard_image(rs.getString(8));
-            board.setBoard_path(rs.getString(9));
-            board.setBoard_hit(rs.getInt(10));
-            board.setBoard_available(rs.getInt(11));
-            board.setBoard_like(rs.getInt(12));
-            list.add(board);
-         }
-         return list;
+               else {
+            	   	PreparedStatement pstmt=conn.prepareStatement(SQL3);
+                  	pstmt.setInt(1, getNext()-(pageNumber-1)*8);
+                  	pstmt.setInt(2, cate_num);
+                  	rs=pstmt.executeQuery();
+            	while(rs.next()) {
+            	      BoardDataBean board = new BoardDataBean();
+            	      board.setCate_num(rs.getInt("cate_num"));
+            	      board.setBoard_num(rs.getInt("board_num"));
+            	      board.setBoard_title(rs.getString("board_title"));
+            	      board.setBoard_price(rs.getInt("board_price"));
+            	      board.setUser_id(rs.getString("user_id"));
+            	      board.setBoard_date(rs.getString("board_date"));
+            	      board.setBoard_content(rs.getString("board_content"));
+            	      board.setBoard_image(rs.getString("board_image"));
+            	      board.setBoard_path(rs.getString("board_path"));
+            	      board.setBoard_hit(rs.getInt("board_hit"));
+            	      board.setBoard_available(rs.getInt("board_available"));
+            	      board.setBoard_like(rs.getInt("board_like"));
+            	      list.add(board);
+            		   }
+            	   }
+               }
+           return list;
       }catch(Exception e) {
          e.printStackTrace();
       }
@@ -209,15 +251,24 @@ public class BoardDBBean {
    public int allCount(int cate_num) {
       String SQL1 = "SELECT COUNT(*) FROM board WHERE board_available = 1";
       String SQL2 = "SELECT COUNT(*) FROM board WHERE cate_num = ? AND board_available = 1";
+      String SQL3 = "SELECT COUNT(*) FROM board JOIN cate ON board.cate_num = cate.cate_num cate_parent = ? AND board_available = 1";
+
       try {
          if(cate_num == 0) {
             PreparedStatement pstmt=conn.prepareStatement(SQL1);
             rs=pstmt.executeQuery();
          }
          else {
-            PreparedStatement pstmt=conn.prepareStatement(SQL2);
-            pstmt.setInt(1, cate_num);
-            rs=pstmt.executeQuery();
+        	 if(CateDBBean.getinstance().getcate(cate_num).getCate_parent() > 0) {
+        		 PreparedStatement pstmt=conn.prepareStatement(SQL2);
+                 pstmt.setInt(1, cate_num);
+                 rs=pstmt.executeQuery();
+        	 }
+        	 else {
+        		 PreparedStatement pstmt=conn.prepareStatement(SQL3);
+                 pstmt.setInt(1, cate_num);
+                 rs=pstmt.executeQuery();
+        	 }
          }
          if(rs.next()) {
             return rs.getInt(1);

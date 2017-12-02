@@ -60,22 +60,30 @@
 			 <tbody>
 			 	<tr>
 	<%
-		int pageNum = 1; if(request.getParameter("pageNumber") != null) pageNum = Integer.parseInt(request.getParameter("pageNumber"));
-		int cate = 0; if(request.getParameter("cate_num") != null) cate = Integer.parseInt(request.getParameter("cate_num"));
+		int pageNum = 1; if(request.getParameter("pageNumber") != null) pageNum = Integer.parseInt(request.getParameter("pageNumber")); //페이지번호 설정 
+		int cate = 0; if(request.getParameter("cate_num") != null) cate = Integer.parseInt(request.getParameter("cate_num")); //카테고리 번호 설정
 		int length = 0;
 		BoardDBBean board = BoardDBBean.getinstance();
+		CateDataBean cate_data = CateDBBean.getinstance().getcate(cate);
+		ArrayList<CateDataBean> cate_list = null;
 		ArrayList<BoardDataBean> list = null;
-		//ArrayList<BoardDataBean> out_list,in_list = null;
 		
+		//전체보기
 		if(cate == 0){
 			list = board.getList(0, pageNum);
 			length = board.allCount(cate);
 		}
+		
+		//카테고리 선택
 		else{
-			list = board.getList(cate, pageNum);
-			//if(CateDBBean.getinstance().getBoard(cate).getCate_parent() > 0)
-				//in_list = board.getList(CateDBBean.getinstance().getBoard(cate).getCate_parent(), pageNum);
-			length = board.allCount(cate); //+ board.allCount(CateDBBean.getinstance().getBoard(cate).getCate_parent());
+			if(cate_data.getCate_parent() > 0){
+				list = board.getList(cate_data.getCate_num(), pageNum);
+				length = board.allCount(cate_data.getCate_num());
+			}
+			else{
+				list = board.getList(cate_data.getCate_num(), pageNum);
+				length = board.allCount(cate_data.getCate_num());
+			}
 		}
 		
 		if(list.size() == 0){
