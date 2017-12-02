@@ -32,6 +32,6 @@ public class MngrUserBanAction extends HttpServlet {
 		String user_id = request.getParameter("user_id");
 		UserDBBean.getinstance().banUser(user_id);
 		
-		response.sendRedirect("/mngr/member/fullMemberManage.jsp");
+		response.sendRedirect("mngr/member/fullMemberManage.jsp");
 	}
 }

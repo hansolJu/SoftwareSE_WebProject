@@ -63,6 +63,6 @@ public class CateDataBean {
 	public void setUpCategoryName(String upCategoryName) {
 		this.upCategoryName = upCategoryName;
 	}
-	
+
 	
 }
