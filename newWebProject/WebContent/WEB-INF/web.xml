@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>good</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+ 
+  <servlet>
+      <servlet-name>LoginAction</servlet-name>
+      <servlet-class>wedeal.control.LoginAction</servlet-class>
+  </servlet>
+  <servlet><servlet-name>RegisterAction</servlet-name>
+      <servlet-class>wedeal.control.RegisterAction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>LoginAction</servlet-name>
+      <url-pattern>/LoginAction</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RegisterAction</servlet-name>
+  	<url-pattern>/RegisterAction</url-pattern>
+  </servlet-mapping>
+ 
+</web-app>

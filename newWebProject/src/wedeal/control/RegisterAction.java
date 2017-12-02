@@ -11,7 +11,7 @@ import wedeal.bean.UserDBBean;
 import wedeal.bean.UserDataBean;
 
 
-@WebServlet("/RegisterAction")
+@WebServlet(value = "/RegisterAction", name = "RegisterAction")
 public class RegisterAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

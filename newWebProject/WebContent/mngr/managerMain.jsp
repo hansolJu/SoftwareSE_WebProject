@@ -17,7 +17,7 @@ ul{
    list-style:none;
    }
 </style>
-	<jsp:include page="/Menubar.jsp"/>
+	<jsp:include page="/user/Menubar.jsp"/>
 	<div id="mList" class="list-group" style="float:left">
 		<h4>회원 관리</h4>
 			<a href="/newWebProject/MngrUserAction" class="list-group-item">전체회원</a>

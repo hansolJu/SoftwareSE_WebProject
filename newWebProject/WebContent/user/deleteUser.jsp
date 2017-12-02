@@ -40,7 +40,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../Menubar.jsp" />
+	<jsp:include page="Menubar.jsp" />
 	<!-- 회원 메뉴 -->
 	<div id="menu" style="display: inline-block; border-right: 1px solid; float: left; height: 400px; width: 15%; padding: 10px;">
 		<ul style="list-style: none;">

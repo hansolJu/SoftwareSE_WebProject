@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="menutag" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="showtag" %>
 <!-- 
 	main페이지
 	로그인이 되어있지 않은 경우 접속하기를 통해 로그인, 회원가입이 가능. 로그인은 login.jsp로, 회원가입은 join.jsp로 이동.
@@ -26,7 +25,7 @@
 <body>
 	
 	<!-- 상단바 -->
-	<jsp:include page="Menubar.jsp"/>
+	<jsp:include page="user/Menubar.jsp"/>
 	
 	<style type="text/css">
 	a, a:hover{
@@ -35,7 +34,7 @@
 	};
 	</style>
 	<!-- 메뉴 생성 부분 -->
-	<jsp:include page="sideMenubar.jsp" />
+	<jsp:include page="/user/sideMenubar.jsp" />
 	<!-- 추천부분 -->
 	<showtag:show/>
 </body>

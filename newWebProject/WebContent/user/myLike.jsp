@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- 메뉴 바 -->
-	<jsp:include page="../Menubar.jsp" />
+	<jsp:include page="Menubar.jsp" />
 
 	<!-- 회원 메뉴 -->
 	<jsp:include page="userMenubar.jsp" />

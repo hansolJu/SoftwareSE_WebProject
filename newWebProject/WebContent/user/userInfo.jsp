@@ -31,7 +31,7 @@
 		UserDataBean userinfo = user.getUser(session_id);
 	%>
 	<!-- 상단 메뉴 -->
-	<jsp:include page="../Menubar.jsp"/>
+	<jsp:include page="Menubar.jsp"/>
 	<!-- 회원 메뉴 -->
 	<jsp:include page="userMenubar.jsp" />
 	
