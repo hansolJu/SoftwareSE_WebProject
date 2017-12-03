@@ -45,7 +45,7 @@
 			if (in_cate.get(j).getCate_parent() == out_cate.get(i).getCate_num()) {
 	%>
             <li>
-              <a href="http://localhost:8080/newWebProject/board.jsp?cate_num=<%=in_cate.get(j).getCate_num()%>"><%=in_cate.get(j).getCate_name()%></a>
+              <a href="http://203.249.22.34:8080/newWebProject/board.jsp?cate_num=<%=in_cate.get(j).getCate_num()%>"><%=in_cate.get(j).getCate_name()%></a>
             </li>
             <%
 							}

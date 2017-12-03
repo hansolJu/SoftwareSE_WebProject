@@ -43,18 +43,18 @@ public class UserWithDrawAction extends HttpServlet {
 				request.setAttribute("messageType", "성공 메시지");
 				request.setAttribute("messageContent", "탈퇴가 완료 되었습니다.");
 				request.getSession().invalidate();
-				response.sendRedirect("http://localhost:8080/newWebProject/index.jsp");
+				response.sendRedirect("http://203.249.22.34:8080/newWebProject/index.jsp");
 			}
 			else {
 				request.setAttribute("messageType", "오류 메시지");
 				request.setAttribute("messageContent","탈퇴에 실패 했습니다.");
-				response.sendRedirect("http://localhost:8080/newwebProject/user/deleteUser.jsp");
+				response.sendRedirect("http://203.249.22.34:8080/newwebProject/user/deleteUser.jsp");
 			}
 		}
 		else {
 			request.setAttribute("messageType", "오류 메시지");
 			request.setAttribute("messageContent", "회원 정보를 찾지 못했습니다.");
-			response.sendRedirect("http://localhost:8080/newWebProject/user/deleteUser.jsp");
+			response.sendRedirect("http://203.249.22.34:8080/newWebProject/user/deleteUser.jsp");
 		}
 	}
 }
