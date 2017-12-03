@@ -32,7 +32,7 @@
 						<input type="password" class="form-control" placeholder="비밀번호" name="user_pw" maxlength="20">
 					</div>
 					<input type="submit" class="btn btn-primary form-control" value="로그인"><br/><br/>
-					<center><a href="SearchId.jsp">아이디 찾기</a> &emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;
+					<center><a href="SearchId.jsp">아이디 찾기</a> &emsp;|&emsp;
 							<a href="SearchPW.jsp">비밀번호 찾기</a>
 					</center>
 				</form>

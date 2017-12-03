@@ -23,9 +23,6 @@
 			<a class="navbar-brand" href="/newWebProject/index.jsp">Wedeal</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="/newWebProject/index.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 메인</a></li>
-			</ul>
 			<c:if test="${user_id eq null}">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
