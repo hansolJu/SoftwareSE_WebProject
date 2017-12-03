@@ -44,7 +44,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="/newWebProject/index.jsp" onclick="logout();">로그아웃</a></li>
+					 	<li><a href="/newWebProject/index.jsp" onclick="location.href='/newWebProject/LogoutAction'">로그아웃</a></li>
 					 	<li><a href="http://203.249.22.34:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
 					 	<c:if test="${my_available >= '2'}">
 							<li><a href="http://203.249.22.34:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
