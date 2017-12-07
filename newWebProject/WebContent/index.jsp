@@ -37,7 +37,8 @@
 		text-decoration: none;
 	};
 	</style>
+
 	<!-- 추천부분 -->
-	<showtag:show/>
+	<%-- <showtag:show/> --%>
 </body>
 </html>

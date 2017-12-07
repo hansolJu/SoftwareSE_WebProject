@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import wedeal.bean.*;
 
 public class BoardDBBean {
+
 	
 	private Connection conn;
 	private PreparedStatement pstmt;

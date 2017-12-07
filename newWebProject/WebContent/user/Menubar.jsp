@@ -6,7 +6,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
 	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="/newWebProject/js/bootstrap.js"></script>
@@ -29,8 +28,8 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="http://203.249.22.34:8080/newWebProject/user/login.jsp">로그인</a></li>
-					 	<li><a href="http://203.249.22.34:8080/newWebProject/user/join.jsp">회원가입</a></li>
+					 	<li><a href="/newWebProject/user/login.jsp">로그인</a></li>
+					 	<li><a href="/newWebProject/user/join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>

@@ -114,7 +114,7 @@
 					<a href="../DeclarationAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
 			</c:if>
 			<%
-				if(request.getParameter("user_id").equals(board.getUser_id())) {%>
+				if(request.getSession().getAttribute("user_id").equals(board.getUser_id())) {%>
 				<a href="update.jsp?board_num=<%= board.getBoard_num() %>&cate_num=<%=board.getCate_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/newWebProject/BoardDeleteAction?cate_num=<%=board.getCate_num()%>&board_num=<%=board.getBoard_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 			<%} %>

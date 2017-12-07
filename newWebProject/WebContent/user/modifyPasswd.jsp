@@ -88,13 +88,7 @@
 	</nav>
 	
 	<!-- 회원 메뉴 -->
-	<div id="menu" style="display:inline-block; border-right:1px solid; float:left; height:400px; width:15%; padding:10px;">
-		<ul style="list-style:none;">
-			<li><a href="#">내 게시글</a></li>
-			<li><a href="#">내 댓글</a></li>
-			<li><a href="#">내 찜</a></li>
-		</ul>
-	</div>
+	<jsp:include page="userMenubar.jsp">
 	<div>
 		<div style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
 			<h3>비밀번호 수정</h3>
