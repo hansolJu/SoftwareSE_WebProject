@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ page import="wedeal.*" %>
+    pageEncoding="UTF-8"  import="wedeal.bean.SearchService"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<title>╬фюл╣П х╝юн</title>
+	<title>Л∙└Л²╢К■■ М≥∙Л²╦</title>
 	<style type="text/css">
 		div{
 			text-align:center;
@@ -28,7 +27,7 @@
 		<td>
 		<table width="500px" height="100px" align="center" border=0; style="background-color:white;" >
 		<tr>
-			<th>╬фюл╣П х╝юн</th>
+			<th>Л∙└Л²╢К■■ М≥∙Л²╦</th>
 		</tr>
 		</table>
 		     
@@ -39,10 +38,10 @@
         		<td>
 		        <%if(user_id!= null){ %>
 				<tr>
-				    <td><div><%=user_name %>╢тюг ╬фюл╣П╢б</div></td>
+				    <td><div><%=user_name %>К▀≤Л²≤ Л∙└Л²╢К■■К┼■</div></td>
 				</tr>
 				<tr>
-					<td><h1><div><%=user_id %></div></h1><div>ют╢о╢ы.</div></td>
+					<td><h1><div><%=user_id %></div></h1><div>Л·┘К▀┬К▀╓.</div></td>
 				</tr>
 		        </td>
 				</tr>
@@ -52,18 +51,18 @@
 					<tr>
         				<td>
         				<div>
-        					<input type="button" value="╥н╠вюнго╠Б" class="btn btn-primary" onclick="location.href='login.jsp'">
-        					<input type="button" value="╨Я╧п╧Ьхё цё╠Б" class="btn btn-primary" onclick="location.href='SearchPW.jsp'">        							
+        					<input type="button" value="К║°Й╥╦Л²╦М∙≤Й╦╟" class="btn btn-primary" onclick="location.href='login.jsp'">
+        					<input type="button" value="К╧└К╟─К╡┬М≤╦ Л╟╬Й╦╟" class="btn btn-primary" onclick="location.href='SearchPW.jsp'">        							
         				</div>
         				</td>
          			</tr>
       				</table>
       				<%} else{%>
       				<tr>
-						<td><%=user_name %>╢т!</td>
+						<td><%=user_name %>К▀≤!</td>
 					</tr>
 					<tr>
-						<td><h1>╟║юта╓╨╦╟║ ╬Ь╫ю╢о╢ы.</h1></td>
+						<td><h1>Й╟─Л·┘Л═∙КЁ╢Й╟─ Л≈├Л┼╣К▀┬К▀╓.</h1></td>
 					</tr>
 					</table>
 					</td> 
@@ -72,8 +71,8 @@
 					<td>
 					<table width="150px"  align="center" border="0" style="margin-top:1%">
 					<tr>
-						<td><input type="button" value="х╦©Ь╟║ютго╠Б" class="btn btn-primary" onclick="location.href='join.jsp'"></td>
-						<td><input type="button" value="цЁю╫ю╦╥н" class="btn btn-primary" onclick="location.href='login.jsp'"></td>
+						<td><input type="button" value="М ▄Л⌡░Й╟─Л·┘М∙≤Й╦╟" class="btn btn-primary" onclick="location.href='join.jsp'"></td>
+						<td><input type="button" value="Л╡≤Л²▄Л°╪К║°" class="btn btn-primary" onclick="location.href='login.jsp'"></td>
 					</tr>
 					</table>   
 					<%} %>

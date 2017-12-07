@@ -35,8 +35,8 @@
 	};
 	</style>
 	<!-- 메뉴 생성 부분 -->
-	<jsp:include page="sideMenubar.jsp" />
+	<menutag:menu/>
 	<!-- 추천부분 -->
-	<showtag:show/>
+	<%-- <showtag:show/> --%>
 </body>
 </html>

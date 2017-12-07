@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import wedeal.bean.BoardDBBean;
 import wedeal.bean.LikeDBBean;
 import wedeal.bean.LikeDataBean;
 
@@ -32,14 +33,19 @@ public class UserLikeListAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String session_id = null;
 		ArrayList<LikeDataBean> likelist = null;
+		BoardDBBean board = BoardDBBean.getinstance();
+		ArrayList<String> board_name = new ArrayList<String>();
 		
 		if(request.getSession().getAttribute("user_id")!=null)
 			session_id = (String)request.getSession().getAttribute("user_id");
 		
 		LikeDBBean like = LikeDBBean.getinstance();
 		likelist = like.getList(session_id);
-		
+		for(LikeDataBean l : likelist) {
+			board_name.add(board.getBoard(l.getBoard_num()).getBoard_title());
+		}
 		request.setAttribute("userlikelist", likelist);
+		request.setAttribute("boardtitlelist", board_name);
 		request.getRequestDispatcher("user/myLike.jsp").forward(request, response);
 	}
 
