@@ -23,7 +23,7 @@ import wedeal.bean.BoardDataBean;
 @WebServlet(value = "/BoardUpdateAction", name = "BoardUpdateAction")
 public class BoardUpdateAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String board_path = "C:\\Users\\jaeyo\\eclipse-workspace\\image";
+	private static String board_path = "C:\\Users\\이재윤\\Desktop\\se\\upload";
 	private static String enType = "utf-8";
 	private static int maxSize = 1024 * 1024 * 1024;
 
