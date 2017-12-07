@@ -95,7 +95,7 @@
 								{
 						
 						%>
-						<img src="<%= board.getBoard_path() %>\<%= images[i] %>" height= 300px width=300px><%="<br>"%>
+						<img src="/test/<%= images[i] %>" height= 300px width=300px><%="<br>"%>
 						<%
 							}
 						%>
