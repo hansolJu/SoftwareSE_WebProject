@@ -117,7 +117,7 @@ public class UserDBBean {
 			pstmt.setString(5, member.getUser_pw());
 			pstmt.setInt(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
-			pstmt.setInt(8, member.getUser_available());
+			pstmt.setInt(8, 1);
 			//int result = new likeDAO().create(member.getUser_id());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
