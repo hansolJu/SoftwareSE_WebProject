@@ -13,7 +13,7 @@ import wedeal.bean.DeclarationDBBean;
 import wedeal.bean.DeclarationDataBean;
 
 
-@WebServlet("/DeclarationAction")
+@WebServlet(value = "/DeclarationAction", name = "DeclarationAction")
 public class DeclarationAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,13 +37,13 @@ public class DeclarationAction extends HttpServlet {
 			if(result == -1) {
 				request.getSession().setAttribute("messageType", "오류 메시지");
 				request.getSession().setAttribute("messageContent", "내부적인 오류입니다.");
-				RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 				request.setAttribute("board_num", declarationdt.getBoard_num());
 				view.forward(request, response);
 				return;
 			}
 			else {
-				RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 				request.setAttribute("board_num", declarationdt.getBoard_num());
 				view.forward(request, response);
 				return;
@@ -52,7 +52,7 @@ public class DeclarationAction extends HttpServlet {
 		else {
 				request.getSession().setAttribute("messageType", "오류 메시지");
 				request.getSession().setAttribute("messageContent", "이미 신고하셨습니다.");
-				RequestDispatcher view = request.getRequestDispatcher("view.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("user/view.jsp");
 				request.setAttribute("board_num", declarationdt.getBoard_num());
 				view.forward(request, response);
 				return;

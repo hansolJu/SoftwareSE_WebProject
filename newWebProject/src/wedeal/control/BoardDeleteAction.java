@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import wedeal.bean.BoardDBBean;
 
 
-@WebServlet("/BoardDeleteAction")
+@WebServlet(value = "/BoardDeleteAction", name ="BoardDeleteAction")
 public class BoardDeleteAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,8 +36,8 @@ public class BoardDeleteAction extends HttpServlet {
 		}
 
 		else
-			response.sendRedirect("board.jsp?cate_num="+cate_num);
-	}
+			response.sendRedirect("user/board.jsp?cate_num="+cate_num);
+}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

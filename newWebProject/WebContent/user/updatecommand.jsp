@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="wedeal.bean.*" %>
 <!-- 
 	로그인 페이지
 	ID/PW를 입력했을떄 DB에 정보가 존재할 경우 로그인 성공
@@ -13,25 +14,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>로그인 화면</title>
+	<title>댓글 수정</title>
+	<script type="text/javascript">
+		function logout(){
+			var user_id = $('#user_id').val();
+			$.ajax({
+				type: 'POST',
+				url: '/newWebProject/UserLogoutServlet',
+			})
+		}
+	</script>
 </head>
 <body>
 	<!-- 상단바 -->
 	<jsp:include page="Menubar.jsp"/>
-	
+	<% int comment_num = Integer.parseInt(request.getParameter("comment_num"));
+	   int board_num = Integer.parseInt(request.getParameter("board_num"));
+	   CommentDBBean comment = CommentDBBean.getinstance();
+	   CommentDataBean commentdt = comment.getComment(comment_num);
+	%>
 	<div class="container">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="./LoginAction">
-					<h3 style="text-align: center;">로그인</h3>
+				<form method="post" action="/newWebProject/CommentUpdateAction">
+					<h3 style="text-align: center;">댓글 수정</h3>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="아이디" name="user_id" maxlength="20">
+						<textarea class="form-control" name="comment_content" style="height: 100px;"><%=commentdt.getComment_content()%></textarea>
 					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" placeholder="비밀번호" name="user_pw" maxlength="20">
-					</div>
-					<input type="submit" class="btn btn-primary form-control" value="로그인">
+					<input type="hidden" name="board_num" value=<%=board_num %>>
+					<input type="hidden" name="comment_num" value=<%=comment_num %>>
+					<input type="submit" class="btn btn-primary form-control" value="수정">
 				</form>
 		</div>
 		<div class="col-lg-4"></div>

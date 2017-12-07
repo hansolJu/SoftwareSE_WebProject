@@ -9,28 +9,29 @@ import java.util.ArrayList;
 import wedeal.bean.*;
 
 public class BoardDBBean {
-   
-   private Connection conn;
-   private PreparedStatement pstmt;
-   private ResultSet rs;
-   
-   
-   private static BoardDBBean instance = new BoardDBBean();
-   
-   public static BoardDBBean getinstance() {
-      return instance;
-   }
-   private BoardDBBean() {
-      try {
-         String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
-         String dbID = "jy";
-         String dbPW = "1365";
-         Class.forName("com.mysql.jdbc.Driver");
-         conn = DriverManager.getConnection(dbURL, dbID, dbPW);
-      }catch(Exception e) {
-         e.printStackTrace();
-      }
-   }
+
+	
+	private Connection conn;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+	
+	
+	private static BoardDBBean instance = new BoardDBBean();
+	
+	public static BoardDBBean getinstance() {
+		return instance;
+	}
+	private BoardDBBean() {
+		try {
+			String dbURL = "jdbc:mysql://203.249.22.34:3306/se?autoReconnect=true&useSSL=false";
+			String dbID = "jy";
+			String dbPW = "1365";
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPW);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 
    //현재 시간을 서버에 넣어준다.
@@ -119,49 +120,49 @@ public class BoardDBBean {
             }
             else {
                if(CateDBBean.getinstance().getcate(cate_num).getCate_parent() > 0) {
-                  PreparedStatement pstmt=conn.prepareStatement(SQL2);
+            	   PreparedStatement pstmt=conn.prepareStatement(SQL2);
                    pstmt.setInt(1, getNext()-(pageNumber-1)*8);
                    pstmt.setInt(2, cate_num);
                    rs=pstmt.executeQuery();
                 while(rs.next()) {
-                      BoardDataBean board = new BoardDataBean();
-                      board.setCate_num(rs.getInt(1));
-                      board.setBoard_num(rs.getInt(2));
-                      board.setBoard_title(rs.getString(3));
-                      board.setBoard_price(rs.getInt(4));
-                      board.setUser_id(rs.getString(5));
-                      board.setBoard_date(rs.getString(6));
-                      board.setBoard_content(rs.getString(7));
-                      board.setBoard_image(rs.getString(8));
-                      board.setBoard_path(rs.getString(9));
-                      board.setBoard_hit(rs.getInt(10));
-                      board.setBoard_available(rs.getInt(11));
-                      board.setBoard_like(rs.getInt(12));
-                      list.add(board);
-                }
+       	            BoardDataBean board = new BoardDataBean();
+       	            board.setCate_num(rs.getInt(1));
+       	            board.setBoard_num(rs.getInt(2));
+       	            board.setBoard_title(rs.getString(3));
+       	            board.setBoard_price(rs.getInt(4));
+       	            board.setUser_id(rs.getString(5));
+       	            board.setBoard_date(rs.getString(6));
+       	            board.setBoard_content(rs.getString(7));
+       	            board.setBoard_image(rs.getString(8));
+       	            board.setBoard_path(rs.getString(9));
+       	            board.setBoard_hit(rs.getInt(10));
+       	            board.setBoard_available(rs.getInt(11));
+       	            board.setBoard_like(rs.getInt(12));
+       	            list.add(board);
+       		   }
             }
                else {
-                     PreparedStatement pstmt=conn.prepareStatement(SQL3);
-                     pstmt.setInt(1, getNext()-(pageNumber-1)*8);
-                     pstmt.setInt(2, cate_num);
-                     rs=pstmt.executeQuery();
-               while(rs.next()) {
-                     BoardDataBean board = new BoardDataBean();
-                     board.setCate_num(rs.getInt("cate_num"));
-                     board.setBoard_num(rs.getInt("board_num"));
-                     board.setBoard_title(rs.getString("board_title"));
-                     board.setBoard_price(rs.getInt("board_price"));
-                     board.setUser_id(rs.getString("user_id"));
-                     board.setBoard_date(rs.getString("board_date"));
-                     board.setBoard_content(rs.getString("board_content"));
-                     board.setBoard_image(rs.getString("board_image"));
-                     board.setBoard_path(rs.getString("board_path"));
-                     board.setBoard_hit(rs.getInt("board_hit"));
-                     board.setBoard_available(rs.getInt("board_available"));
-                     board.setBoard_like(rs.getInt("board_like"));
-                     list.add(board);
-                     }
-                  }
+            	   	PreparedStatement pstmt=conn.prepareStatement(SQL3);
+                  	pstmt.setInt(1, getNext()-(pageNumber-1)*8);
+                  	pstmt.setInt(2, cate_num);
+                  	rs=pstmt.executeQuery();
+            	while(rs.next()) {
+            	      BoardDataBean board = new BoardDataBean();
+            	      board.setCate_num(rs.getInt("cate_num"));
+            	      board.setBoard_num(rs.getInt("board_num"));
+            	      board.setBoard_title(rs.getString("board_title"));
+            	      board.setBoard_price(rs.getInt("board_price"));
+            	      board.setUser_id(rs.getString("user_id"));
+            	      board.setBoard_date(rs.getString("board_date"));
+            	      board.setBoard_content(rs.getString("board_content"));
+            	      board.setBoard_image(rs.getString("board_image"));
+            	      board.setBoard_path(rs.getString("board_path"));
+            	      board.setBoard_hit(rs.getInt("board_hit"));
+            	      board.setBoard_available(rs.getInt("board_available"));
+            	      board.setBoard_like(rs.getInt("board_like"));
+            	      list.add(board);
+            		   }
+            	   }
                }
            return list;
       }catch(Exception e) {
@@ -251,7 +252,7 @@ public class BoardDBBean {
    public int allCount(int cate_num) {
       String SQL1 = "SELECT COUNT(*) FROM board WHERE board_available = 1";
       String SQL2 = "SELECT COUNT(*) FROM board WHERE cate_num = ? AND board_available = 1";
-      String SQL3 = "SELECT COUNT(*) FROM board JOIN cate ON board.cate_num = cate.cate_num cate_parent = ? AND board_available = 1";
+      String SQL3 = "SELECT COUNT(*) FROM board JOIN cate ON board.cate_num = cate.cate_num WHERE cate.cate_parent = ? AND board_available = 1;";
 
       try {
          if(cate_num == 0) {
@@ -259,16 +260,16 @@ public class BoardDBBean {
             rs=pstmt.executeQuery();
          }
          else {
-            if(CateDBBean.getinstance().getcate(cate_num).getCate_parent() > 0) {
-               PreparedStatement pstmt=conn.prepareStatement(SQL2);
+        	 if(CateDBBean.getinstance().getcate(cate_num).getCate_parent() > 0) {
+        		 PreparedStatement pstmt=conn.prepareStatement(SQL2);
                  pstmt.setInt(1, cate_num);
                  rs=pstmt.executeQuery();
-            }
-            else {
-               PreparedStatement pstmt=conn.prepareStatement(SQL3);
+        	 }
+        	 else {
+        		 PreparedStatement pstmt=conn.prepareStatement(SQL3);
                  pstmt.setInt(1, cate_num);
                  rs=pstmt.executeQuery();
-            }
+        	 }
          }
          if(rs.next()) {
             return rs.getInt(1);
@@ -432,7 +433,7 @@ public class BoardDBBean {
 
       ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
       pstmt = conn.prepareStatement("(select * from board where board_title like ? and board_available = 1)"
-            + "union" + "(select * from board where board_content like ? and board_available = 1)");  //해당 이름을 포함하는 물품 검색
+      		+ "union" + "(select * from board where board_content like ? and board_available = 1)");  //해당 이름을 포함하는 물품 검색
       pstmt.setString(1, "%" + searchName + "%");
       pstmt.setString(2, "%" + searchName + "%");
       rs = pstmt.executeQuery();
@@ -470,8 +471,8 @@ public class BoardDBBean {
 
       ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
       pstmt = conn.prepareStatement("SELECT * FROM board "
-            + "where board.board_num in (select comment.board_num from comment where comment_content like ? and comment_available =1) "
-            + "and board_available = 1");  //해당 댓글이 있는 게시글 반환
+      		+ "where board.board_num in (select comment.board_num from comment where comment_content like ? and comment_available =1) "
+      		+ "and board_available = 1");  //해당 댓글이 있는 게시글 반환
       pstmt.setString(1, "%" + searchName + "%");
       rs = pstmt.executeQuery();
       while(rs.next()) {
@@ -508,8 +509,8 @@ public class BoardDBBean {
 
       ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
       pstmt = conn.prepareStatement("select * from "
-            + "(select * from board where board.user_id in "
-            + "(select user.user_id from user where user.user_available = 1 and user.user_id = ?) and board_available = 1) A;");  //해당 작성자가 작성한 게시물 검새
+      		+ "(select * from board where board.user_id in "
+      		+ "(select user.user_id from user where user.user_available = 1 and user.user_id = ?) and board_available = 1) A;");  //해당 작성자가 작성한 게시물 검새
       pstmt.setString(1, searchName);
       rs = pstmt.executeQuery();
       while(rs.next()) {
@@ -546,8 +547,8 @@ public class BoardDBBean {
 
       ArrayList<BoardDataBean> searchCategoryProductList = new ArrayList<>();  //반환할 결과 리스트
       pstmt = conn.prepareStatement("select * from board, "
-            + "(SELECT cate_num, cate_name, getpath_f(cate_num) AS path FROM cate HAVING path LIKE ?) recate " + 
-            "where board.cate_num = recate.cate_num;");  //계층 카테고리 검색 (중복 제거)
+      		+ "(SELECT cate_num, cate_name, getpath_f(cate_num) AS path FROM cate HAVING path LIKE ?) recate " + 
+      		"where board.cate_num = recate.cate_num;");  //계층 카테고리 검색 (중복 제거)
       pstmt.setString(1, "%" + Integer.toString(categoryId) + "%");
 
       rs = pstmt.executeQuery();
@@ -572,7 +573,39 @@ public class BoardDBBean {
       return searchCategoryProductList;
    }
       
-      
+   public ArrayList<BoardDataBean> getUserBoardList(String user_id){
+	      String sql = "select * from board where user_id=? and board_available=? order by board_num asc";
+	      ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
+
+	      try {
+	         PreparedStatement pstmt=conn.prepareStatement(sql);
+	         pstmt.setString(1, user_id);
+	         pstmt.setInt(2, 1);
+	         rs=pstmt.executeQuery();
+
+	         while(rs.next()) {
+	            BoardDataBean board = new BoardDataBean();
+	            board.setCate_num(rs.getInt(1));
+	            board.setBoard_num(rs.getInt(2));
+	            board.setBoard_title(rs.getString(3));
+	            board.setBoard_price(rs.getInt(4));
+	            board.setUser_id(rs.getString(5));
+	            board.setBoard_date(rs.getString(6));
+	            board.setBoard_content(rs.getString(7));
+	            board.setBoard_image(rs.getString(8));
+	            board.setBoard_path(rs.getString(9));
+	            board.setBoard_hit(rs.getInt(10));
+	            board.setBoard_available(rs.getInt(11));
+	            board.setBoard_like(rs.getInt(12));
+	            list.add(board);
+	         }
+	         return list;
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }
+	      return list;
+	   }
+   
    //좋아요 순서대로 짜름 -->추천글을 위함
          public ArrayList<BoardDataBean> AllgetList(){
             String SQL="SELECT * FROM board ORDER BY board_like DESC";
@@ -603,43 +636,5 @@ public class BoardDBBean {
                e.printStackTrace();
             }
             return null;
-         }
-         /*
-          * 작성자 : 채지훈
-          * 작성일 : 2017.11.28
-          * 수정자 : 채지훈
-          * 수정일 : 2017.11.29
-          */
-         public ArrayList<BoardDataBean> getUserBoardList(String user_id){
-            String sql = "select * from board where user_id=? and board_available=? order by board_num asc";
-            ArrayList<BoardDataBean> list = new ArrayList<BoardDataBean>();
-
-            try {
-               PreparedStatement pstmt=conn.prepareStatement(sql);
-               pstmt.setString(1, user_id);
-               pstmt.setInt(2, 1);
-               rs=pstmt.executeQuery();
-
-               while(rs.next()) {
-                  BoardDataBean board = new BoardDataBean();
-                  board.setCate_num(rs.getInt(1));
-                  board.setBoard_num(rs.getInt(2));
-                  board.setBoard_title(rs.getString(3));
-                  board.setBoard_price(rs.getInt(4));
-                  board.setUser_id(rs.getString(5));
-                  board.setBoard_date(rs.getString(6));
-                  board.setBoard_content(rs.getString(7));
-                  board.setBoard_image(rs.getString(8));
-                  board.setBoard_path(rs.getString(9));
-                  board.setBoard_hit(rs.getInt(10));
-                  board.setBoard_available(rs.getInt(11));
-                  board.setBoard_like(rs.getInt(12));
-                  list.add(board);
-               }
-               return list;
-            }catch(SQLException e) {
-               e.printStackTrace();
-            }
-            return list;
          }
 }

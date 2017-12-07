@@ -15,7 +15,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './../LogoutAction',
+				url: '/newWebProject/LogoutAction',
 			})
 		}
 	</script>
@@ -79,13 +79,7 @@
 	</nav>
 	
 	<!-- 회원 메뉴 -->
-	<div id="menu" style="display:inline-block; border-right:1px solid; float:left; height:400px; width:15%; padding:10px;">
-		<ul style="list-style:none;">
-			<li><a href="#">내 게시글</a></li>
-			<li><a href="#">내 댓글</a></li>
-			<li><a href="#">내 찜</a></li>
-		</ul>
-	</div>
+	<jsp:include page="userMenubar.jsp">
 	
 	<!-- 회원 연락처 수정 -->
 	<div>
@@ -93,7 +87,7 @@
 			<h3>연락처 수정</h3>
 			<br>
 			<div>
-				<form name="modify" method="POST" action="./../UserPhoneModifyAction">
+				<form name="modify" method="POST" action="/newWebProject/UserPhoneModifyAction">
 				<table>
 					<tr>
 						<td>수정할 연락처 : <input type="text" name="user_phone" size="15"></td>

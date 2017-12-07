@@ -16,7 +16,7 @@ import wedeal.bean.UserDataBean;
 /**
  * Servlet implementation class MngrBanAction
  */
-@WebServlet("/MngrBanAction")
+@WebServlet(value = "/MngrBanAction", name = "MngrBanAction")
 public class MngrBanAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

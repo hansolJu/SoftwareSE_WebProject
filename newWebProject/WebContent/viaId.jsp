@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"  import="wedeal.bean.SearchService"%>
+    pageEncoding="UTF-8"  import="wedeal.bean.UserDBBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
    String phone1 = request.getParameter("phone1");
    String phone2 = request.getParameter("phone2");
    String user_phone = Phone+"-"+phone1+"-"+phone2;
-   SearchService searchService = SearchService.getInstance();
+   UserDBBean searchService = UserDBBean.getinstance();
    String user_id = searchService.searchId(user_name, user_phone);
 %>
 <body>

@@ -13,24 +13,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../css/bootstrap.css">
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="../js/bootstrap.js"></script>
 	<title>로그인 화면</title>
 </head>
 <body>
 	<!-- 상단바 -->
-	<jsp:include page="../Menubar.jsp"/>
+	<jsp:include page="Menubar.jsp"/>
 	
 	<div class="container">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-
-				<form method="post" action="../LoginAction">
-				<form method="post" action="./../LoginAction">
+				<form method="post" action="/newWebProject/LoginAction">
 					<h3 style="text-align: center;">로그인</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디" name="user_id" maxlength="20">
@@ -38,7 +31,10 @@
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호" name="user_pw" maxlength="20">
 					</div>
-					<input type="submit" class="btn btn-primary form-control" value="로그인">
+					<input type="submit" class="btn btn-primary form-control" value="로그인"><br/><br/>
+					<center><a href="SearchId.jsp">아이디 찾기</a> &emsp;|&emsp;
+							<a href="SearchPW.jsp">비밀번호 찾기</a>
+					</center>
 				</form>
 		</div>
 		<div class="col-lg-4"></div>

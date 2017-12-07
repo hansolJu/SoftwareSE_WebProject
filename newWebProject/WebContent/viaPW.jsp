@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ page import="wedeal.bean.SearchService" %>
+    pageEncoding="UTF-8"%>
+<%@ page import="wedeal.bean.UserDBBean" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<title>╨Я╧п╧Ьхё х╝юн</title>
+	<title>К╧└К╟─К╡┬М≤╦ М≥∙Л²╦</title>
 	<style type="text/css">
 		div{
 			text-align:center;
@@ -13,13 +13,13 @@
 	</style>
 </head>
 <%
-   request.setCharacterEncoding("euc-kr");
+   request.setCharacterEncoding("UTF-8");
    String user_id = request.getParameter("user_id");
    String Phone = request.getParameter("Phone");
    String phone1 = request.getParameter("phone1");
    String phone2 = request.getParameter("phone2");
    String user_phone = Phone+"-"+phone1+"-"+phone2;
-   SearchService searchService = SearchService.getInstance();
+   UserDBBean searchService = UserDBBean.getinstance();
    String user_pw = searchService.searchPw(user_id, user_phone);
 %>
 <body>	
@@ -28,7 +28,7 @@
 		<td>
 		<table width="500px" height="100px" align="center" border=0; style="background-color:white;" >
 		<tr>
-			<th>╨Я╧п╧Ьхё х╝юн</th>
+			<th>К╧└К╟─К╡┬М≤╦ М≥∙Л²╦</th>
 		</tr>
 		</table>
 		     
@@ -39,10 +39,10 @@
         		<td>
 		        <%if(user_id!= null){ %>
 				<tr>
-				    <td><div><%=user_id %>╢тюг ╨Я╧п╧Ьхё╢б</div></td>
+				    <td><div><%=user_id %>К▀≤Л²≤ К╧└К╟─К╡┬М≤╦К┼■</div></td>
 				</tr>
 				<tr>
-					<td><h1><div><%=user_pw %></div></h1><div>ют╢о╢ы.</div></td>
+					<td><h1><div><%=user_pw %></div></h1><div>Л·┘К▀┬К▀╓.</div></td>
 				</tr>
 		        </td>
 				</tr>
@@ -52,17 +52,17 @@
 					<tr>
         				<td>
         				<div>
-        					<input type="button" value="╥н╠вюнго╠Б" class="btn btn-primary" onclick="location.href='login.jsp'">
+        					<input type="button" value="К║°Й╥╦Л²╦М∙≤Й╦╟" class="btn btn-primary" onclick="location.href='login.jsp'">
         				</div>
         				</td>
          			</tr>
       				</table>
       				<%} else{%>
       				<tr>
-						<td><%=user_id %>╢т!</td>
+						<td><%=user_id %>К▀≤!</td>
 					</tr>
 					<tr>
-						<td><h1>╟║юта╓╨╦╟║ ╬Ь╫ю╢о╢ы.</h1></td>
+						<td><h1>Й╟─Л·┘Л═∙КЁ╢Й╟─ Л≈├Л┼╣К▀┬К▀╓.</h1></td>
 					</tr>
 					</table>
 					</td> 
@@ -71,8 +71,8 @@
 					<td>
 					<table width="150px"  align="center" border="0" style="margin-top:1%">
 					<tr>
-						<td><input type="button" value="х╦©Ь╟║ютго╠Б" class="btn btn-primary" onclick="location.href='join.jsp'"></td>
-						<td><input type="button" value="цЁю╫ю╦╥н" class="btn btn-primary" onclick="location.href='login.jsp'"></td>
+						<td><input type="button" value="М ▄Л⌡░Й╟─Л·┘М∙≤Й╦╟" class="btn btn-primary" onclick="location.href='join.jsp'"></td>
+						<td><input type="button" value="Л╡≤Л²▄Л°╪К║°" class="btn btn-primary" onclick="location.href='login.jsp'"></td>
 					</tr>
 					</table>   
 					<%} %>

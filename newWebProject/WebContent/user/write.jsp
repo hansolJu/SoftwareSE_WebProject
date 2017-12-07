@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 		<!-- 테이블 색 -->
-			<form name=writetable method="post" action="./BoardWriteAction" enctype="multipart/form-data">
+			<form name=writetable method="post" action="/newWebProject/BoardWriteAction" enctype="multipart/form-data">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>

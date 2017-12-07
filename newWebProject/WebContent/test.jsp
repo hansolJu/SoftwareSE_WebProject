@@ -3,7 +3,6 @@
 	import="java.util.ArrayList, wedeal.bean.CateDataBean, wedeal.bean.CateDBBean"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,31 +31,36 @@
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 	<%
 		for (int i = 0; i < out_cate.size(); i++) {
-			
+			for (int j = 0; j < in_cate.size(); j++) {
 	%>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text"><%=out_cate.get(i).getCate_name()%></span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-     <%
-     	for (int j = 0; j < in_cate.size(); j++) {
-			if (in_cate.get(j).getCate_parent() == out_cate.get(i).getCate_num()) {
+          <%
+		if (in_cate.get(j).getCate_parent() == out_cate.get(i).getCate_num()) {
 	%>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+    
             <li>
               <a href="http://localhost:8080/newWebProject/board.jsp?cate_num=<%=in_cate.get(j).getCate_num()%>"><%=in_cate.get(j).getCate_name()%></a>
             </li>
             <%
 							}
-     	}
 			%>
           </ul>
         </li>
  	<%
+						}
 					}
 	%>
-
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Link</span>
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -75,4 +79,5 @@
     <script src="Resources/js/sb-admin-datatables.min.js"></script>
   </div>
 </body>
+
 </html>

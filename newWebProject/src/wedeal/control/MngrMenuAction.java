@@ -13,7 +13,7 @@ import wedeal.bean.CateDataBean;
 /**
  * Servlet implementation class MngrMenuListAction
  */
-@WebServlet("/MngrMenuAction")
+@WebServlet(value = "/MngrMenuAction", name = "MngrMenuAction")
 public class MngrMenuAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**

@@ -14,13 +14,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 	<title>댓글 수정</title>
 	<script type="text/javascript">
 		function logout(){
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './UserLogoutServlet',
+				url: '../UserLogoutServlet',
 			})
 		}
 	</script>
@@ -32,7 +38,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="./DeclarationAction">
+				<form method="post" action="/newWebProject/DeclarationAction">
 					<h3 style="text-align: center;">신고 사유</h3>
 					<div class="form-group">
 						<textarea class="form-control" name="declaration_content" style="height: 100px;"></textarea>

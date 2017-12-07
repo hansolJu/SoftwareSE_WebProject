@@ -20,7 +20,7 @@ import wedeal.bean.BoardDBBean;
 import wedeal.bean.BoardDataBean;
 
 
-@WebServlet("/BoardUpdateAction")
+@WebServlet(value = "/BoardUpdateAction", name = "BoardUpdateAction")
 public class BoardUpdateAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String board_path = "C:\\Users\\jaeyo\\eclipse-workspace\\image";
@@ -113,7 +113,7 @@ public class BoardUpdateAction extends HttpServlet {
 			if(old_image.isEmpty()) {
 				request.getSession().setAttribute("messageType", "오류 메시지");
 				request.getSession().setAttribute("messageContent", "이미지는 1개이상 남아있어야 합니다.");
-				response.sendRedirect("update.jsp");
+				response.sendRedirect("user/update.jsp");
 			}
 			
 			for(int i = 0; i < old_image.size(); i++) {
@@ -127,7 +127,7 @@ public class BoardUpdateAction extends HttpServlet {
 		if(boarddt.getBoard_title() == null || boarddt.getBoard_title().equals("") || boarddt.getBoard_content() == null || boarddt.getBoard_content().equals("") ) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "모든 내용을 입력하세요.");
-			response.sendRedirect("update.jsp");
+			response.sendRedirect("user/update.jsp");
 			return;
 		}
 		
@@ -136,10 +136,10 @@ public class BoardUpdateAction extends HttpServlet {
 		if(result == -1) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "글 수정이 실패했습니다.");
-			response.sendRedirect("update.jsp");
+			response.sendRedirect("user/update.jsp");
 			return;
 		}
 		else
-			response.sendRedirect("board.jsp?cate_num="+boarddt.getCate_num());
+			response.sendRedirect("user/board.jsp?cate_num="+boarddt.getCate_num());
 	}
 }

@@ -14,7 +14,7 @@ import wedeal.bean.UserDBBean;
 /**
  * Servlet implementation class UserPhoneModifyAction
  */
-@WebServlet("/UserPhoneModifyAction")
+@WebServlet(value = "/UserPhoneModifyAction", name = "UserPhoneModifyAction")
 public class UserPhoneModifyAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

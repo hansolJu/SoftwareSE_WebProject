@@ -22,7 +22,7 @@
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './LogoutAction',
+				url: '/newWebProject/LogoutAction',
 			})
 		}
 	</script>
@@ -107,16 +107,16 @@
 			<c:if test="${user_id ne null}">
 					
 					<% if(LikeDBBean.getinstance().check_id(request.getParameter("user_id"),board.getBoard_num()) == -1) {%>
-					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a>
+					<a href="/newWebProject/LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></a>
 					<%} else{ %>
-					<a href="./LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+					<a href="/newWebProject/LikeAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
 					<%} %>
-					<a href="./DeclarationAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
+					<a href="../DeclarationAction?board_num=<%= board.getBoard_num() %>&user_id=${user_id}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
 			</c:if>
 			<%
 				if(request.getSession().getAttribute("user_id").equals(board.getUser_id())) {%>
 				<a href="update.jsp?board_num=<%= board.getBoard_num() %>&cate_num=<%=board.getCate_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="./BoardDeleteAction?cate_num=<%=board.getCate_num()%>&board_num=<%=board.getBoard_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/newWebProject/BoardDeleteAction?cate_num=<%=board.getCate_num()%>&board_num=<%=board.getBoard_num() %>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 			<%} %>
 		</div>
 	</div>
@@ -124,7 +124,7 @@
 	<!-- 댓글 기능 -->
 	<div class="container">
 	<div class="row">
-		<form method="post" action="./CommentWriteAction?board_num=<%=board.getBoard_num()%>&cate_num=<%=board.getCate_num()%>&user_id=${user_id}">
+		<form method="post" action="/newWebProject/CommentWriteAction?board_num=<%=board.getBoard_num()%>&cate_num=<%=board.getCate_num()%>&user_id=${user_id}">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -161,7 +161,7 @@
 					%>
 						<td>
 						<a href="updatecommand.jsp?board_num=<%=board_num%>&comment_num=<%=list.get(i).getComment_num()%>"><input type=button class="btn btn-primary" value="수정"></a>
-						<a onclick="return confirm('정말로 삭제하시겠습니까?')"  href="./CommentDeleteAction?comment_num=<%=list.get(i).getComment_num() %>&board_num=<%=board_num %>" class="btn btn-primary">삭제</a>
+						<a onclick="return confirm('정말로 삭제하시겠습니까?')"  href="/newWebProject/CommentDeleteAction?comment_num=<%=list.get(i).getComment_num() %>&board_num=<%=board_num %>" class="btn btn-primary">삭제</a>
 						</td>
 						</tr>
 					<%} else{%>

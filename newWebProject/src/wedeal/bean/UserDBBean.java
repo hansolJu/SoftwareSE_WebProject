@@ -117,7 +117,7 @@ public class UserDBBean {
 			pstmt.setString(5, member.getUser_pw());
 			pstmt.setInt(6, member.getUser_hope());
 			pstmt.setString(7, getDate());
-			pstmt.setInt(8, member.getUser_available());
+			pstmt.setInt(8, 1);
 			//int result = new likeDAO().create(member.getUser_id());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -132,6 +132,47 @@ public class UserDBBean {
 		}
 		return -1;//error
 	}
+	
+    public String searchId(String user_name, String user_phone) throws SQLException {
+    	PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String SQL = "SELECT user_id FROM user WHERE user_name = ? AND user_phone = ? ";
+        try {
+        	pstmt = conn.prepareStatement(SQL);
+        	pstmt.setString(1, user_name);
+        	pstmt.setString(2, user_phone);
+        	rs = pstmt.executeQuery();
+        	if( rs.next() )
+        		return (rs.getString("user_id"));
+        	else
+        		return null;
+        	} finally {
+        		if(rs!=null)try { rs.close(); } catch(SQLException ex) {}
+        		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+        		}
+    }
+    
+    public String searchPw(String user_id, String user_phone) throws SQLException {
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+        String SQLL = "SELECT user_pw FROM user WHERE user_id = ? AND user_phone = ? ";
+
+    	try {
+    		pstmt = conn.prepareStatement(SQLL);
+    		pstmt.setString(1, user_id);
+    		pstmt.setString(2, user_phone);
+    		rs = pstmt.executeQuery();
+    		if( rs.next() )
+    			return (rs.getString("user_pw"));
+    		else
+    			return null;
+    		} finally {
+    			if(rs!=null)try { rs.close(); } catch(SQLException ex) {}
+    			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+    			}
+
+    }
+	
 
 	//get user info
 	public UserDataBean getUser(String user_id) {

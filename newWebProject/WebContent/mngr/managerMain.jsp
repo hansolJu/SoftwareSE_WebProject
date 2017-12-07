@@ -12,12 +12,13 @@
 <script src= "http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
 <script src="/newWebProject/js/bootstrap.js"></script>
+
 <style>
 ul{
    list-style:none;
    }
 </style>
-	<jsp:include page="/Menubar.jsp"/>
+	<jsp:include page="/user/Menubar.jsp"/>
 	<div id="mList" class="list-group" style="float:left">
 		<h4>회원 관리</h4>
 			<a href="/newWebProject/MngrUserAction" class="list-group-item">전체회원</a>

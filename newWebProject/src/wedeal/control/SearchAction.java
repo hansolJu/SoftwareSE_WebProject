@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import wedeal.bean.BoardDBBean;
 import wedeal.bean.BoardDataBean;
 
-@WebServlet("/SearchAction")
+@WebServlet(value = "/SearchAction", name = "SearchAction")
 public class SearchAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,7 +54,7 @@ public class SearchAction extends HttpServlet {
 				list = searchService.selectProductByNameAndContent(searchName);
 			}
 			request.setAttribute("searchResultList", list);  //검색 결과 리스트 attribute에 저장
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/searchBoardList.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("user/searchBoardList.jsp");
 			dispatcher.forward(request, response);
 		} catch(SQLException e) {
 			e.printStackTrace();

@@ -11,7 +11,7 @@ import wedeal.bean.UserDBBean;
 import wedeal.bean.UserDataBean;
 
 
-@WebServlet("/RegisterAction")
+@WebServlet(value = "/RegisterAction", name = "RegisterAction")
 public class RegisterAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,14 +40,14 @@ public class RegisterAction extends HttpServlet {
 		if(user.getUser_name() == null || user.getUser_name().equals("") || user_age == null || user_age.equals("") || user.getUser_phone() == null || user.getUser_phone().equals("") || user.getUser_id() == null || user.getUser_id().equals("") || user.getUser_pw() == null || user.getUser_pw().equals("") || user_hope == null || user_hope.equals("") || check_passwd == null || check_passwd.equals("")) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "모든 내용을 입력하세요.");
-			response.sendRedirect("join.jsp");
+			response.sendRedirect("user/join.jsp");
 			return;
 		}
 		
 		if(!user.getUser_pw().equals(check_passwd)) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "비밀번호가 일치하지 않습니다.");
-			response.sendRedirect("join.jsp");
+			response.sendRedirect("user/join.jsp");
 			return;
 		}
 		
@@ -64,7 +64,7 @@ public class RegisterAction extends HttpServlet {
 		else {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "이미 존재하는 회원입니다.");
-			response.sendRedirect("join.jsp");
+			response.sendRedirect("user/join.jsp");
 		}
 	}
 

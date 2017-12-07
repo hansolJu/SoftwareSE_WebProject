@@ -19,20 +19,17 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">Wedeal</a>
+			<a class="navbar-brand" href="/newWebProject/index.jsp">Wedeal</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 메인</a></li>
-			</ul>
 			<c:if test="${user_id eq null}">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">접속하기<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="http://localhost:8080/newWebProject/user/login.jsp">로그인</a></li>
-					 	<li><a href="http://localhost:8080/newWebProject/user/join.jsp">회원가입</a></li>
+					 	<li><a href="/newWebProject/user/login.jsp">로그인</a></li>
+					 	<li><a href="/newWebProject/user/join.jsp">회원가입</a></li>
 					 </ul>
 				</li>
 			</ul>
@@ -46,17 +43,17 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
+					 	<li><a href="/newWebProject/LogoutAction" onclick="location.href=''">로그아웃</a></li>
+					 	<li><a href="/newWebProject/user/userInfo.jsp">내 정보</a></li>
 					 	<c:if test="${my_available >= '2'}">
-							<li><a href="http://localhost:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
+							<li><a href="http://203.249.22.34:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
 						</c:if>
 					 </ul>
 				</li>
 			</ul>
 			</c:if>
 			<!-- 은진이 검색부분 연결!!! -->
-			<form class="navbar-form navbar-right" role="search" name="Search" method=post action="SearchAction">
+			<form class="navbar-form navbar-right" role="search" name="Search" method=post action="/newWebProject/SearchAction">
 			<select name="searchItem">
         		<option>제목</option>
         		<option>내용</option>

@@ -8,12 +8,18 @@
 <!DOCTYPE html >
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 <script type="text/javascript">
 		function logout(){
 			var user_id = $('#user_id').val();
 			$.ajax({
 				type: 'POST',
-				url: './../LogoutAction',
+				url: '/newWebProject/LogoutAction',
 			})
 		}
 </script>
@@ -31,7 +37,7 @@
 		UserDataBean userinfo = user.getUser(session_id);
 	%>
 	<!-- 상단 메뉴 -->
-	<jsp:include page="../Menubar.jsp"/>
+	<jsp:include page="Menubar.jsp"/>
 	<!-- 회원 메뉴 -->
 	<jsp:include page="userMenubar.jsp" />
 	
@@ -76,7 +82,7 @@
 			<div>
 				<table class="table table-striped">
 					<tr>
-						<td><a href="http://localhost:8080/newWebProject/user/modifyPasswd.jsp">수정</a></td>
+						<td><a href="http://203.249.22.34:8080/newWebProject/user/modifyPasswd.jsp">수정</a></td>
 					</tr>	
 				</table>
 			</div>
@@ -88,7 +94,7 @@
 			<div>
 				<table class="table table-striped">
 					<tr>
-						<td><a href="http://localhost:8080/newWebProject/user/deleteUser.jsp">탈퇴</a>
+						<td><a href="http://203.249.22.34:8080/newWebProject/user/deleteUser.jsp">탈퇴</a>
 					<tr>
 				</table>
 			</div>

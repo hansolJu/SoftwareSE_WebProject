@@ -14,7 +14,7 @@ import wedeal.bean.UserDBBean;
 /**
  * Servlet implementation class UserPassModifyAction
  */
-@WebServlet("/UserPassWdModifyAction")
+@WebServlet(value = "/UserPassWdModifyAction", name = "UserPassWdModifyAction")
 public class UserPassWdModifyAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

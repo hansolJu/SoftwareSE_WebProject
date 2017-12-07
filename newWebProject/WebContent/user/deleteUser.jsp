@@ -21,7 +21,7 @@
 		var user_id = $('#user_id').val();
 		$.ajax({
 			type : 'POST',
-			url : './../UserLogoutServlet',
+			url : '/newWebProject/UserLogoutServlet',
 		})
 	}
 
@@ -40,7 +40,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../Menubar.jsp" />
+	<jsp:include page="Menubar.jsp" />
 	<!-- 회원 메뉴 -->
 	<div id="menu" style="display: inline-block; border-right: 1px solid; float: left; height: 400px; width: 15%; padding: 10px;">
 		<ul style="list-style: none;">
@@ -54,7 +54,7 @@
 		<h3>회원 탈퇴</h3>
 		<hr>
 		<div>
-			<form name="withdraw" method="post" action="./../UserWithDrawAction" onSubmit="return checkIt()" >
+			<form name="withdraw" method="post" action="/newWebProject/UserWithDrawAction" onSubmit="return checkIt()" >
 				비밀번호 <input type="password" name="user_pw" size="20">
 				<hr>
 				<input type="submit" name="Submit" value="탈퇴" size="15">

@@ -16,7 +16,7 @@ import wedeal.bean.LikeDataBean;
 /**
  * Servlet implementation class UserLikeListAction
  */
-@WebServlet("/UserLikeListAction")
+@WebServlet(value = "/UserLikeListAction", name = "UserLikeListAction")
 public class UserLikeListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

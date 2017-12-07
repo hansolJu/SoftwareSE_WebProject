@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import wedeal.bean.UserDBBean;
 
 
-@WebServlet("/LoginAction")
+@WebServlet(value = "/LoginAction", name = "LoginAction")
 public class LoginAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,7 @@ public class LoginAction extends HttpServlet {
 		if( user_id == null || user_id.equals("") || user_pw == null || user_pw.equals("")) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "모든 내용을 입력하세요.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 			return;
 		}
 		int result=userdb.login(user_id, user_pw);
@@ -50,13 +50,13 @@ public class LoginAction extends HttpServlet {
 		else if(result == 0) {
 			request.getSession().setAttribute("messageType", "오류 메세지");
 			request.getSession().setAttribute("messageContent", "아이디 혹은 비밀번호가 맞지 않습니다.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 		}
 		
 		else {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "내부적인 오류입니다. 다시 시도해 주세요.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("user/login.jsp");
 		}
 	}
 
