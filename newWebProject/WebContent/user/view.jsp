@@ -103,7 +103,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<a href="board.jsp?cate_num=<%=board.getBoard_num()%>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+			<a href="board.jsp?cate_num=<%=board.getCate_num()%>" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
 			<c:if test="${user_id ne null}">
 					
 					<% if(LikeDBBean.getinstance().check_id(request.getParameter("user_id"),board.getBoard_num()) == -1) {%>
