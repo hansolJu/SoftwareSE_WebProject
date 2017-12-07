@@ -21,9 +21,9 @@
 				String image = list.get(i).getBoard_image();
 				String[] images = image.split("/");
 		%>	
-		<td align="center"><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
+		<td align="center"><a href="user/view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
 		<label>작성자:<%=list.get(i).getUser_id() %></label><%="<br>"%>
-		<a href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="<%= list.get(i).getBoard_path() %>\<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
+		<a href="user/view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="/test/<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
 		<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%></td>
 	<%
 		}}
@@ -40,18 +40,20 @@
 				<%
 					UserDataBean user = UserDBBean.getinstance().getUser((String)request.getSession().getAttribute("user_id"));
 					ArrayList<CateDataBean> cate = CateDBBean.getinstance().in_getList();
-					for(int i = 0; i < 4; i ++){
-						for(int j = 0; j < cate.size(); j++){
-							if(user.getUser_hope() == cate.get(j).getCate_parent())
+					int count = 0;
+						for(int i = 0; i < cate.size(); i++){
+							if(user.getUser_hope() == cate.get(i).getCate_parent())
 							{
+								if(count == 4) break;
+								count++;
 								String image = list.get(i).getBoard_image();
 								String[] images = image.split("/");
 				%>
-				<td align="center"><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
+		<td align="center"><a href="user/view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
 		<label>작성자:<%=list.get(i).getUser_id() %></label><%="<br>"%>
-		<a href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="<%= list.get(i).getBoard_path() %>\<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
+		<a href="user/view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="/test/<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
 		<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%></td>
-		<%}}} %>
+		<%}} %>
 		</tbody>
 	</c:if>
 		</table>

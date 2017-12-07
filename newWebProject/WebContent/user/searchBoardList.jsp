@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="wedeal.bean.*" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="menutag" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 
 	게시판 페이지
@@ -90,9 +91,9 @@
 			String image = list.get(i).getBoard_image();
 			String[] images = image.split("/");
 	%>	
-		<td align="center"><a href="view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
+		<td align="center"><a href="user/view.jsp?board_num=<%=list.get(i).getBoard_num() %>&user_id=${user_id}"><%=list.get(i).getBoard_title().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a><%="<br>"%>
 		<label>작성자:<%=list.get(i).getUser_id() %></label><%="<br>"%>
-		<a href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="<%= list.get(i).getBoard_path() %>\<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
+		<a href="view.jsp?board_num=<%=list.get(i).getBoard_num()%>&user_id=${user_id}"><img src="/test/<%= images[0] %>" height= 200px width=200px></a><%="<br>"%>
 		<%=list.get(i).getBoard_date().substring(0,11) + list.get(i).getBoard_date().substring(11,13)+"시" + list.get(i).getBoard_date().substring(14,16)+"분"%></td>
 	<%
 		if((i+1)%4 == 0 && i > 0){
@@ -126,7 +127,9 @@
         	<button type="submit" class="btn btn-default">Search</button>
     </form>
 	<c:if test="${user_id ne null}">
+		<c:if test="${my_available >= '1'}">
 		<a href="write.jsp"  class='btn btn-primary pull-right'>글쓰기</a>
+		</c:if>
 	</c:if>
 		</div>
 		</div>
