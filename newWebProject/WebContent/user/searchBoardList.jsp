@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="wedeal.bean.*" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="menutag" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 
 	게시판 페이지
@@ -126,7 +127,9 @@
         	<button type="submit" class="btn btn-default">Search</button>
     </form>
 	<c:if test="${user_id ne null}">
+		<c:if test="${my_available >= '1'}">
 		<a href="write.jsp"  class='btn btn-primary pull-right'>글쓰기</a>
+		</c:if>
 	</c:if>
 		</div>
 		</div>

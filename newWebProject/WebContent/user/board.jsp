@@ -139,14 +139,11 @@
         	<button type="submit" class="btn btn-default">Search</button>
     </form>
 	<c:if test="${user_id ne null}">
-		<a href="write.jsp"  class='btn btn-primary pull-right'>글쓰기</a>
+		<c:if test="${my_available >= '1'}">
+			<a href="write.jsp"  class='btn btn-primary pull-right'>글쓰기</a>
+		</c:if>
 	</c:if>
 		</div>
-		</div>
-	<script type="text/javascript">
-            $(function () {
-                $(' #da-thumbs > li ').hoverdir();
-            });
-       </script>
+	</div>
 </body>
 </html>
