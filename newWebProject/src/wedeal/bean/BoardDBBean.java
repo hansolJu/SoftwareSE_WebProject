@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import wedeal.bean.*;
 
 public class BoardDBBean {
+
 	
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -507,9 +508,7 @@ public class BoardDBBean {
       PreparedStatement pstmt = null;
 
       ArrayList<BoardDataBean> searchNameProductList = new ArrayList<>();  //반환할 결과 리스트
-      pstmt = conn.prepareStatement("select * from "
-      		+ "(select * from board where board.user_id in "
-      		+ "(select user.user_id from user where user.user_available = 1 and user.user_id = ?) and board_available = 1) A;");  //해당 작성자가 작성한 게시물 검새
+      pstmt = conn.prepareStatement("SELECT * FROM board WHERE board.user_id IN (SELECT user.user_id FROM user WHERE user.user_id = ?) and board_available = 1");  //해당 작성자가 작성한 게시물 검새
       pstmt.setString(1, searchName);
       rs = pstmt.executeQuery();
       while(rs.next()) {

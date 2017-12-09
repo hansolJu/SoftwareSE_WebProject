@@ -10,6 +10,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 <jsp:include page="/mngr/managerMain.jsp" />
 <div id="staffList" style="float:left; padding-left:30px; width:90%">
 		<ul>
