@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
 <%@ page import="wedeal.bean.*" %> 
 <!DOCTYPE html>
@@ -30,69 +30,18 @@
 		}
 		UserDBBean user = UserDBBean.getinstance();
 		UserDataBean userinfo = user.getUser(session_id);
-		
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.jsp">WeDEAL</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">메인</a></li>
-				<li><a href="board.jsp">게시판</a></li>
-			</ul>
-			<%
-				if(session_id == null){
-				//-------------------------------------------------------로그인이 되어있지 않은 경우
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
-					 <ul class="dropdown-menu">
-					 	<li><a href="login.jsp">로그인</a></li>
-					 	<li><a href="join.jsp">회원가입</a></li>
-					 </ul>
-				</li>
-			</ul>
-			<% 
-				} else{
-				//-------------------------------------------------------로그인이 되어있는 경우
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">설정<span class="caret"></span></a>
-					 <ul class="dropdown-menu">
-					 	<li><a href="" onclick="logout();">로그아웃</a></li>
-					 	<li><a href="userinfo.jsp" >내 정보</a></li>
-					 </ul>
-				</li>
-			</ul>
-			<%
-				} 
-			%>
-		</div>
-	</nav>
+	<jsp:include page="Menubar.jsp"/>
 	
-	<!-- 회원 메뉴 -->
-	<jsp:include page="userMenubar.jsp">
+	<jsp:include page="userMenubar.jsp"/>
 	
-	<!-- 회원 연락처 수정 -->
 	<div>
 		<div style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
 			<h3>연락처 수정</h3>
 			<br>
-			<div>
+			<div class="form-group">
 				<form name="modify" method="POST" action="/newWebProject/UserPhoneModifyAction">
-				<table>
-					<tr>
-						<td>수정할 연락처 : <input type="text" name="user_phone" size="15"></td>
-					</tr>
-				</table>
+					연락처 <input class="form-control" type="text" name="user_phone" value="<%=userinfo.getUser_phone() %>" size="15">
 				<hr>
 				<input type="submit" name="Submit" value="수정">
 				</form>
