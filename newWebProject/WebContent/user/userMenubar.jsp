@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://203.249.22.34:8080/newWebProject/css/bootstrap.css">
+<link rel="stylesheet" href="http://localhost:8080/newWebProject/css/bootstrap.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="http://203.249.22.34:8080/newWebProject/js/bootstrap.js"></script>
+<script src="http://localhost:8080/newWebProject/js/bootstrap.js"></script>
 <title>UserMenu</title>
 
 </head>

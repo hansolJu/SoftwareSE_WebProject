@@ -83,7 +83,7 @@
 			<div>
 				<table class="table table-striped">
 					<tr>
-						<td><a href="http://203.249.22.34:8080/newWebProject/user/modifyPasswd.jsp">수정</a></td>
+						<td><a href="http://localhost:8080/newWebProject/user/modifyPasswd.jsp">수정</a></td>
 					</tr>	
 				</table>
 			</div>
@@ -95,7 +95,7 @@
 			<div>
 				<table class="table table-striped">
 					<tr>
-						<td><a href="http://203.249.22.34:8080/newWebProject/user/deleteUser.jsp">탈퇴</a>
+						<td><a href="http://localhost:8080/newWebProject/user/deleteUser.jsp">탈퇴</a>
 					<tr>
 				</table>
 			</div>

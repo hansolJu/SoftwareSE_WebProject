@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,10 +45,10 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					 aria-expanded="false">마이 페이지<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 	<li><a href="http://203.249.22.34:8080/newWebProject/LogoutAction">로그아웃</a></li>
-					 	<li><a href="http://203.249.22.34:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/LogoutAction">로그아웃</a></li>
+					 	<li><a href="http://localhost:8080/newWebProject/user/userInfo.jsp">내 정보</a></li>
 					 	<c:if test="${my_available >= '2'}">
-							<li><a href="http://203.249.22.34:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
+							<li><a href="http://localhost:8080/newWebProject/mngr/managerMain.jsp">관리</a></li>
 						</c:if>
 					 </ul>
 				</li>

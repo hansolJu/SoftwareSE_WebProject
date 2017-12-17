@@ -14,7 +14,7 @@
 		<title>아이디 확인</title>
 	</head>
 	<%
-	   request.setCharacterEncoding("UTF-8");
+	   request.setCharacterEncoding("utf-8");
 	   String user_name = request.getParameter("user_name");
 	   String user_phone = request.getParameter("user_phone");
 	   UserDBBean userdbbean = UserDBBean.getinstance();

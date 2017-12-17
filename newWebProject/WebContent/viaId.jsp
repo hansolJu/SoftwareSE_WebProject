@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  import="wedeal.bean.UserDBBean"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>아이디 확인</title>
 	<style type="text/css">
 		div{
@@ -12,12 +12,12 @@
 	</style>
 </head>
 <%
-   request.setCharacterEncoding("euc-kr");
+   request.setCharacterEncoding("utf-8");
    String user_name = request.getParameter("user_name");
    String Phone = request.getParameter("Phone");
    String phone1 = request.getParameter("phone1");
    String phone2 = request.getParameter("phone2");
-   String user_phone = Phone+"-"+phone1+"-"+phone2;
+   String user_phone = Phone + phone1 + phone2;
    UserDBBean searchService = UserDBBean.getinstance();
    String user_id = searchService.searchId(user_name, user_phone);
 %>

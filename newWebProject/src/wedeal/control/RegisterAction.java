@@ -36,6 +36,7 @@ public class RegisterAction extends HttpServlet {
 		String user_age=request.getParameter("user_age");
 		String user_hope=request.getParameter("user_hope");
 		user.setUser_available(1);
+	//	user.setUser_available(1);
 		
 		
 		if(user.getUser_name() == null || user.getUser_name().equals("") || user_age == null || user_age.equals("") || user.getUser_phone() == null || user.getUser_phone().equals("") || user.getUser_id() == null || user.getUser_id().equals("") || user.getUser_pw() == null || user.getUser_pw().equals("") || user_hope == null || user_hope.equals("") || check_passwd == null || check_passwd.equals("")) {
