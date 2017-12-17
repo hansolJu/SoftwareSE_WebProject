@@ -42,7 +42,7 @@
 			<div class="form-group">
 				<form name="modify" method="POST" action="/newWebProject/UserPhoneModifyAction">
 					연락처 <input class="form-control" type="text" name="user_phone" value="<%=userinfo.getUser_phone() %>" size="15">
-				<hr>
+				<br>
 				<input type="submit" name="Submit" value="수정">
 				</form>
 			</div>
