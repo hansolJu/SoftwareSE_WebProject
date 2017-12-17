@@ -59,5 +59,4 @@ public class LoginAction extends HttpServlet {
 			response.sendRedirect("user/login.jsp");
 		}
 	}
-
 }

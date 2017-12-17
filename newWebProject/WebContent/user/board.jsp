@@ -20,9 +20,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="MetaData/css/demo.css" />
-     <link rel="stylesheet" type="text/css" href="MetaData/css/style.css" />
-     <noscript><link rel="stylesheet" type="text/css" href="MetaData/css/noJS.css"/></noscript>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/newWebProject/css/bootstrap.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="/newWebProject/js/bootstrap.js"></script>
 	<title>메인 화면</title>
 	<script type="text/javascript">
 		function logout(){
