@@ -8,6 +8,7 @@
 <!DOCTYPE html >
 <html>
 <head>
+<title>마이 페이지</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -72,7 +73,7 @@
 					</tr>
 				</table>
 				<br>
-				<a href="http://localhost:8080/newWebProject/user/modifyPhone.jsp">수정</a>
+				<a href="http://203.249.22.34:8080/newWebProject/user/modifyPhone.jsp">수정</a>
 			</div>
 		</div>
 		<br>
