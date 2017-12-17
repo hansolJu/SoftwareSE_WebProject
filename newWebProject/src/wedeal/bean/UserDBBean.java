@@ -259,7 +259,7 @@ public class UserDBBean {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
