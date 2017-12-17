@@ -39,7 +39,7 @@ public class UserWithDrawAction extends HttpServlet {
 		int checkit = user.registerCheck(user_id);
 		if(checkit == 0) {
 			boolean check = user.deleteUser(user_id);
-			if(check == true) {
+			if(check) {
 				request.setAttribute("messageType", "성공 메시지");
 				request.setAttribute("messageContent", "탈퇴가 완료 되었습니다.");
 				request.getSession().invalidate();
@@ -48,7 +48,7 @@ public class UserWithDrawAction extends HttpServlet {
 			else {
 				request.setAttribute("messageType", "오류 메시지");
 				request.setAttribute("messageContent","탈퇴에 실패 했습니다.");
-				response.sendRedirect("http://203.249.22.34:8080/newwebProject/user/deleteUser.jsp");
+				response.sendRedirect("http://203.249.22.34:8080/newWebProject/user/deleteUser.jsp");
 			}
 		}
 		else {

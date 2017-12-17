@@ -42,23 +42,20 @@
 <body>
 	<jsp:include page="Menubar.jsp" />
 	<!-- 회원 메뉴 -->
-	<div id="menu" style="display: inline-block; border-right: 1px solid; float: left; height: 400px; width: 15%; padding: 10px;">
-		<ul style="list-style: none;">
-			<li><a href="#">내 게시글</a></li>
-			<li><a href="#">내 댓글</a></li>
-		</ul>
-	</div>
+	<jsp:include page="userMenubar.jsp"/>
 
 	<!-- 회원 탈퇴 -->
-	<div id="confirm" style="display: inline-block; border: 1px; height: 200px; width: 500px; padding-left: 50px; padding-right: 50px;">
-		<h3>회원 탈퇴</h3>
-		<hr>
-		<div>
-			<form name="withdraw" method="post" action="/newWebProject/UserWithDrawAction" onSubmit="return checkIt()" >
-				비밀번호 <input type="password" name="user_pw" size="20">
-				<hr>
-				<input type="submit" name="Submit" value="탈퇴" size="15">
-			</form>
+	<div>
+		<div style="display:inline-block; border:1px; height:200px; width:500px; padding-left:50px; padding-right:50px;">
+			<h3>회원 탈퇴</h3>
+			<br>
+			<div class="form-group">
+				<form name="withdraw" method="post" action="/newWebProject/UserWithDrawAction" onSubmit="return checkIt()" >
+					비밀번호 <input type="password" class="form-control" name="user_pw" size="20">
+					<hr>
+					<input type="submit" name="Submit" value="탈퇴" size="15">
+				</form>
+			</div>
 		</div>
 	</div>
 </body>
